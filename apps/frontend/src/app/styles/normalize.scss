@@ -148,13 +148,17 @@ html {
   color: $text-primary-default;
   font-size: 16px;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 22px;
   &.small {
     font-size: 14px;
     line-height: 15.39px;
   }
   &.medium {
     font-weight: 500;
+  }
+
+  &.semibold {
+    font-weight: 600;
   }
 
   &.secondary {

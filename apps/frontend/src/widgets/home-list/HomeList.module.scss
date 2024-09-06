@@ -1,0 +1,60 @@
+@import '@styles/__defines.scss';
+
+.card {
+  padding: 16px;
+  border-radius: 16px;
+  background-color: white;
+  cursor: pointer;
+
+  transition: all 0.2s;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  width: 328px;
+  height: 258px;
+
+  overflow: hidden;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: $blue200;
+    }
+  }
+
+  .description {
+    color: $text-tertiary-default;
+    font-weight: 500;
+  }
+
+  .circle {
+    position: relative;
+    width: 24px;
+    height: 22px;
+    &::before {
+      background-color: $text-tertiary-default;
+      border-radius: 50%;
+      content: '';
+      left: 10px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+    }
+  }
+
+  .image {
+    flex: 1;
+    border: 1px solid $divider-default;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .name {
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

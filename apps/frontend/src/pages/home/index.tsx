@@ -1,6 +1,7 @@
 import { IconSquareRoundedPlusFilled } from '@tabler/icons-react';
 import { Button } from 'shared/ui/Button';
 import { PageWrapper } from 'shared/ui/Wrappers/PageWrapper';
+import { HomeList } from 'widgets/home-list';
 
 const HomePage = () => {
   return (
@@ -13,7 +14,7 @@ const HomePage = () => {
       }
       title="Лаборатории"
     >
-      <div>123</div>
+      <HomeList />
       <div></div>
     </PageWrapper>
   );

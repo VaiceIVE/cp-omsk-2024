@@ -1,0 +1,11 @@
+@import '@styles/__defines.scss';
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 40px;
+
+  border-bottom: 1px solid $divider-default;
+}

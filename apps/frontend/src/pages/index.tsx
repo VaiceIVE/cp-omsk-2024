@@ -5,6 +5,7 @@ import { lazy, useContext, useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { HOME_ROUTE, LOGIN_ROUTE } from 'shared/constants/const';
 import { authRoutes, publicRoutes } from 'shared/constants/routes';
+import { Header } from 'widgets/header';
 
 const LoginPage = lazy(() => import('pages/login'));
 const HomePage = lazy(() => import('pages/home'));
@@ -49,6 +50,7 @@ const Routing = observer(() => {
 
   return (
     <Flex className="wrapper" style={{ height: '100vh' }}>
+      <Header />
       <Flex flex={1} gap={0}>
         <Stack flex={1} w={'100%'}>
           <Routes>
