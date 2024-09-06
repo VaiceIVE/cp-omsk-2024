@@ -20,7 +20,7 @@ const Routing = observer(() => {
   useEffect(() => {
     if (
       UStore.isAuth &&
-      !authRoutes.find((item) => item.path.includes(location.pathname))
+      !authRoutes.find((item) => location.pathname.includes(item.path))
     ) {
       navigate(HOME_ROUTE);
     }
