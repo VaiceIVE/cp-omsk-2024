@@ -1,0 +1,51 @@
+@import '@styles/__defines.scss';
+
+.title {
+  color: $text-primary-default;
+  font-style: normal;
+  font-weight: 700;
+
+  z-index: 2;
+
+  // &.gray {
+  //   color: $placeholder-color;
+  // }
+
+  // &.error {
+  //   color: $error-color;
+  // }
+
+  // &.blue {
+  //   color: $main-blue-color;
+  // }
+}
+
+.h1 {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.h2 {
+  font-size: 32px;
+  line-height: 38px;
+}
+
+.h3 {
+  font-size: 26px;
+  line-height: 31px;
+}
+
+.h4 {
+  font-size: 20px;
+  line-height: 21.99px;
+}
+
+.h5 {
+  font-size: 16px;
+  line-height: 17.59px;
+}
+
+.main {
+  font-size: 64px;
+  line-height: 70.38px;
+}

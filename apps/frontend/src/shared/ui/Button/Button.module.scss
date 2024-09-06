@@ -1,0 +1,137 @@
+@import '@styles/__defines.scss';
+
+.button {
+  height: 50px;
+  width: fit-content;
+  padding: 12px 20px;
+  background: $text-primary-default;
+  border-radius: 12px;
+  color: $white-color;
+  transition: all 0.2s ease;
+  z-index: 10;
+
+  position: relative;
+
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+
+  &.full {
+    width: unset;
+    flex: 1;
+  }
+
+  &:not(.disabled) {
+    @media (hover: hover) {
+      &:hover {
+        background-color: $text-primary-hover;
+      }
+    }
+  }
+
+  // &.active {
+  //   border: 1px solid $link-hover-color;
+  // }
+
+  &.disabled {
+    background-color: $gray100;
+    color: $text-primary-default;
+  }
+
+  &.loading {
+    opacity: 0.5;
+  }
+
+  // &.light {
+  //   background-color: #eef6fc;
+  //   color: $main-blue-color;
+
+  //   @media (hover: hover) {
+  //     &:hover {
+  //       background-color: #d9efff;
+  //     }
+  //   }
+  // }
+
+  // &.orange {
+  //   color: white;
+
+  //   background-color: $main-orange-color;
+
+  //   @media (hover: hover) {
+  //     &:hover {
+  //       background-color: #ed5a39;
+  //     }
+  //   }
+  // }
+
+  // &.outline {
+  //   background: transparent;
+  //   border: 1px solid $divider-color;
+  //   color: $text-color;
+
+  //   svg {
+  //     color: $main-blue-color;
+  //   }
+
+  //   @media (hover: hover) {
+  //     &:hover {
+  //       border-color: $link-hover-color;
+  //       background-color: transparent;
+  //     }
+  //   }
+  // }
+
+  // &.white {
+  //   background-color: white;
+  //   color: $text-color;
+
+  //   svg {
+  //     color: $main-blue-color;
+  //   }
+
+  //   @media (hover: hover) {
+  //     &:hover {
+  //       background-color: $gray-color;
+  //     }
+  //   }
+  // }
+}
+
+.button-wrapper {
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+  justify-content: center;
+
+  &.solo {
+    column-gap: 0;
+  }
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+
+  &.loading {
+    .label,
+    .icon {
+      visibility: hidden;
+    }
+  }
+
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+}

@@ -1,0 +1,19 @@
+@import '@styles/__defines.scss';
+
+.wrapper {
+  height: 400px;
+  width: 100%;
+  z-index: 11;
+
+  border-radius: 12px;
+  border: 1px solid $border-color;
+
+  overflow: hidden;
+
+  &.full {
+    height: 100%;
+
+    border-radius: unset;
+    border: none;
+  }
+}
