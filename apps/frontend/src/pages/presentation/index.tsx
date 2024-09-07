@@ -215,8 +215,14 @@ const PresentationPage = () => {
   };
 
   const handleRegenerate = () => {
-    if (activeElement?.elementType === SlideElementType.Image) {
-      console.log();
+    if (!activeElement) {
+      const slideType = presentationForm.getValues('slideType');
+      console.log('slide', slideType);
+    } else if (activeElement?.elementType === SlideElementType.Image) {
+      const imageStyle = presentationForm.getValues('style');
+      console.log('image', imageStyle);
+    } else {
+      console.log('text');
     }
   };
 

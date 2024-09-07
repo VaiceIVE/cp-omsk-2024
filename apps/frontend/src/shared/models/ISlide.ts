@@ -3,6 +3,7 @@ import { ISlideElement } from './ISlideElement';
 export interface ISlide {
   id: number;
   slideType: SlideType;
+  context: string;
   elements: ISlideElement[];
 }
 

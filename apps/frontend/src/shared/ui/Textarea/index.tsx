@@ -26,5 +26,12 @@ export const Textarea = ({
   error,
   ...props
 }: Props) => {
-  return <MantineTextarea className={style.root} {...props} />;
+  return (
+    <MantineTextarea
+      onChange={field?.onChange}
+      value={field?.value}
+      className={style.root}
+      {...props}
+    />
+  );
 };

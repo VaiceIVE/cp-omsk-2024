@@ -1,6 +1,7 @@
 import { Flex, Stack } from '@mantine/core';
 import styles from './HomeList.module.scss';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
 
 export const HomeList = () => {
   return (
@@ -13,9 +14,9 @@ export const HomeList = () => {
               Название презентации очень длинное
             </p>
             <Flex className={styles.description} align={'center'} gap={4}>
-              <div>123</div>
+              <div>{dayjs(new Date()).format('DD.MM')}</div>
               <div className={styles.circle}></div>
-              <div>123</div>
+              <div>Файл</div>
             </Flex>
           </Stack>
         </li>
@@ -26,9 +27,9 @@ export const HomeList = () => {
               Название презентации очень длинное
             </p>
             <Flex className={styles.description} align={'center'} gap={4}>
-              <div>123</div>
+              <div>{dayjs(new Date()).format('DD.MM')}</div>
               <div className={styles.circle}></div>
-              <div>123</div>
+              <div>Файл</div>
             </Flex>
           </Stack>
         </li>

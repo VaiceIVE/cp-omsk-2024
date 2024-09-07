@@ -11,6 +11,7 @@ import { ColorChange } from './components/ColorChange';
 import { TextChange } from './components/TextChange';
 import { SlideType } from 'shared/models/ISlide';
 import { useEffect } from 'react';
+import { Textarea } from 'shared/ui/Textarea';
 
 const titleByType: Record<SlideElementType, string> = {
   [SlideElementType.Icon]: 'Настройки изображения',
@@ -32,7 +33,8 @@ const slideByType: Record<SlideType, string> = {
 };
 
 export const ElementControlls = () => {
-  const { activeElement, presentation, currentSlide } = usePresentationPage();
+  const { activeElement, presentation, currentSlide, handleRegenerate } =
+    usePresentationPage();
 
   const { control, setValue } = useFormContext();
 
@@ -79,13 +81,39 @@ export const ElementControlls = () => {
         </Stack>
       )}
 
-      <Button
-        reverse
-        label="Генерировать новый"
-        fullWidth
-        variant="outline"
-        icon={<IconWand stroke={2} />}
-      />
+      {!activeElement && (
+        <Textarea
+          disabled
+          placeholder="Для заголовков"
+          label="Выделенный в файле текст"
+          field={{
+            onChange: function (...event: any[]): void {
+              throw new Error('Function not implemented.');
+            },
+            onBlur: function (): void {
+              throw new Error('Function not implemented.');
+            },
+            value: undefined,
+            disabled: undefined,
+            name: undefined,
+            ref: function (instance: any): void {
+              throw new Error('Function not implemented.');
+            },
+          }}
+        />
+      )}
+
+      {activeElement?.elementType !== SlideElementType.Figure &&
+        activeElement?.elementType !== SlideElementType.Icon && (
+          <Button
+            onClick={handleRegenerate}
+            reverse
+            label="Генерировать новый"
+            fullWidth
+            variant="outline"
+            icon={<IconWand stroke={2} />}
+          />
+        )}
 
       <Stack gap={22}>
         {activeElement?.elementType === SlideElementType.Image && (

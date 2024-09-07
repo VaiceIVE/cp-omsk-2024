@@ -8,9 +8,16 @@ interface TitleProps {
   level?: number | string;
   color?: string;
   semibold?: boolean;
+  medium?: boolean;
 }
 
-export const Title = ({ title, level, color, semibold }: TitleProps) => {
+export const Title = ({
+  title,
+  level,
+  color,
+  semibold,
+  medium,
+}: TitleProps) => {
   let content: ReactElement = <div></div>;
 
   switch (level) {
@@ -20,7 +27,8 @@ export const Title = ({ title, level, color, semibold }: TitleProps) => {
           className={classNames(
             `${styles.title} ${styles.h1}`,
             color && styles[color],
-            semibold && styles.semibold
+            semibold && styles.semibold,
+            medium && styles.medium
           )}
         >
           {title}
@@ -33,7 +41,8 @@ export const Title = ({ title, level, color, semibold }: TitleProps) => {
           className={classNames(
             `${styles.title} ${styles.h2}`,
             color && styles[color],
-            semibold && styles.semibold
+            semibold && styles.semibold,
+            medium && styles.medium
           )}
         >
           {title}
@@ -46,7 +55,8 @@ export const Title = ({ title, level, color, semibold }: TitleProps) => {
           className={classNames(
             `${styles.title} ${styles.h3}`,
             color && styles[color],
-            semibold && styles.semibold
+            semibold && styles.semibold,
+            medium && styles.medium
           )}
         >
           {title}
@@ -59,7 +69,8 @@ export const Title = ({ title, level, color, semibold }: TitleProps) => {
           className={classNames(
             `${styles.title} ${styles.h4}`,
             color && styles[color],
-            semibold && styles.semibold
+            semibold && styles.semibold,
+            medium && styles.medium
           )}
         >
           {title}
@@ -72,7 +83,8 @@ export const Title = ({ title, level, color, semibold }: TitleProps) => {
           className={classNames(
             `${styles.title} ${styles.h5}`,
             color && styles[color],
-            semibold && styles.semibold
+            semibold && styles.semibold,
+            medium && styles.medium
           )}
         >
           {title}
@@ -85,7 +97,8 @@ export const Title = ({ title, level, color, semibold }: TitleProps) => {
           className={classNames(
             `${styles.title} ${styles.main}`,
             color && styles[color],
-            semibold && styles.semibold
+            semibold && styles.semibold,
+            medium && styles.medium
           )}
         >
           {title}
