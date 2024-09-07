@@ -98,7 +98,10 @@ export class SlideElement {
     fig_bgcolor: string;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 5,
+        scale: 3
     })
     fig_border_radius: number;
 
