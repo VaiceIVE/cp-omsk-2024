@@ -92,12 +92,14 @@ export class PresentationService {
         {
           for(const element of images)
           {
+            console.log(slideInfo[slide])
+            console.log(slideInfo[slide]['images'])
             newSlide.addImage({
               x: element.position.x / 192, // 1,
               y: element.position.y / 192, // 1,
               w: element.image.width / 192, // 15
               h: element.image.height / 192, // 15
-              data: (await this.storageService.getFromS3ByName(slide['images'][0])).read()
+              data: (await this.storageService.getFromS3ByName(slideInfo[slide]['images'][0])).read()
             })
           }
         }
