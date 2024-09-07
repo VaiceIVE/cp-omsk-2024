@@ -164,6 +164,31 @@ const PresentationPage = () => {
     }
   };
 
+  const updateTypography = (
+    key: 'fontSize' | 'fontWeight' | 'fontFamily',
+    value: string | number
+  ) => {
+    if (activeElement && activeElement.typeography) {
+      setPresentation((prevPresentation) => ({
+        ...prevPresentation,
+        slides: prevPresentation.slides.map((slide) => ({
+          ...slide,
+          elements: slide.elements.map((element) =>
+            element.id === activeElement.id
+              ? {
+                  ...element,
+                  typeography: {
+                    ...element.typeography!,
+                    [key]: value,
+                  },
+                }
+              : element
+          ),
+        })),
+      }));
+    }
+  };
+
   const handleRegenerate = () => {
     if (activeElement?.elementType === SlideElementType.Image) {
       console.log();
@@ -230,6 +255,7 @@ const PresentationPage = () => {
             isProportional,
             setIsProportional,
             updateColorElement,
+            updateTypography,
           }}
         >
           <ul className={styles.slideList}>

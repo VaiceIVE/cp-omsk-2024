@@ -24,6 +24,10 @@ export interface IPresentationPageContext {
   isProportional: boolean;
   setIsProportional: React.Dispatch<React.SetStateAction<boolean>>;
   updateColorElement: (hex: string) => void;
+  updateTypography: (
+    key: 'fontSize' | 'fontWeight' | 'fontFamily',
+    value: string | number
+  ) => void;
 }
 
 export const PresentationPageContext =

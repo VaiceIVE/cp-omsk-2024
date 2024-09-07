@@ -15,14 +15,20 @@ interface Props {
   disabled?: boolean;
   limit?: number;
   allowDeselect?: boolean;
+  onChange?: (value: string | null) => void;
 }
 
-export const Select = ({ field, allowDeselect = false, ...props }: Props) => {
+export const Select = ({
+  field,
+  allowDeselect = false,
+  onChange,
+  ...props
+}: Props) => {
   return (
     <MantineSelect
       allowDeselect={allowDeselect}
       value={field?.value ? field?.value : null}
-      onChange={field.onChange}
+      onChange={onChange ?? field.onChange}
       {...props}
       className={style.select}
     />

@@ -8,6 +8,7 @@ import { Select } from 'shared/ui/Select';
 import { Title } from 'shared/ui/Title';
 import { SizeChange } from './components/SizeChange';
 import { ColorChange } from './components/ColorChange';
+import { TextChange } from './components/TextChange';
 
 const titleByType = {
   [SlideElementType.Icon]: 'Настройки изображения',
@@ -66,6 +67,12 @@ export const ElementControlls = () => {
           activeElement?.elementType === SlideElementType.Figure) && (
           <SizeChange />
         )}
+
+        {activeElement?.elementType === SlideElementType.Heading ||
+          activeElement?.elementType === SlideElementType.Numeric ||
+          (activeElement?.elementType === SlideElementType.Text && (
+            <TextChange />
+          ))}
 
         {activeElement?.elementType !== SlideElementType.Image &&
           activeElement?.elementType !== SlideElementType.Icon &&

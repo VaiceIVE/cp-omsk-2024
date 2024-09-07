@@ -19,7 +19,7 @@ export const mockPres: IPresentation = {
           },
           elementType: SlideElementType.Text,
           typeography: {
-            fontFamily: '',
+            fontFamily: 'Manrope',
             fontSize: 80,
             fontWeight: 700,
             color: '#1E1E1E',
