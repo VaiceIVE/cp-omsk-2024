@@ -47,7 +47,7 @@ export class SlideElement {
     @Column({
         nullable: true,
         type: "decimal",
-        precision: 5,
+        precision: 8,
         scale: 3
     })
     typo_width: number;
@@ -90,7 +90,7 @@ export class SlideElement {
     @Column({
         nullable: true,
         type: "decimal",
-        precision: 5,
+        precision: 8,
         scale: 3
     })
     fig_width: number;
@@ -108,7 +108,7 @@ export class SlideElement {
     @Column({
         nullable: true,
         type: "decimal",
-        precision: 5,
+        precision: 8,
         scale: 3
     })
     fig_border_radius: number;
