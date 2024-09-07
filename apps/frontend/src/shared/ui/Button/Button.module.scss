@@ -44,13 +44,17 @@
     color: $text-primary-default;
 
     svg {
-      color: $text-primary-default;
+      color: $primary-acent-default;
     }
     &:not(.disabled) {
       @media (hover: hover) {
         &:hover {
           border-color: $divider-hover;
           background-color: transparent;
+
+          svg {
+            color: $primary-acent-hover;
+          }
         }
       }
     }
@@ -92,6 +96,10 @@
   column-gap: 12px;
   align-items: center;
   justify-content: center;
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
 
   &.solo {
     column-gap: 0;

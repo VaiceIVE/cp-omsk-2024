@@ -1,0 +1,1 @@
+export { FigureElement } from './FigureElement';

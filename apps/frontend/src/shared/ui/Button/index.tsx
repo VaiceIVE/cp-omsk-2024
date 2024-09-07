@@ -14,6 +14,7 @@ export interface ButtonProps extends ComponentProps<'button'> {
   fullWidth?: boolean;
   isLoading?: boolean;
   isActive?: boolean;
+  reverse?: boolean;
 }
 
 export const Button = ({
@@ -28,6 +29,7 @@ export const Button = ({
   fullWidth,
   isLoading,
   isActive,
+  reverse,
 }: ButtonProps) => {
   return (
     <MantineButton
@@ -57,6 +59,7 @@ export const Button = ({
             [styles.reverse]: isIconLeft,
             [styles.solo]: !label,
             [styles.loading]: isLoading,
+            [styles.reverse]: reverse,
           })}
         >
           <div className={styles.label}>{label}</div>

@@ -18,6 +18,8 @@ interface Props {
   type?: string;
   allowClear?: boolean;
   error?: string;
+  fullWidth?: boolean;
+  defaultValue?: string;
 }
 
 export const Input = ({
@@ -30,6 +32,8 @@ export const Input = ({
   error,
   onChange,
   value,
+  fullWidth,
+  defaultValue,
   ...props
 }: Props) => {
   return (
@@ -39,11 +43,15 @@ export const Input = ({
         autoFocus={false}
         onFocus={onFocus}
         autoComplete="on"
+        defaultValue={defaultValue}
         {...props}
         size={size}
-        onChange={field?.onChange ?? onChange}
+        onChange={onChange ?? field?.onChange}
         value={field?.value ?? value ?? ''}
-        className={classNames(style.input, { [style.error]: error })}
+        className={classNames(style.input, {
+          [style.error]: error,
+          [style.full]: fullWidth,
+        })}
         rightSectionPointerEvents="all"
         rightSection={
           allowClear ? (

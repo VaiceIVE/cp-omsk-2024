@@ -12,6 +12,8 @@ export interface ISlideElement {
     fontWeight: number;
     fontSize: number;
     text: string;
+    width: number;
+    lineHeight: number;
   } | null;
   image: {
     width: number;
@@ -36,4 +38,7 @@ export enum SlideElementType {
   Text = 'TEXT',
   Image = 'IMAGE',
   Heading = 'HEADING',
+  Numeric = 'NUMERIC',
+  Icon = 'ICON',
+  Figure = 'FIGURE',
 }

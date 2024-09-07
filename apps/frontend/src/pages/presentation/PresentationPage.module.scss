@@ -1,5 +1,75 @@
+@import '@styles/__defines.scss';
+
 .root {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.slideList {
+  display: flex;
+  padding: 12px 24px 27px;
+  gap: 24px;
+}
+
+.slide {
+  width: 84px;
+  height: 51px;
+
+  position: relative;
+
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: $divider-default;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  &.active {
+    outline-width: 4px;
+    outline-color: $primary-acent-default;
+
+    .bg {
+      background-color: #003b6580;
+    }
+  }
+
+  .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #11111166;
+    width: 100%;
+    height: 100%;
+
+    z-index: 2;
+  }
+
+  .number {
+    z-index: 3;
+
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 28px;
+
+    color: white;
+
+    position: absolute;
+    left: 10px;
+    bottom: 6.5px;
+  }
+
+  .cap {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+  }
 }

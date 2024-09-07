@@ -36,6 +36,13 @@
     }
   }
 
+  &.full {
+    flex: 1;
+    input {
+      width: 100%;
+    }
+  }
+
   [data-position='right'] {
     width: unset;
   }
