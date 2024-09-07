@@ -13,6 +13,13 @@ export interface ICreatingPageContext {
 
   hasCharts: boolean;
   setHasCharts: React.Dispatch<React.SetStateAction<boolean>>;
+
+  logoFiles: File[];
+  setLogoFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  resetLogoRef: React.RefObject<() => void>;
+
+  accentColor: string;
+  setAccentColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const CreatingPageContext =

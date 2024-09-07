@@ -24,14 +24,18 @@ const CreatingPage = () => {
 
   const [docFile, setDocFile] = useState<File | null>(null);
   const [tableFile, setTableFile] = useState<File | null>(null);
+  const [logoFiles, setLogoFiles] = useState<File[]>([]);
 
   const [selectedChart, setSelectedChart] = useState('');
   const [hasCharts, setHasCharts] = useState(false);
+
+  const [accentColor, setAccentColor] = useState('#000000');
 
   const StepComponent = steps[currentStep];
 
   const resetDocRef = useRef<() => void>(null);
   const resetTableRef = useRef<() => void>(null);
+  const resetLogoRef = useRef<() => void>(null);
 
   return (
     <div className={styles.wrapper}>
@@ -53,8 +57,8 @@ const CreatingPage = () => {
 
             <CreatingPageContext.Provider
               value={{
-                docFile: docFile,
-                tableFile: tableFile,
+                docFile,
+                tableFile,
                 setDocFile,
                 setTableFile,
                 resetDocRef,
@@ -63,6 +67,11 @@ const CreatingPage = () => {
                 setSelectedChart,
                 hasCharts,
                 setHasCharts,
+                logoFiles,
+                setLogoFiles,
+                resetLogoRef,
+                accentColor,
+                setAccentColor,
               }}
             >
               <FormProvider {...creatingForm}>{StepComponent}</FormProvider>
