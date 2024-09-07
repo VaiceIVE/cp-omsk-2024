@@ -6,7 +6,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as bodyParser from 'body-parser';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -25,7 +25,7 @@ async function bootstrap() {
     ],
   })
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 8000;
   await app.listen(port);
 }
 
