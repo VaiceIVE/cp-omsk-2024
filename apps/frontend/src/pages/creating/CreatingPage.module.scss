@@ -1,0 +1,40 @@
+@import '@styles/__defines.scss';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+}
+
+.root {
+  background-color: $gray50;
+  height: 100%;
+  padding-top: 24px;
+
+  flex: 1;
+}
+
+.section {
+  margin: 0 auto;
+}
+
+.form {
+  background-color: white;
+  border-radius: 16px;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  padding: 12px 0;
+  background-color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  z-index: 10;
+}

@@ -1,9 +1,10 @@
-import { ISlideElement } from './ISlideElemnt';
+import { ISlideElement } from './ISlideElement';
 
 export interface ISlide {
   id: number;
   slideType: SlideType;
-  elemnents: ISlideElement[];
+  context: string;
+  elements: ISlideElement[];
 }
 
 export enum SlideType {

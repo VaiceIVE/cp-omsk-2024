@@ -19,14 +19,12 @@ export const Checkbox = ({
   checked,
 }: CheckboxProps) => {
   return (
-    <MantineCheckbox.Card
-      className={classNames(styles.checkbox, className)}
+    <MantineCheckbox
+      className={classNames(styles.root, className)}
+      label={label}
+      onChange={(e) => onChange?.(e.currentTarget.checked)}
       value={value}
       checked={checked}
-      onClick={onChange ? () => onChange((prev: boolean) => !prev) : undefined}
-    >
-      <MantineCheckbox.Indicator />
-      <label>{label}</label>
-    </MantineCheckbox.Card>
+    />
   );
 };

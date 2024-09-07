@@ -4,12 +4,16 @@
 #nav a.active,
 a.hover div {
   div {
-    font-weight: 700;
-    //color: $primary-default;
+    font-weight: 500;
+    color: $primary-acent-default;
+
+    background-color: $blue300;
+
+    border-color: $blue300;
   }
 
   svg {
-    //color: $primary-default;
+    color: $primary-acent-default;
   }
 }
 

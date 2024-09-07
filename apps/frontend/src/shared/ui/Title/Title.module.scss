@@ -7,17 +7,13 @@
 
   z-index: 2;
 
-  // &.gray {
-  //   color: $placeholder-color;
-  // }
+  &.semibold {
+    font-weight: 600;
+  }
 
-  // &.error {
-  //   color: $error-color;
-  // }
-
-  // &.blue {
-  //   color: $main-blue-color;
-  // }
+  &.medium {
+    font-weight: 500;
+  }
 }
 
 .h1 {

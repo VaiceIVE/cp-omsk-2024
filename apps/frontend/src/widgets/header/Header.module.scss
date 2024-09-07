@@ -8,4 +8,17 @@
   padding: 16px 40px;
 
   border-bottom: 1px solid $divider-default;
+
+  .link {
+    padding: 15px 18px;
+    border: 1.5px solid $divider-default;
+    border-radius: 32px;
+
+    font-weight: 500;
+    color: $text-primary-default;
+
+    svg {
+      color: $text-tertiary-default;
+    }
+  }
 }

@@ -6,7 +6,10 @@ interface UploadProps extends ButtonProps {
   onChange?: React.Dispatch<React.SetStateAction<File | null>>;
   onChangeArray?: React.Dispatch<React.SetStateAction<File[]>>;
   resetRef?: React.ForwardedRef<() => void> | undefined;
+  values?: File[];
   multiple?: boolean;
+  accept?: string;
+  maxLength?: number;
 }
 
 export const Upload = ({
@@ -14,6 +17,9 @@ export const Upload = ({
   resetRef,
   multiple,
   onChangeArray,
+  accept,
+  maxLength = 3,
+  values,
   ...buttonProps
 }: UploadProps) => {
   if (multiple) {
@@ -21,11 +27,11 @@ export const Upload = ({
       <FileButton
         resetRef={resetRef}
         onChange={
-          onChangeArray
+          onChangeArray && values && values?.length < maxLength
             ? (payload) => onChangeArray((prev) => [...prev, ...payload])
             : () => null
         }
-        accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        accept={accept}
         multiple
       >
         {(props) => <Button {...props} {...buttonProps} />}
@@ -34,11 +40,7 @@ export const Upload = ({
   }
 
   return (
-    <FileButton
-      resetRef={resetRef}
-      onChange={onChange!}
-      accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    >
+    <FileButton resetRef={resetRef} onChange={onChange!} accept={accept}>
       {(props) => <Button {...props} {...buttonProps} />}
     </FileButton>
   );

@@ -2,47 +2,47 @@
 
 .select {
   input {
-    background: transparent;
-    border-radius: 12px;
+    background-color: transparent;
+    padding: 14px;
+    border-radius: 8px;
+    border-color: $divider-default;
 
-    padding: 20px 24px;
-    color: $text-color;
+    height: 50px;
+    flex: 1;
 
     font-size: 16px;
-    font-weight: 400;
-    line-height: 18px;
-
-    border: 1px solid $border-color;
-
-    height: 61px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
 
     &:focus-within {
-      border-color: $link-hover-color;
+      border-color: $primary-acent-default;
     }
 
     &::placeholder {
       font-size: 16px;
+      font-style: normal;
       font-weight: 500;
-      line-height: 18px;
-      color: $placeholder-color;
+      line-height: 22px;
+      color: $text-secondary-default;
     }
 
     &:disabled {
       background: #adb5bd;
-      color: $placeholder-color;
+      //color: $placeholder-color;
     }
 
     &[data-disabled='true'] {
       background: #f1f1f2;
-      color: $placeholder-color;
+      //color: $placeholder-color;
     }
   }
 
   label {
     margin-bottom: 8px;
-    color: $text-color;
+    color: #383838;
     font-size: 16px;
-    font-weight: 400;
-    line-height: 18px;
+    font-weight: 500;
+    line-height: 22px;
   }
 }
