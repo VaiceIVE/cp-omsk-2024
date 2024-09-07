@@ -16,7 +16,7 @@ export const FigureElement = ({
   scale,
   isActive,
 }: FigureElementProps) => {
-  const { handleClick, handleDrag } = usePresentationPage();
+  const { handleClick, handleStop, currentSlideId } = usePresentationPage();
 
   return (
     <Draggable
@@ -27,7 +27,7 @@ export const FigureElement = ({
       scale={scale}
       bounds={'parent'}
       disabled={!isActive}
-      onStop={(e, data) => handleDrag(e, data, 0, element.id)}
+      onStop={(e, data) => handleStop(e, data, currentSlideId, element.id)}
     >
       <div
         onClick={() => {

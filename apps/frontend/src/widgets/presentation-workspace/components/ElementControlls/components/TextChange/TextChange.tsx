@@ -15,7 +15,8 @@ const weights: Record<number, string> = {
 const fonts = ['Manrope'];
 
 export const TextChange = () => {
-  const { activeElement, updateTypography } = usePresentationPage();
+  const { activeElement, updateTypography, currentSlideId } =
+    usePresentationPage();
 
   const { control, setValue } = useFormContext();
 
@@ -45,7 +46,7 @@ export const TextChange = () => {
             field={field}
             onChange={(e) => {
               field.onChange(e);
-              updateTypography('fontFamily', e ?? '');
+              updateTypography(currentSlideId, 'fontFamily', e ?? '');
             }}
           />
         )}
@@ -63,7 +64,7 @@ export const TextChange = () => {
             type="number"
             onChange={(e) => {
               field.onChange(e);
-              updateTypography('fontSize', e.target.value);
+              updateTypography(currentSlideId, 'fontSize', e.target.value);
             }}
           />
         )}
@@ -87,7 +88,7 @@ export const TextChange = () => {
             field={field}
             onChange={(e) => {
               field.onChange(e);
-              updateTypography('fontWeight', e ?? '');
+              updateTypography(currentSlideId, 'fontWeight', e ?? '');
             }}
           />
         )}

@@ -167,6 +167,10 @@ html {
     font-weight: 600;
   }
 
+  &.bold {
+    font-weight: 700;
+  }
+
   &.secondary {
     color: $text-secondary-default;
   }

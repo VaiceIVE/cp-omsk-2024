@@ -11,6 +11,7 @@ export const SizeChange = () => {
     updateSizeElement,
     isProportional,
     setIsProportional,
+    currentSlideId,
   } = usePresentationPage();
 
   const { control, setValue } = useFormContext();
@@ -48,7 +49,7 @@ export const SizeChange = () => {
               type="number"
               onChange={(e) => {
                 field.onChange(e);
-                updateSizeElement('width', e.target.value);
+                updateSizeElement(currentSlideId, 'width', e.target.value);
               }}
             />
           )}
@@ -70,7 +71,7 @@ export const SizeChange = () => {
               onChange={(e) => {
                 field.onChange(e);
 
-                updateSizeElement('height', e.target.value);
+                updateSizeElement(currentSlideId, 'height', e.target.value);
               }}
             />
           )}

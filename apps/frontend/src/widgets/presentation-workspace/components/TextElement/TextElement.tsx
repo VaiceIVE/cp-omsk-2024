@@ -12,7 +12,7 @@ interface TextElementProps {
 }
 
 export const TextElement = ({ element, scale, isActive }: TextElementProps) => {
-  const { handleDrag, handleClick } = usePresentationPage();
+  const { handleStop, handleClick, currentSlideId } = usePresentationPage();
 
   return (
     <Draggable
@@ -22,7 +22,7 @@ export const TextElement = ({ element, scale, isActive }: TextElementProps) => {
       }}
       scale={scale}
       bounds={'parent'}
-      onStop={(e, data) => handleDrag(e, data, 0, element.id)}
+      onStop={(e, data) => handleStop(e, data, currentSlideId, element.id)}
       disabled={!isActive}
     >
       <p

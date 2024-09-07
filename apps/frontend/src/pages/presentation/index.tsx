@@ -1,15 +1,24 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import styles from './PresentationPage.module.scss';
-import { PresentationWorkspace } from 'widgets/presentation-workspace';
-
-import template1 from 'shared/assets/templates/template1.png';
-import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import classNames from 'classnames';
 import { PresentationPageContext } from './PresentationPageContext';
 import { mockPres } from 'shared/constants/mock';
 import { DraggableEvent } from 'react-draggable';
 import { ISlideElement, SlideElementType } from 'shared/models/ISlideElement';
-import { FormProvider, useForm } from 'react-hook-form';
+import { PresentationWorkspace } from 'widgets/presentation-workspace';
+
+import template1 from 'shared/assets/templates/template1.png';
+import template2 from 'shared/assets/templates/template2.png';
+import template3 from 'shared/assets/templates/template3.png';
+
+import styles from './PresentationPage.module.scss';
+
+const templates: Record<number, string> = {
+  0: template1,
+  1: template2,
+  2: template3,
+};
 
 const PresentationPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -27,6 +36,8 @@ const PresentationPage = () => {
   const slideRef = useRef<HTMLDivElement>(null);
 
   const presentationForm = useForm();
+
+  const currentSlideId = presentation.slides[currentSlide].id;
 
   const updateElementPosition = (
     slideId: number,
@@ -58,6 +69,7 @@ const PresentationPage = () => {
   };
 
   const updateSizeElement = (
+    slideId: number,
     key: 'width' | 'height',
     value: number | string
   ) => {
@@ -100,30 +112,34 @@ const PresentationPage = () => {
 
       setPresentation((prevPresentation) => ({
         ...prevPresentation,
-        slides: prevPresentation.slides.map((slide) => ({
-          ...slide,
-          elements: slide.elements.map((element) =>
-            element.id === activeElement.id
-              ? {
-                  ...element,
-                  image: activeElement.image
+        slides: prevPresentation.slides.map((slide) =>
+          slide.id === slideId
+            ? {
+                ...slide,
+                elements: slide.elements.map((element) =>
+                  element.id === activeElement.id
                     ? {
-                        ...element.image!,
-                        width: newWidth,
-                        height: newHeight,
+                        ...element,
+                        image: activeElement.image
+                          ? {
+                              ...element.image!,
+                              width: newWidth,
+                              height: newHeight,
+                            }
+                          : element.image,
+                        figure: activeElement.figure
+                          ? {
+                              ...element.figure!,
+                              width: newWidth,
+                              height: newHeight,
+                            }
+                          : element.figure,
                       }
-                    : element.image,
-                  figure: activeElement.figure
-                    ? {
-                        ...element.figure!,
-                        width: newWidth,
-                        height: newHeight,
-                      }
-                    : element.figure,
-                }
-              : element
-          ),
-        })),
+                    : element
+                ),
+              }
+            : slide
+        ),
       }));
 
       if (key === 'width') {
@@ -134,57 +150,66 @@ const PresentationPage = () => {
     }
   };
 
-  const updateColorElement = (hex: string) => {
+  const updateColorElement = (slideId: number, hex: string) => {
     if (activeElement) {
       setPresentation((prevPresentation) => ({
         ...prevPresentation,
-        slides: prevPresentation.slides.map((slide) => ({
-          ...slide,
-          elements: slide.elements.map((element) =>
-            element.id === activeElement.id
-              ? {
-                  ...element,
-                  typeography: activeElement.typeography
+        slides: prevPresentation.slides.map((slide) =>
+          slide.id === slideId
+            ? {
+                ...slide,
+                elements: slide.elements.map((element) =>
+                  element.id === activeElement.id
                     ? {
-                        ...element.typeography!,
-                        color: hex,
+                        ...element,
+                        typeography: activeElement.typeography
+                          ? {
+                              ...element.typeography!,
+                              color: hex,
+                            }
+                          : element.typeography,
+                        figure: activeElement.figure
+                          ? {
+                              ...element.figure!,
+                              backgroundColor: hex,
+                            }
+                          : element.figure,
                       }
-                    : element.typeography,
-                  figure: activeElement.figure
-                    ? {
-                        ...element.figure!,
-                        backgroundColor: hex,
-                      }
-                    : element.figure,
-                }
-              : element
-          ),
-        })),
+                    : element
+                ),
+              }
+            : slide
+        ),
       }));
     }
   };
 
   const updateTypography = (
+    slideId: number,
     key: 'fontSize' | 'fontWeight' | 'fontFamily',
     value: string | number
   ) => {
     if (activeElement && activeElement.typeography) {
       setPresentation((prevPresentation) => ({
         ...prevPresentation,
-        slides: prevPresentation.slides.map((slide) => ({
-          ...slide,
-          elements: slide.elements.map((element) =>
-            element.id === activeElement.id
-              ? {
-                  ...element,
-                  typeography: {
-                    ...element.typeography!,
-                    [key]: value,
-                  },
-                }
-              : element
-          ),
-        })),
+        slides: prevPresentation.slides.map((slide) =>
+          slide.id === slideId
+            ? {
+                ...slide,
+                elements: slide.elements.map((element) =>
+                  element.id === activeElement.id
+                    ? {
+                        ...element,
+                        typeography: {
+                          ...element.typeography!,
+                          [key]: value,
+                        },
+                      }
+                    : element
+                ),
+              }
+            : slide
+        ),
       }));
     }
   };
@@ -195,7 +220,7 @@ const PresentationPage = () => {
     }
   };
 
-  const handleDrag = (
+  const handleStop = (
     e: DraggableEvent,
     data: { x: number; y: number },
     slideId: number,
@@ -218,6 +243,11 @@ const PresentationPage = () => {
       setActiveElement(null);
     }
   };
+
+  useEffect(() => {
+    setActiveElement(null);
+    setIsProportional(false);
+  }, [currentSlide]);
 
   useEffect(() => {
     const updateHeight = () => {
@@ -246,7 +276,7 @@ const PresentationPage = () => {
             leftHeight,
             scale,
             presentation,
-            handleDrag,
+            handleStop,
             handleClick,
             activeElement,
             handleSlideClick,
@@ -256,14 +286,29 @@ const PresentationPage = () => {
             setIsProportional,
             updateColorElement,
             updateTypography,
+            currentSlideId,
           }}
         >
           <ul className={styles.slideList}>
-            <li className={classNames(styles.slide, styles.active)}>
-              <div className={styles.number}>1</div>
-              <div className={styles.bg}></div>
-              <img alt="cap" src={template1} className={styles.cap} />
-            </li>
+            {presentation.slides.map((s, index) => (
+              <li
+                key={s.id}
+                className={classNames(styles.slide, {
+                  [styles.active]: index === currentSlide,
+                })}
+                onClick={() => {
+                  setCurrentSlide(index);
+                }}
+              >
+                <div className={styles.number}>{index + 1}</div>
+                <div className={styles.bg}></div>
+                <img
+                  alt="cap"
+                  src={templates[presentation.templateId]}
+                  className={styles.cap}
+                />
+              </li>
+            ))}
           </ul>
           <PresentationWorkspace />
         </PresentationPageContext.Provider>

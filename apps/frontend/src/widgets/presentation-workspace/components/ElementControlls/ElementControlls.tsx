@@ -9,20 +9,38 @@ import { Title } from 'shared/ui/Title';
 import { SizeChange } from './components/SizeChange';
 import { ColorChange } from './components/ColorChange';
 import { TextChange } from './components/TextChange';
+import { SlideType } from 'shared/models/ISlide';
+import { useEffect } from 'react';
 
-const titleByType = {
+const titleByType: Record<SlideElementType, string> = {
   [SlideElementType.Icon]: 'Настройки изображения',
-  [SlideElementType.Image]: 'Настройки изображения', //done
+  [SlideElementType.Image]: 'Настройки изображения',
   [SlideElementType.Text]: 'Настройки текста',
   [SlideElementType.Figure]: 'Настройки фигуры',
   [SlideElementType.Heading]: 'Настройки текста',
   [SlideElementType.Numeric]: 'Настройки текста',
 };
 
-export const ElementControlls = () => {
-  const { activeElement } = usePresentationPage();
+const slideByType: Record<SlideType, string> = {
+  [SlideType.Header]: 'Титульный лист',
+  [SlideType.OneText]: 'Заголовок + 1 блок текста + картинка',
+  [SlideType.TwoText]: 'Заголовок + 2 блока текста + 2 иконки',
+  [SlideType.ThreeText]: 'Заголовок + 3 блока текста + 3 иконки',
+  [SlideType.BigNumbers]: 'Заголовок + 3 блока текста + числовые данные',
+  [SlideType.Chart]: 'Заголовок + диаграмма',
+  [SlideType.Ending]: 'Заключительный слайд',
+};
 
-  const { control } = useFormContext();
+export const ElementControlls = () => {
+  const { activeElement, presentation, currentSlide } = usePresentationPage();
+
+  const { control, setValue } = useFormContext();
+
+  useEffect(() => {
+    if (!activeElement) {
+      setValue('slideType', presentation.slides[currentSlide].slideType);
+    }
+  }, [activeElement, currentSlide, presentation.slides, setValue]);
 
   return (
     <Stack p={28} gap={28}>
@@ -34,6 +52,33 @@ export const ElementControlls = () => {
             : 'Настройки слайда'
         }
       />
+
+      {!activeElement && (
+        <Stack gap={12}>
+          <p className="text bold">
+            Тип слайда:{' '}
+            <span className="text medium secondary">
+              {slideByType[presentation.slides[currentSlide].slideType]}
+            </span>
+          </p>
+
+          <Controller
+            name="slideType"
+            control={control}
+            render={({ field }) => (
+              <Select
+                placeholder="Сменить тип слайда"
+                data={Object.keys(slideByType).map((t: string) => ({
+                  value: t as string,
+                  label: slideByType[t as SlideType],
+                }))}
+                field={field}
+              />
+            )}
+          />
+        </Stack>
+      )}
+
       <Button
         reverse
         label="Генерировать новый"

@@ -24,7 +24,10 @@ export const PresentationWorkspace = () => {
     presentation,
     activeElement,
     handleSlideClick,
+    currentSlide,
   } = usePresentationPage();
+
+  const slides = presentation.slides[currentSlide];
 
   return (
     <div className={styles.wrapper}>
@@ -38,7 +41,7 @@ export const PresentationWorkspace = () => {
         }}
         onClick={handleSlideClick}
       >
-        {presentation.slides[0].elements.map((e) => {
+        {slides.elements.map((e) => {
           const ElementByType = Element[e.elementType];
 
           const isActive = e.id === activeElement?.id;

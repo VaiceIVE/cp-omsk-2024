@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { ColorInput } from 'widgets/color-input';
 
 export const ColorChange = () => {
-  const { activeElement, updateColorElement } = usePresentationPage();
+  const { activeElement, updateColorElement, currentSlideId } =
+    usePresentationPage();
 
   const [color, setColor] = useState('');
 
@@ -26,7 +27,7 @@ export const ColorChange = () => {
         value={color}
         onChange={(value: string) => {
           setColor(value);
-          updateColorElement(value);
+          updateColorElement(currentSlideId, value);
         }}
       />
     </Stack>

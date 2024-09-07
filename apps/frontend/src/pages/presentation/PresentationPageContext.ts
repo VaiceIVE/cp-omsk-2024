@@ -10,7 +10,7 @@ export interface IPresentationPageContext {
   leftHeight: number;
   scale: number;
   presentation: IPresentation;
-  handleDrag: (
+  handleStop: (
     e: DraggableEvent,
     data: { x: number; y: number },
     slideId: number,
@@ -19,15 +19,21 @@ export interface IPresentationPageContext {
   handleClick: (element: ISlideElement) => void;
   activeElement: ISlideElement | null;
   handleSlideClick: (e: React.MouseEvent) => void;
-  updateSizeElement: (key: 'width' | 'height', value: number | string) => void;
+  updateSizeElement: (
+    slideId: number,
+    key: 'width' | 'height',
+    value: number | string
+  ) => void;
   handleRegenerate: () => void;
   isProportional: boolean;
   setIsProportional: React.Dispatch<React.SetStateAction<boolean>>;
-  updateColorElement: (hex: string) => void;
+  updateColorElement: (slideId: number, hex: string) => void;
   updateTypography: (
+    slideId: number,
     key: 'fontSize' | 'fontWeight' | 'fontFamily',
     value: string | number
   ) => void;
+  currentSlideId: number;
 }
 
 export const PresentationPageContext =
