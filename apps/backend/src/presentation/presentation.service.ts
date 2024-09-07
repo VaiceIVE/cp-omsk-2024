@@ -234,6 +234,8 @@ export class PresentationService {
         {
           newElement.posX = element.position.x 
           newElement.posY = element.position.y 
+          newElement.posZ = element.position.z         
+
           newElement.fig_width = element.figure.width
           newElement.fig_height = element.figure.height
           newElement.fig_bgcolor = element.figure.backgroundColor
@@ -245,6 +247,8 @@ export class PresentationService {
           const svgName = slideInfo['text_svg_pairs'].pop()
           newElement.posX = element.position.x
           newElement.posY = element.position.y
+          newElement.posZ = element.position.z         
+
           newElement.image_width = element.image.width
           newElement.image_height = element.image.height
           newElement.image_url = `${backendUrl}/static/${svgName}` 
@@ -261,7 +265,9 @@ export class PresentationService {
             continue
           }
           newElement.posX = element.position.x
-          newElement.posY = element.position.y        
+          newElement.posY = element.position.y   
+          newElement.posZ = element.position.z         
+     
           newElement.image_width = element.image.width
           newElement.image_height = element.image.height
           newElement.image_url = `${backendUrl}/storage/${slideInfo['images'][0]}` 
@@ -271,6 +277,7 @@ export class PresentationService {
         {
           newElement.posX = element.position.x
           newElement.posY = element.position.y     
+          newElement.posZ = element.position.z         
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight
@@ -283,7 +290,8 @@ export class PresentationService {
         {
 
           newElement.posX = element.position.x
-          newElement.posY = element.position.y     
+          newElement.posY = element.position.y
+          newElement.posZ = element.position.z         
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight
@@ -296,7 +304,9 @@ export class PresentationService {
         if(element.elementType == 'TEXT')
         {
           newElement.posX = element.position.x
-          newElement.posY = element.position.y     
+          newElement.posY = element.position.y 
+          newElement.posZ = element.position.z         
+    
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight

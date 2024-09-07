@@ -12,7 +12,9 @@ export class SlideElement {
     @Column()
     posY: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     posZ: number;
 
     @Column({
