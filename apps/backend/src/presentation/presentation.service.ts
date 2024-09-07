@@ -223,6 +223,10 @@ export class PresentationService {
       //     continue
       //   }
 
+      console.log(template)
+
+      console.log(template.slides)
+
       const slideTemplate = template.slides[slideInfo['slide_type']]
 
       let newSlideElements = []
