@@ -26,6 +26,7 @@
     "react-draggable": "^4.4.6",
     "react-hook-form": "^7.53.0",
     "react-router-dom": "^6.26.1",
+    "react-svg": "^16.1.34",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "spdy": "^4.0.2",

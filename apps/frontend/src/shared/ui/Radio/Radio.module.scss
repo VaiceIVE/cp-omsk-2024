@@ -1,10 +1,6 @@
 @import '@styles/__defines.scss';
 
 .radio {
-  padding: 14px 16px;
-  border-radius: 1px solid $divider-color;
-  border-radius: 10px;
-
   transition: all 0.3s;
 
   &[data-checked='true'] {
@@ -21,14 +17,24 @@
 
   @media (hover: hover) {
     &:hover {
-      border-color: $link-hover-color;
+      //border-color: $link-hover-color;
     }
   }
 
   div {
     &[data-checked='true'] {
-      background-color: $main-blue-color;
-      border-color: $main-blue-color;
+      //background-color: $main-blue-color;
+      //border-color: $main-blue-color;
     }
   }
+}
+
+.radioBlock {
+  padding: 16px;
+  border-radius: 1px solid $divider-default;
+  border-radius: 10px;
+
+  flex: 1;
+
+  background-color: white;
 }

@@ -8,6 +8,8 @@ import { IconPresentation } from '@tabler/icons-react';
 import { Button } from 'shared/ui/Button';
 import { StyleForm } from './components/StyleForm';
 import { OptionsForm } from './components/OptionsForm';
+import { IconCircle } from './components/IconCircle';
+import { EyeIcon } from 'shared/assets/EyeIcon';
 
 const steps: Record<number, ReactNode> = {
   0: <InitialForm />,
@@ -28,9 +30,8 @@ const CreatingPage = () => {
         <Grid.Col className={styles.section} span={6}>
           <Stack className={styles.form} p={32} gap={32}>
             <Flex gap={20} align={'center'}>
-              <div className={styles.icon}>
-                <IconPresentation />
-              </div>
+              <IconCircle width={56} size={32} src={EyeIcon} />
+
               <Stack gap={2}>
                 <Title level={2} title="Создание презентации" />
                 <p className="text small medium secondary-hover">

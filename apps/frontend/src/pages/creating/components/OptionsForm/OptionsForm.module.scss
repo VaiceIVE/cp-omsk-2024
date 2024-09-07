@@ -1,0 +1,19 @@
+@import '@styles/__defines.scss';
+
+.info {
+  padding: 16px;
+  border-radius: 12px;
+  background-color: $blue300;
+}
+
+.tag {
+  cursor: pointer;
+  padding: 10px 12px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: $divider-default;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

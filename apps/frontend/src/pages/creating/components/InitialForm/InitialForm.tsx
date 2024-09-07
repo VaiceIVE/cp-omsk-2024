@@ -35,6 +35,7 @@ export const InitialForm = () => {
 
       <FormSection>
         <Title semibold level={4} title="Файл графиков (опционально)" />
+
         <Stack gap={20}>
           <Stack gap={10}>
             <p className="text semibold">Загрузить новый файл</p>
@@ -43,6 +44,10 @@ export const InitialForm = () => {
             </p>
           </Stack>
           <Button label="Загрузить файл .xlsx" variant="accent" />
+        </Stack>
+
+        <Stack gap={20}>
+          <p className="text semibold">Выбрать загруженный файл</p>
         </Stack>
       </FormSection>
     </Fragment>

@@ -25,24 +25,6 @@
   border-radius: 16px;
 }
 
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-
-  background-color: $blue400;
-  border-radius: 50%;
-
-  svg {
-    width: 32px;
-    height: 32px;
-
-    color: $primary-acent-default;
-  }
-}
-
 .footer {
   position: sticky;
   bottom: 0;
