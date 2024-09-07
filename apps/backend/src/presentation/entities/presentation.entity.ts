@@ -3,7 +3,13 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Presentation {
-    slides: Slide[];
+
+    @PrimaryGeneratedColumn()
     id: number;
+
+    @OneToMany(() => Slide, (s) => s.presentation)
+    slides: Slide[];
+
+    @Column()
     templateId: number;
 }
