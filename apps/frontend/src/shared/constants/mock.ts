@@ -48,6 +48,25 @@ export const mockPres: IPresentation = {
           chart: null,
           figure: null,
         },
+        {
+          id: 2,
+          position: {
+            x: 686.67,
+            y: 314,
+            z: 0,
+          },
+          typeography: null,
+          image: null,
+
+          chart: null,
+          elementType: SlideElementType.Figure,
+          figure: {
+            width: 546.67,
+            height: 627,
+            backgroundColor: '#F8F8F8',
+            borderRadius: 24,
+          },
+        },
       ],
     },
   ],

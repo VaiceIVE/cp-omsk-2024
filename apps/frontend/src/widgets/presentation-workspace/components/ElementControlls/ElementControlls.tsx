@@ -1,19 +1,17 @@
-import { Flex, Stack } from '@mantine/core';
+import { Stack } from '@mantine/core';
 import { IconWand } from '@tabler/icons-react';
 import { usePresentationPage } from 'pages/presentation/usePresentationPage';
-import { Fragment, useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { SlideType } from 'shared/models/ISlide';
 import { SlideElementType } from 'shared/models/ISlideElement';
 import { Button } from 'shared/ui/Button';
-import { Checkbox } from 'shared/ui/Checkbox';
-import { Input } from 'shared/ui/Input';
 import { Select } from 'shared/ui/Select';
 import { Title } from 'shared/ui/Title';
+import { SizeChange } from './components/SizeChange';
+import { ColorChange } from './components/ColorChange';
 
 const titleByType = {
   [SlideElementType.Icon]: 'Настройки изображения',
-  [SlideElementType.Image]: 'Настройки изображения',
+  [SlideElementType.Image]: 'Настройки изображения', //done
   [SlideElementType.Text]: 'Настройки текста',
   [SlideElementType.Figure]: 'Настройки фигуры',
   [SlideElementType.Heading]: 'Настройки текста',
@@ -21,12 +19,7 @@ const titleByType = {
 };
 
 export const ElementControlls = () => {
-  const {
-    activeElement,
-    updateSizeElement,
-    isProportional,
-    setIsProportional,
-  } = usePresentationPage();
+  const { activeElement } = usePresentationPage();
 
   const { control } = useFormContext();
 
@@ -47,15 +40,9 @@ export const ElementControlls = () => {
         variant="outline"
         icon={<IconWand stroke={2} />}
       />
-      {!activeElement && (
-        <Fragment>
-          <></>
-          <div>123</div>
-        </Fragment>
-      )}
 
-      {activeElement?.elementType === SlideElementType.Image && (
-        <Stack gap={22}>
+      <Stack gap={22}>
+        {activeElement?.elementType === SlideElementType.Image && (
           <Controller
             name="style"
             defaultValue={'Деловой'}
@@ -73,55 +60,17 @@ export const ElementControlls = () => {
               />
             )}
           />
+        )}
 
-          <Stack gap={16}>
-            <Flex gap={8}>
-              <Controller
-                name="width"
-                defaultValue={activeElement.image?.width.toString()}
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    field={field}
-                    label="Ширина"
-                    fullWidth
-                    type="number"
-                    onChange={(e) => {
-                      field.onChange(e);
-                      updateSizeElement('width', e.target.value);
-                    }}
-                  />
-                )}
-              />
+        {(activeElement?.elementType === SlideElementType.Image ||
+          activeElement?.elementType === SlideElementType.Figure) && (
+          <SizeChange />
+        )}
 
-              <Controller
-                name="height"
-                defaultValue={activeElement.image?.height.toString()}
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    field={field}
-                    label="Высота"
-                    fullWidth
-                    type="number"
-                    onChange={(e) => {
-                      field.onChange(e);
-
-                      updateSizeElement('height', e.target.value);
-                    }}
-                  />
-                )}
-              />
-            </Flex>
-            <Checkbox
-              value={''}
-              checked={isProportional}
-              onChange={setIsProportional}
-              label={'Пропорциональное изменение'}
-            />
-          </Stack>
-        </Stack>
-      )}
+        {activeElement?.elementType !== SlideElementType.Image &&
+          activeElement?.elementType !== SlideElementType.Icon &&
+          !!activeElement && <ColorChange />}
+      </Stack>
     </Stack>
   );
 };

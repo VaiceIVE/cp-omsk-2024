@@ -64,22 +64,37 @@ const PresentationPage = () => {
     if (activeElement) {
       const updatedValue =
         typeof value === 'string' ? parseFloat(value) : value;
-      let newWidth = activeElement.image?.width || 0;
-      let newHeight = activeElement.image?.height || 0;
+
+      let newWidth =
+        activeElement.image?.width || activeElement.figure?.width || 0;
+      let newHeight =
+        activeElement.image?.height || activeElement.figure?.height || 0;
 
       if (key === 'width') {
         newWidth = updatedValue;
-        if (isProportional && activeElement.image) {
-          newHeight =
-            (updatedValue / activeElement.image.width) *
-            activeElement.image.height;
+        if (isProportional) {
+          if (activeElement.image) {
+            newHeight =
+              (updatedValue / activeElement.image.width) *
+              activeElement.image.height;
+          } else if (activeElement.figure) {
+            newHeight =
+              (updatedValue / activeElement.figure.width) *
+              activeElement.figure.height;
+          }
         }
       } else if (key === 'height') {
         newHeight = updatedValue;
-        if (isProportional && activeElement.image) {
-          newWidth =
-            (updatedValue / activeElement.image.height) *
-            activeElement.image.width;
+        if (isProportional) {
+          if (activeElement.image) {
+            newWidth =
+              (updatedValue / activeElement.image.height) *
+              activeElement.image.width;
+          } else if (activeElement.figure) {
+            newWidth =
+              (updatedValue / activeElement.figure.height) *
+              activeElement.figure.width;
+          }
         }
       }
 
@@ -91,11 +106,56 @@ const PresentationPage = () => {
             element.id === activeElement.id
               ? {
                   ...element,
-                  image: {
-                    ...element.image!,
-                    width: newWidth,
-                    height: newHeight,
-                  },
+                  image: activeElement.image
+                    ? {
+                        ...element.image!,
+                        width: newWidth,
+                        height: newHeight,
+                      }
+                    : element.image,
+                  figure: activeElement.figure
+                    ? {
+                        ...element.figure!,
+                        width: newWidth,
+                        height: newHeight,
+                      }
+                    : element.figure,
+                }
+              : element
+          ),
+        })),
+      }));
+
+      if (key === 'width') {
+        presentationForm.setValue('height', newHeight);
+      } else {
+        presentationForm.setValue('width', newWidth);
+      }
+    }
+  };
+
+  const updateColorElement = (hex: string) => {
+    if (activeElement) {
+      setPresentation((prevPresentation) => ({
+        ...prevPresentation,
+        slides: prevPresentation.slides.map((slide) => ({
+          ...slide,
+          elements: slide.elements.map((element) =>
+            element.id === activeElement.id
+              ? {
+                  ...element,
+                  typeography: activeElement.typeography
+                    ? {
+                        ...element.typeography!,
+                        color: hex,
+                      }
+                    : element.typeography,
+                  figure: activeElement.figure
+                    ? {
+                        ...element.figure!,
+                        backgroundColor: hex,
+                      }
+                    : element.figure,
                 }
               : element
           ),
@@ -169,6 +229,7 @@ const PresentationPage = () => {
             handleRegenerate,
             isProportional,
             setIsProportional,
+            updateColorElement,
           }}
         >
           <ul className={styles.slideList}>

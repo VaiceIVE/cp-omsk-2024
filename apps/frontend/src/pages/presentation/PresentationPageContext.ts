@@ -23,6 +23,7 @@ export interface IPresentationPageContext {
   handleRegenerate: () => void;
   isProportional: boolean;
   setIsProportional: React.Dispatch<React.SetStateAction<boolean>>;
+  updateColorElement: (hex: string) => void;
 }
 
 export const PresentationPageContext =

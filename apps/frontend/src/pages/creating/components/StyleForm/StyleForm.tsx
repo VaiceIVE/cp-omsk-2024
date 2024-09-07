@@ -1,17 +1,17 @@
 import { Fragment } from 'react';
 import { FormSection } from '../FormSection';
 import { Title } from 'shared/ui/Title';
-import { ColorPicker, Flex, Stack, Radio as MantineRadio } from '@mantine/core';
+import { Flex, Stack, Radio as MantineRadio } from '@mantine/core';
 import { Upload } from 'shared/ui/Upload';
 import { IconFileFilled, IconPaperclip } from '@tabler/icons-react';
 import { useCreatingPage } from 'pages/creating/useCreatingPage';
-import { Input } from 'shared/ui/Input';
 
 import template1 from 'shared/assets/templates/template1.png';
 import template2 from 'shared/assets/templates/template2.png';
 import template3 from 'shared/assets/templates/template3.png';
 import { Radio } from 'shared/ui/Radio';
 import { Controller, useFormContext } from 'react-hook-form';
+import { ColorInput } from 'widgets/color-input';
 
 export const StyleForm = () => {
   const { logoFiles, setLogoFiles, resetLogoRef, accentColor, setAccentColor } =
@@ -97,34 +97,7 @@ export const StyleForm = () => {
         <Stack gap={20}>
           <p className="text semibold">Акцентный цвет презентации</p>
 
-          <Input
-            value={accentColor}
-            onChange={setAccentColor}
-            label="HEX код"
-            placeholder="HEX"
-          />
-
-          <ColorPicker
-            value={accentColor}
-            onChangeEnd={setAccentColor}
-            format="hex"
-            swatches={[
-              '#2e2e2e',
-              '#868e96',
-              '#fa5252',
-              '#e64980',
-              '#be4bdb',
-              '#7950f2',
-              '#4c6ef5',
-              '#228be6',
-              '#15aabf',
-              '#12b886',
-              '#40c057',
-              '#82c91e',
-              '#fab005',
-              '#fd7e14',
-            ]}
-          />
+          <ColorInput value={accentColor} onChange={setAccentColor} />
         </Stack>
       </FormSection>
     </Fragment>
