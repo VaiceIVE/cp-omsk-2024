@@ -71,7 +71,7 @@ export class PresentationService {
             figures.push(element)
           }
 
-          if(element.elementType == 'icon')
+          if(element.elementType == 'ICON')
           {
             icons.push(element)
           }
@@ -99,7 +99,7 @@ export class PresentationService {
       {
         for(const element of figures)
         {
-          newSlide.addShape(pres.ShapeType.rect, {
+          newSlide.addShape(pres.ShapeType.roundRect, {
             x: element.position.x / 192, // 1,
             y: element.position.y / 192, // 1,
             w: element.figure.width / 192, // 15
@@ -114,9 +114,28 @@ export class PresentationService {
         {
           for(const element of images)
           {
-            
+            newSlide.addImage({
+              x: element.position.x / 192, // 1,
+              y: element.position.y / 192, // 1,
+              w: element.image.width / 192, // 15
+              h: element.image.height / 192, // 15
+              data: (await this.storageService.getFromS3ByName(slide['images'][0])).read()
+            })
           }
         }
+
+        if(icons)
+          {
+            for(const element of icons)
+            {
+              newSlide.addImage({
+                x: element.position.x / 192, // 1,
+                y: element.position.y / 192, // 1,
+                w: element.image.width / 192, // 15
+                h: element.image.height / 192, // 15
+              })
+            }
+          }
 
         if(numbers)
           {
@@ -186,11 +205,6 @@ export class PresentationService {
     //save data to database
 
     //send presentation ID
-
-  }
-
-  async saveFilesToS3(files: Express.Multer.File[])
-  {
 
   }
 
