@@ -26,7 +26,7 @@ export const ImageElement = ({
       }}
       scale={scale}
       bounds={'parent'}
-      onStop={(e, data) => handleStop(e, data, currentSlideId, element.id)}
+      onStop={(e, data) => handleStop(e, data, currentSlideId ?? 0, element.id)}
       disabled={!isActive}
     >
       <div

@@ -10,6 +10,7 @@ import { OptionsForm } from './components/OptionsForm';
 import { IconCircle } from './components/IconCircle';
 import { EyeIcon } from 'shared/assets/EyeIcon';
 import { CreatingPageContext } from './CreatingPageContext';
+import PresentationServices from 'shared/services/PresentationServices';
 
 const steps: Record<number, ReactNode> = {
   0: <InitialForm />,
@@ -21,6 +22,8 @@ const CreatingPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const creatingForm = useForm();
+
+  const [loading, setLoading] = useState(false);
 
   const [docFile, setDocFile] = useState<File | null>(null);
   const [tableFile, setTableFile] = useState<File | null>(null);
@@ -41,6 +44,21 @@ const CreatingPage = () => {
   const length = creatingForm.watch('length') ?? '';
   const changeText = creatingForm.watch('changeText') ?? '';
   const template = creatingForm.watch('template') ?? '';
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = async (data: any) => {
+    console.log(data);
+
+    try {
+      setLoading(true);
+
+      await PresentationServices.createPresentation(1);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -95,7 +113,12 @@ const CreatingPage = () => {
           label="Назад"
         />
         {currentStep === 2 ? (
-          <Button disabled={!template} w={227} label="Создать презентацию" />
+          <Button
+            onClick={creatingForm.handleSubmit(onSubmit)}
+            disabled={!template}
+            w={227}
+            label="Создать презентацию"
+          />
         ) : (
           <Button
             onClick={() => {

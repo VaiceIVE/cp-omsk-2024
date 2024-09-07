@@ -36,7 +36,7 @@ export const TextElement = ({ element, scale, isActive }: TextElementProps) => {
       }}
       scale={scale}
       bounds={'parent'}
-      onStop={(e, data) => handleStop(e, data, currentSlideId, element.id)}
+      onStop={(e, data) => handleStop(e, data, currentSlideId ?? 0, element.id)}
       disabled={!isActive}
     >
       <div
@@ -65,7 +65,8 @@ export const TextElement = ({ element, scale, isActive }: TextElementProps) => {
           onChange={(e) => {
             setText(e.currentTarget.value);
 
-            updateTypography(currentSlideId, 'text', e.currentTarget.value);
+            currentSlideId &&
+              updateTypography(currentSlideId, 'text', e.currentTarget.value);
           }}
           value={element.typeography?.text}
         />

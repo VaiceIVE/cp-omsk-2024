@@ -40,9 +40,9 @@ export const ElementControlls = () => {
 
   useEffect(() => {
     if (!activeElement) {
-      setValue('slideType', presentation.slides[currentSlide].slideType);
+      setValue('slideType', presentation?.slides[currentSlide].slideType);
     }
-  }, [activeElement, currentSlide, presentation.slides, setValue]);
+  }, [activeElement, currentSlide, presentation?.slides, setValue]);
 
   return (
     <Stack p={28} gap={28}>
@@ -55,7 +55,7 @@ export const ElementControlls = () => {
         }
       />
 
-      {!activeElement && (
+      {!activeElement && presentation && (
         <Stack gap={12}>
           <p className="text bold">
             Тип слайда:{' '}

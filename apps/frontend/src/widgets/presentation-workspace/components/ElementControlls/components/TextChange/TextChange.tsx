@@ -46,7 +46,8 @@ export const TextChange = () => {
             field={field}
             onChange={(e) => {
               field.onChange(e);
-              updateTypography(currentSlideId, 'fontFamily', e ?? '');
+              currentSlideId &&
+                updateTypography(currentSlideId, 'fontFamily', e ?? '');
             }}
           />
         )}
@@ -64,7 +65,8 @@ export const TextChange = () => {
             type="number"
             onChange={(e) => {
               field.onChange(e);
-              updateTypography(currentSlideId, 'fontSize', e.target.value);
+              currentSlideId &&
+                updateTypography(currentSlideId, 'fontSize', e.target.value);
             }}
           />
         )}
@@ -88,7 +90,8 @@ export const TextChange = () => {
             field={field}
             onChange={(e) => {
               field.onChange(e);
-              updateTypography(currentSlideId, 'fontWeight', e ?? '');
+              currentSlideId &&
+                updateTypography(currentSlideId, 'fontWeight', e ?? '');
             }}
           />
         )}

@@ -27,7 +27,7 @@ export const FigureElement = ({
       scale={scale}
       bounds={'parent'}
       disabled={!isActive}
-      onStop={(e, data) => handleStop(e, data, currentSlideId, element.id)}
+      onStop={(e, data) => handleStop(e, data, currentSlideId ?? 0, element.id)}
     >
       <div
         onClick={() => {

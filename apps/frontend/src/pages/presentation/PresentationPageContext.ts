@@ -9,7 +9,7 @@ export interface IPresentationPageContext {
   slideRef: React.RefObject<HTMLDivElement>;
   leftHeight: number;
   scale: number;
-  presentation: IPresentation;
+  presentation: IPresentation | null;
   handleStop: (
     e: DraggableEvent,
     data: { x: number; y: number },
@@ -33,7 +33,7 @@ export interface IPresentationPageContext {
     key: 'fontSize' | 'fontWeight' | 'fontFamily' | 'text',
     value: string | number
   ) => void;
-  currentSlideId: number;
+  currentSlideId: number | undefined;
 }
 
 export const PresentationPageContext =
