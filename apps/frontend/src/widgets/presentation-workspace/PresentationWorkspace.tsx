@@ -1,5 +1,7 @@
+import Draggable from 'react-draggable';
 import styles from './PresentationWorkspace.module.scss';
 import { useEffect, useRef, useState } from 'react';
+import { mockSLide } from 'shared/constants/mock';
 
 export const PresentationWorkspace = () => {
   const [leftHeight, setLeftHeight] = useState(0);
@@ -28,15 +30,34 @@ export const PresentationWorkspace = () => {
       <div
         ref={slideRef}
         className={styles.slide}
-        style={{ height: `${leftHeight}px` }}
+        style={{
+          height: `${leftHeight}px`,
+        }}
       >
-        <div
-          style={{ transform: `scale(${scale})`, transformOrigin: 'top left' }}
-        >
-          <p style={{ fontSize: '80px' }}>123</p>
-        </div>
+        {mockSLide.elemnents.map((s) => (
+          <Draggable
+            position={{
+              x: s.position.x * scale,
+              y: s.position.y * scale,
+            }}
+            scale={scale}
+            bounds={'parent'}
+          >
+            <p
+              style={{
+                fontSize: `calc(${s.typeography?.fontSize}px * ${scale})`,
+                fontWeight: s.typeography?.fontWeight,
+                color: s.typeography?.color,
+                width: `calc(1018px * ${scale})`,
+                lineHeight: `calc(96px * ${scale})`,
+              }}
+            >
+              {s.typeography?.text}
+            </p>
+          </Draggable>
+        ))}
       </div>
-      <div className={styles.controlls}>{/* Содержимое правой части */}</div>
+      <div className={styles.controlls}></div>
     </div>
   );
 };
