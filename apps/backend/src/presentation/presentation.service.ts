@@ -29,7 +29,7 @@ export class PresentationService {
       slideInfo[slide]['slide_text'] = slideInfo[slide]['slide_text'].replace('\"]"', '').replace('"[\"', '')
       let newSlide = pres.addSlide();
 
-      console.log(template)
+      console.log(slideInfo[slide]['type'])
 
       console.log(template[slideInfo[slide]['type']])
 
