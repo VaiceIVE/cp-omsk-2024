@@ -45,7 +45,10 @@ export class SlideElement {
     typo_text: string;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 5,
+        scale: 3
     })
     typo_width: number;
 
