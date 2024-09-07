@@ -6,10 +6,18 @@ export class SlideElement {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({
+        type: "decimal",
+        precision: 8,
+        scale: 3
+    })
     posX: number;
 
-    @Column()
+    @Column({
+        type: "decimal",
+        precision: 8,
+        scale: 3
+    })
     posY: number;
 
     @Column({
@@ -58,7 +66,10 @@ export class SlideElement {
     image_width: number;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     image_height: number;
 
@@ -68,12 +79,18 @@ export class SlideElement {
     image_url: string;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     chart_width: number;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     chart_height: number;
 
@@ -96,7 +113,10 @@ export class SlideElement {
     fig_width: number;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     fig_height: number;
 
