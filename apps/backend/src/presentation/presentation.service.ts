@@ -232,21 +232,21 @@ export class PresentationService {
         let newElement = this.slideElementRepository.create()
         if(element.elementType == 'FIGURE')
         {
-          newElement.posX = element.position.x / 192
-          newElement.posY = element.position.y / 192
-          newElement.fig_width = element.figure.width / 192
-          newElement.fig_height = element.figure.height / 192
+          newElement.posX = element.position.x 
+          newElement.posY = element.position.y 
+          newElement.fig_width = element.figure.width
+          newElement.fig_height = element.figure.height
           newElement.fig_bgcolor = element.figure.backgroundColor
-          newElement.fig_border_radius = element.figure.height / 192 / element.figure.borderRadius
+          newElement.fig_border_radius = element.figure.borderRadius
         }
 
         if (element.elementType == 'ICON')
         {
           const svgName = slideInfo['text_svg_pairs'].pop()
-          newElement.posX = element.position.x / 192
-          newElement.posY = element.position.y / 192
-          newElement.image_width = element.image.width / 192
-          newElement.image_height = element.image.height / 192
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y
+          newElement.image_width = element.image.width
+          newElement.image_height = element.image.height
           newElement.image_url = `${backendUrl}/static/${svgName}` 
         }
 
@@ -260,48 +260,48 @@ export class PresentationService {
           {
             continue
           }
-          newElement.posX = element.position.x / 192
-          newElement.posY = element.position.y / 192        
-          newElement.image_width = element.image.width / 192
-          newElement.image_height = element.image.height / 192
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y        
+          newElement.image_width = element.image.width
+          newElement.image_height = element.image.height
           newElement.image_url = `${backendUrl}/storage/${slideInfo['images'][0]}` 
         }
 
         if(element.elementType == 'NUMERIC')
         {
-          newElement.posX = element.position.x / 192
-          newElement.posY = element.position.y / 192     
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y     
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight
-          newElement.typo_fontSize = element.typeography.fontSize / 4
-          newElement.typo_width = element.typeography.width / 192
+          newElement.typo_fontSize = element.typeography.fontSize
+          newElement.typo_width = element.typeography.width
           newElement.typo_text = slideCounter.toString()
         }
 
         if(element.elementType == 'HEADING')
         {
 
-          newElement.posX = element.position.x / 192
-          newElement.posY = element.position.y / 192     
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y     
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight
-          newElement.typo_fontSize = element.typeography.fontSize / 4
-          newElement.typo_width = element.typeography.width / 192
+          newElement.typo_fontSize = element.typeography.fontSize
+          newElement.typo_width = element.typeography.width
           newElement.typo_text = slideInfo['title']
 
         }
 
         if(element.elementType == 'TEXT')
         {
-          newElement.posX = element.position.x / 192
-          newElement.posY = element.position.y / 192     
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y     
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight
-          newElement.typo_fontSize = element.typeography.fontSize / 4
-          newElement.typo_width = element.typeography.width / 192
+          newElement.typo_fontSize = element.typeography.fontSize
+          newElement.typo_width = element.typeography.width
           newElement.typo_text = slideInfo['slide_text']
         }
         await this.slideElementRepository.insert(newElement)
