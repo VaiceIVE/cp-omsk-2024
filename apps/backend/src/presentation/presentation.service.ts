@@ -244,6 +244,10 @@ export class PresentationService {
 
         if (element.elementType == 'ICON')
         {
+          if(!('text_svg_pairs' in Object.keys(slideInfo)))
+            {
+              continue
+            }
           const svgName = slideInfo['text_svg_pairs'].pop()
           newElement.posX = element.position.x
           newElement.posY = element.position.y
