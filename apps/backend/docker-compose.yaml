@@ -33,7 +33,7 @@ services:
 #    networks:
 #      - network
     working_dir: /nest-app/
-    entrypoint: bash -c "npm run create-entities-index && npx nx run backend:serve --skip-nx-cache"
+    entrypoint: bash -c "npm run create-entities-index && npx nx run backend:serve:production --skip-nx-cache"
     links:
       - "postgres:postgres"
 
