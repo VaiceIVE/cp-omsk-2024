@@ -25,6 +25,9 @@ const CreatingPage = () => {
   const [docFile, setDocFile] = useState<File | null>(null);
   const [tableFile, setTableFile] = useState<File | null>(null);
 
+  const [selectedChart, setSelectedChart] = useState('');
+  const [hasCharts, setHasCharts] = useState(false);
+
   const StepComponent = steps[currentStep];
 
   const resetDocRef = useRef<() => void>(null);
@@ -56,6 +59,10 @@ const CreatingPage = () => {
                 setTableFile,
                 resetDocRef,
                 resetTableRef,
+                selectedChart,
+                setSelectedChart,
+                hasCharts,
+                setHasCharts,
               }}
             >
               <FormProvider {...creatingForm}>{StepComponent}</FormProvider>

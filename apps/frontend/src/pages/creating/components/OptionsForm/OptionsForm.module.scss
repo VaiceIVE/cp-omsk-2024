@@ -16,4 +16,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.active {
+    border-color: $primary-acent-default;
+    background-color: $primary-acent-default;
+    color: white;
+  }
 }

@@ -35,4 +35,5 @@ export interface ISlideElement {
 export enum SlideElementType {
   Text = 'TEXT',
   Image = 'IMAGE',
+  Heading = 'HEADING',
 }

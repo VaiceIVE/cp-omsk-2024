@@ -1,7 +1,7 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { FormSection } from '../FormSection';
 import { Title } from 'shared/ui/Title';
-import { Flex, Stack } from '@mantine/core';
+import { Flex, Stack, Radio as MantineRadio } from '@mantine/core';
 import { Radio } from 'shared/ui/Radio';
 import { IconCircle } from '../IconCircle';
 import { IconInfoCircle } from '@tabler/icons-react';
@@ -9,6 +9,8 @@ import { IconInfoCircle } from '@tabler/icons-react';
 import styles from './OptionsForm.module.scss';
 import { Checkbox } from 'shared/ui/Checkbox';
 import classNames from 'classnames';
+import { Controller, useFormContext } from 'react-hook-form';
+import { useCreatingPage } from 'pages/creating/useCreatingPage';
 
 const tags = [
   {
@@ -30,7 +32,16 @@ const tags = [
 ];
 
 export const OptionsForm = () => {
-  const [hasCharts, setHasCharts] = useState(false);
+  const { selectedChart, setSelectedChart, hasCharts, setHasCharts } =
+    useCreatingPage();
+
+  const { control } = useFormContext();
+
+  useEffect(() => {
+    if (!hasCharts) {
+      setSelectedChart('');
+    }
+  }, [hasCharts, setSelectedChart]);
 
   return (
     <Fragment>
@@ -40,45 +51,61 @@ export const OptionsForm = () => {
         <Stack gap={12}>
           <p className="text semibold">Длина презентации*</p>
 
-          <Flex gap={12}>
-            <Radio
-              type="block"
-              label={'Короткая'}
-              text="3-7 слайдов"
-              value={''}
-            />
-            <Radio
-              type="block"
-              label={'Средняя'}
-              text="8-11 слайдов"
-              value={''}
-            />
-            <Radio
-              type="block"
-              label={'Длинная'}
-              text="12+ слайдов"
-              value={''}
-            />
-          </Flex>
+          <Controller
+            control={control}
+            name="length"
+            render={({ field }) => (
+              <MantineRadio.Group {...field}>
+                <Flex gap={12}>
+                  <Radio
+                    type="block"
+                    label={'Короткая'}
+                    text="3-7 слайдов"
+                    value={'5'}
+                  />
+                  <Radio
+                    type="block"
+                    label={'Средняя'}
+                    text="8-11 слайдов"
+                    value={'9'}
+                  />
+                  <Radio
+                    type="block"
+                    label={'Длинная'}
+                    text="12+ слайдов"
+                    value={'12'}
+                  />
+                </Flex>
+              </MantineRadio.Group>
+            )}
+          />
         </Stack>
 
         <Stack gap={12}>
           <p className="text semibold">Текстовки на слайдах*</p>
 
-          <Flex gap={12}>
-            <Radio
-              type="block"
-              label={'Изменить формулировки'}
-              text="Сократим/удлиним текст"
-              value={''}
-            />
-            <Radio
-              type="block"
-              label={'Не менять формулировки'}
-              text="Текст останется неизменным"
-              value={''}
-            />
-          </Flex>
+          <Controller
+            control={control}
+            name="changeText"
+            render={({ field }) => (
+              <MantineRadio.Group {...field}>
+                <Flex gap={12}>
+                  <Radio
+                    type="block"
+                    label={'Изменить формулировки'}
+                    text="Сократим/удлиним текст"
+                    value={'true'}
+                  />
+                  <Radio
+                    type="block"
+                    label={'Не менять формулировки'}
+                    text="Текст останется неизменным"
+                    value={'false'}
+                  />
+                </Flex>
+              </MantineRadio.Group>
+            )}
+          />
         </Stack>
       </FormSection>
 
@@ -105,7 +132,20 @@ export const OptionsForm = () => {
             <ul style={!hasCharts ? { opacity: 0.4 } : undefined}>
               <Flex gap={8}>
                 {tags.map((t) => (
-                  <li className={classNames(styles.tag)} key={t.value}>
+                  <li
+                    onClick={
+                      !hasCharts
+                        ? undefined
+                        : () => {
+                            setSelectedChart(t.value);
+                          }
+                    }
+                    className={classNames(
+                      styles.tag,
+                      selectedChart === t.value && styles.active
+                    )}
+                    key={t.value}
+                  >
                     {t.text}
                   </li>
                 ))}
