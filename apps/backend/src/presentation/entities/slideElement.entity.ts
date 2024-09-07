@@ -34,7 +34,9 @@ export class SlideElement {
         nullable: true
     })    typo_fontFamily: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     typo_color: string;
 
     @Column({
