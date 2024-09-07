@@ -85,7 +85,10 @@ export class SlideElement {
     chart_type: string;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 5,
+        scale: 3
     })
     fig_width: number;
 
