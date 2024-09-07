@@ -219,6 +219,7 @@ export class PresentationService {
       if(!('slide_type' in Object.keys(slideInfo)))
         {
           console.log('SLIDE TYPE NOT FOUND')
+          console.log(slideInfo)
           continue
         }
 
