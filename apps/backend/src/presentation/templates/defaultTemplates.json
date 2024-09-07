@@ -1,0 +1,2340 @@
+{
+    "Template1": {
+      "HEADER": {
+        "slideType": "HEADER",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 616,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 80,
+              "text": "",
+              "lineHeight": 96,
+              "width": 1018
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1198,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": null,
+            "image": { "width": 642, "height": 920, "url": "" },
+  
+            "chart": null,
+            "elementType": "IMAGE",
+            "figure": null
+          }
+        ]
+      },
+  
+      "ONE_TEXT": {
+        "slideType": "ONE_TEXT",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 64,
+              "text": "",
+              "lineHeight": 87.42,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 80,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 40,
+              "text": "",
+              "lineHeight": 56,
+              "width": 1018
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1207,
+              "y": 189,
+              "z": 0
+            },
+            "typeography": null,
+            "image": { "width": 633, "height": 811, "url": "" },
+  
+            "chart": null,
+            "elementType": "IMAGE",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+  
+      "TWO_TEXT": {
+        "slideType": "TWO_TEXT",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 64,
+              "text": "",
+              "lineHeight": 87.42,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 652,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 738
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1046,
+              "y": 652,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 738
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 80,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 850,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 980,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 850,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 121,
+              "height": 121,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 16
+            }
+          },
+          {
+            "position": {
+              "x": 1046,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 121,
+              "height": 121,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 16
+            }
+          },
+          {
+            "position": {
+              "x": 160,
+              "y": 402,
+              "z": 2
+            },
+            "typeography": null,
+            "image": { "width": 73, "height": 73, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1070,
+              "y": 402,
+              "z": 2
+            },
+            "typeography": null,
+            "image": { "width": 73, "height": 73, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+  
+      "THREE_TEXT": {
+        "slideType": "THREE_TEXT",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 64,
+              "text": "",
+              "lineHeight": 87.42,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 607,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 742.67,
+              "y": 607,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1349.33,
+              "y": 607,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 80,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 686.67,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 1293.33,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 121,
+              "height": 121,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 16
+            }
+          },
+          {
+            "position": {
+              "x": 742.67,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 121,
+              "height": 121,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 16
+            }
+          },
+          {
+            "position": {
+              "x": 1349.33,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 121,
+              "height": 121,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 16
+            }
+          },
+          {
+            "position": {
+              "x": 160,
+              "y": 402,
+              "z": 2
+            },
+            "typeography": null,
+            "image": { "width": 73, "height": 73, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 766.67,
+              "y": 402,
+              "z": 2
+            },
+            "typeography": null,
+            "image": { "width": 73, "height": 73, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1373.33,
+              "y": 402,
+              "z": 2
+            },
+            "typeography": null,
+            "image": { "width": 73, "height": 73, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+  
+      "BIG_NUMBERS": {
+        "slideType": "BIG_NUMBERS",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 64,
+              "text": "",
+              "lineHeight": 87.42,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+  
+          {
+            "position": {
+              "x": 80,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 686.67,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 1293.33,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#CA0000",
+              "fontWeight": 700,
+              "fontSize": 100,
+              "text": "",
+              "lineHeight": 140,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 607,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 742.67,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#CA0000",
+              "fontWeight": 700,
+              "fontSize": 100,
+              "text": "",
+              "lineHeight": 140,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 742.67,
+              "y": 742,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1349.33,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#CA0000",
+              "fontWeight": 700,
+              "fontSize": 100,
+              "text": "",
+              "lineHeight": 140,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1349.33,
+              "y": 607,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+  
+      "CHART": {
+        "slideType": "CHART",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 64,
+              "text": "",
+              "lineHeight": 87.42,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 334,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+            "chart": {
+              "width": 1760,
+              "height": 666,
+              "url": "",
+              "charType": ""
+            },
+            "elementType": "IMAGE",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 140,
+              "width": 480
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+  
+      "ENDING": {
+        "slideType": "ENDING",
+        "elements": [
+          {
+            "position": {
+              "x": 649,
+              "y": 326,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#CA0000",
+              "fontWeight": 700,
+              "fontSize": 100,
+              "text": "",
+              "lineHeight": 140,
+              "width": 622
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 338,
+              "y": 138,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 1244,
+              "height": 804,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          }
+        ]
+      }
+    },
+  
+    "Template2": {
+      "HEADER": {
+        "slideType": "HEADER",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 616,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 80,
+              "text": "",
+              "lineHeight": 96,
+              "width": 1018
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1207,
+              "y": 230,
+              "z": 0
+            },
+            "typeography": null,
+            "image": { "width": 1000, "height": 1000, "url": "" },
+  
+            "chart": null,
+            "elementType": "IMAGE",
+            "figure": null
+          }
+        ]
+      },
+      "ONE_TEXT": {
+        "slideType": "ONE_TEXT",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 60,
+              "text": "",
+              "lineHeight": 75.78,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 402,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay",
+              "color": "#505050",
+              "fontWeight": 400,
+              "fontSize": 36,
+              "text": "",
+              "lineHeight": 50.4,
+              "width": 987
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1239,
+              "y": 304,
+              "z": 0
+            },
+            "typeography": null,
+            "image": { "width": 601, "height": 696, "url": "" },
+  
+            "chart": null,
+            "elementType": "IMAGE",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 80,
+              "y": 304,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 1099,
+              "height": 696,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+      "TWO_TEXT": {
+        "slideType": "TWO_TEXT",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 60,
+              "text": "",
+              "lineHeight": 75.78,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 652,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 738
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1046,
+              "y": 652,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 738
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 80,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 850,
+              "height": 627,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 980,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 850,
+              "height": 627,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 24
+            }
+          },
+  
+          {
+            "position": {
+              "x": 136,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": null,
+            "image": { "width": 121, "height": 121, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1046,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": null,
+            "image": { "width": 121, "height": 121, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          }
+        ]
+      },
+      "THREE_TEXT": {
+        "slideType": "THREE_TEXT",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 60,
+              "text": "",
+              "lineHeight": 75.78,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 517,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 742.67,
+              "y": 517,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1349.33,
+              "y": 517,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#505050",
+              "fontWeight": 500,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 80,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 686.67,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 1293.33,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#F8F8F8",
+              "borderRadius": 24
+            }
+          },
+  
+          {
+            "position": {
+              "x": 136,
+              "y": 378,
+              "z": 2
+            },
+            "typeography": null,
+            "image": { "width": 121, "height": 121, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 742.67,
+              "y": 378,
+              "z": 2
+            },
+            "typeography": null,
+            "image": { "width": 121, "height": 121, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1349.33,
+              "y": 378,
+              "z": 2
+            },
+            "typeography": null,
+            "image": { "width": 121, "height": 121, "url": "" },
+  
+            "chart": null,
+            "elementType": "ICON",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+      "BIG_NUMBERS": {
+        "slideType": "BIG_NUMBERS",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 60,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+  
+          {
+            "position": {
+              "x": 80,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 686.67,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 1293.33,
+              "y": 314,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+  
+            "chart": null,
+            "elementType": "FIGURE",
+            "figure": {
+              "width": 546.67,
+              "height": 627,
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 24
+            }
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#CA0000",
+              "fontWeight": 700,
+              "fontSize": 100,
+              "text": "",
+              "lineHeight": 140,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 136,
+              "y": 562,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay",
+              "color": "#505050",
+              "fontWeight": 400,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 742.67,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#CA0000",
+              "fontWeight": 700,
+              "fontSize": 100,
+              "text": "",
+              "lineHeight": 140,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 742.67,
+              "y": 562,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay",
+              "color": "#505050",
+              "fontWeight": 400,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1349.33,
+              "y": 378,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#CA0000",
+              "fontWeight": 700,
+              "fontSize": 100,
+              "text": "",
+              "lineHeight": 140,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1349.33,
+              "y": 562,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay",
+              "color": "#505050",
+              "fontWeight": 400,
+              "fontSize": 32,
+              "text": "",
+              "lineHeight": 44.8,
+              "width": 434.67
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+      "CHART": {
+        "slideType": "CHART",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 60,
+              "text": "",
+              "lineHeight": 75.78,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 334,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": null,
+            "image": null,
+            "chart": {
+              "width": 1760,
+              "height": 666,
+              "url": "",
+              "charType": ""
+            },
+            "elementType": "IMAGE",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 140,
+              "width": 480
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      },
+      "ENDING": {
+        "slideType": "ENDING",
+        "elements": [
+          {
+            "position": {
+              "x": 649,
+              "y": 326,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#FFFFFF",
+              "fontWeight": 700,
+              "fontSize": 170,
+              "text": "",
+              "lineHeight": 1239,
+              "width": 170
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          }
+        ]
+      }
+    },
+    "Template3": {
+      "HEADER": {
+        "slideType": "HEADER",
+        "elements": [
+          {
+            "position": {
+              "x": 150,
+              "y": 216,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#000000",
+              "fontWeight": 700,
+              "fontSize": 72,
+              "text": "",
+              "lineHeight": 172,
+              "width": 1620
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 0,
+              "y": 468,
+              "z": 0
+            },
+            "typeography": null,
+            "image": { "width": 1920, "height": 612, "url": "" },
+  
+            "chart": null,
+            "elementType": "IMAGE",
+            "figure": null
+          }
+        ]
+      },
+      "ONE_TEXT": {
+        "slideType": "ONE_TEXT",
+        "elements": [
+          {
+            "position": {
+              "x": 80,
+              "y": 80,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Actay Wide",
+              "color": "#1E1E1E",
+              "fontWeight": 700,
+              "fontSize": 60,
+              "text": "",
+              "lineHeight": 75.78,
+              "width": 965
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "HEADING",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 80,
+              "y": 435,
+              "z": 1
+            },
+            "typeography": {
+              "fontFamily": "Actay",
+              "color": "#505050",
+              "fontWeight": 400,
+              "fontSize": 36,
+              "text": "",
+              "lineHeight": 50.4,
+              "width": 1019
+            },
+            "image": null,
+  
+            "chart": null,
+            "elementType": "TEXT",
+            "figure": null
+          },
+          {
+            "position": {
+              "x": 1179,
+              "y": 290,
+              "z": 0
+            },
+            "typeography": null,
+            "image": { "width": 741, "height": 790, "url": "" },
+  
+            "chart": null,
+            "elementType": "IMAGE",
+            "figure": null
+          },
+  
+          {
+            "position": {
+              "x": 52,
+              "y": 1000,
+              "z": 0
+            },
+            "typeography": {
+              "fontFamily": "Manrope",
+              "color": "#D1D1D1",
+              "fontWeight": 700,
+              "fontSize": 48,
+              "text": "",
+              "lineHeight": 65.57,
+              "width": 28
+            },
+            "image": null,
+            "chart": null,
+            "elementType": "NUMERIC",
+            "figure": null
+          }
+        ]
+      }
+    },
+    "TWO_TEXT": {
+      "slideType": "TWO_TEXT",
+      "elements": [
+        {
+          "position": {
+            "x": 80,
+            "y": 80,
+            "z": 0
+          },
+          "typeography": {
+            "fontFamily": "Actay Wide",
+            "color": "#1E1E1E",
+            "fontWeight": 700,
+            "fontSize": 60,
+            "text": "",
+            "lineHeight": 75.78,
+            "width": 965
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "HEADING",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 80,
+            "y": 412,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#505050",
+            "fontWeight": 500,
+            "fontSize": 32,
+            "text": "",
+            "lineHeight": 44.8,
+            "width": 800
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 1040,
+            "y": 412,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#505050",
+            "fontWeight": 500,
+            "fontSize": 32,
+            "text": "",
+            "lineHeight": 44.8,
+            "width": 800
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+  
+        {
+          "position": {
+            "x": 80,
+            "y": 840,
+            "z": 1
+          },
+          "typeography": null,
+          "image": { "width": 160, "height": 160, "url": "" },
+  
+          "chart": null,
+          "elementType": "ICON",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 1040,
+            "y": 840,
+            "z": 1
+          },
+          "typeography": null,
+          "image": { "width": 160, "height": 160, "url": "" },
+  
+          "chart": null,
+          "elementType": "ICON",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 52,
+            "y": 1000,
+            "z": 0
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#D1D1D1",
+            "fontWeight": 700,
+            "fontSize": 48,
+            "text": "",
+            "lineHeight": 65.67,
+            "width": 28
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "NUMERIC",
+          "figure": null
+        }
+      ]
+    },
+    "THREE_TEXT": {
+      "slideType": "THREE_TEXT",
+      "elements": [
+        {
+          "position": {
+            "x": 80,
+            "y": 80,
+            "z": 0
+          },
+          "typeography": {
+            "fontFamily": "Actay Wide",
+            "color": "#1E1E1E",
+            "fontWeight": 700,
+            "fontSize": 60,
+            "text": "",
+            "lineHeight": 75.78,
+            "width": 965
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "HEADING",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 80,
+            "y": 412,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#505050",
+            "fontWeight": 500,
+            "fontSize": 32,
+            "text": "",
+            "lineHeight": 44.8,
+            "width": 480
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 720,
+            "y": 412,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#505050",
+            "fontWeight": 500,
+            "fontSize": 32,
+            "text": "",
+            "lineHeight": 44.8,
+            "width": 480
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 1360,
+            "y": 412,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#505050",
+            "fontWeight": 500,
+            "fontSize": 32,
+            "text": "",
+            "lineHeight": 44.8,
+            "width": 480
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+  
+        {
+          "position": {
+            "x": 80,
+            "y": 840,
+            "z": 2
+          },
+          "typeography": null,
+          "image": { "width": 160, "height": 160, "url": "" },
+  
+          "chart": null,
+          "elementType": "ICON",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 720,
+            "y": 840,
+            "z": 2
+          },
+          "typeography": null,
+          "image": { "width": 160, "height": 160, "url": "" },
+  
+          "chart": null,
+          "elementType": "ICON",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 1360,
+            "y": 840,
+            "z": 2
+          },
+          "typeography": null,
+          "image": { "width": 160, "height": 160, "url": "" },
+  
+          "chart": null,
+          "elementType": "ICON",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 52,
+            "y": 1000,
+            "z": 0
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#D1D1D1",
+            "fontWeight": 700,
+            "fontSize": 48,
+            "text": "",
+            "lineHeight": 65.57,
+            "width": 28
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "NUMERIC",
+          "figure": null
+        }
+      ]
+    },
+    "BIG_NUMBERS": {
+      "slideType": "BIG_NUMBERS",
+      "elements": [
+        {
+          "position": {
+            "x": 80,
+            "y": 80,
+            "z": 0
+          },
+          "typeography": {
+            "fontFamily": "Actay Wide",
+            "color": "#1E1E1E",
+            "fontWeight": 700,
+            "fontSize": 60,
+            "text": "",
+            "lineHeight": 75.78,
+            "width": 965
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "HEADING",
+          "figure": null
+        },
+  
+        {
+          "position": {
+            "x": 80,
+            "y": 412,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Actay Wide",
+            "color": "#CA0000",
+            "fontWeight": 700,
+            "fontSize": 100,
+            "text": "",
+            "lineHeight": 44.8,
+            "width": 480
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 80,
+            "y": 640,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Actay",
+            "color": "#505050",
+            "fontWeight": 500,
+            "fontSize": 32,
+            "text": ""
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 720,
+            "y": 412,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Actay Wide",
+            "color": "#CA0000",
+            "fontWeight": 700,
+            "fontSize": 100,
+            "text": "",
+            "lineHeight": 140,
+            "width": 480
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 720,
+            "y": 640,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Actay",
+            "color": "#505050",
+            "fontWeight": 500,
+            "fontSize": 32,
+            "text": "",
+            "lineHeight": 44.8,
+            "width": 480
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 1360,
+            "y": 412,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Actay Wide",
+            "color": "#CA0000",
+            "fontWeight": 700,
+            "fontSize": 100,
+            "text": "",
+            "lineHeight": 140,
+            "width": 480
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 1360,
+            "y": 640,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Actay",
+            "color": "#505050",
+            "fontWeight": 500,
+            "fontSize": 32,
+            "text": "",
+            "lineHeight": 44.8,
+            "width": 480
+          },
+          "image": null,
+  
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 52,
+            "y": 1000,
+            "z": 0
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#D1D1D1",
+            "fontWeight": 700,
+            "fontSize": 48,
+            "text": "",
+            "lineHeight": 140,
+            "width": 480
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "NUMERIC",
+          "figure": null
+        }
+      ]
+    },
+    "CHART": {
+      "slideType": "CHART",
+      "elements": [
+        {
+          "position": {
+            "x": 80,
+            "y": 80,
+            "z": 0
+          },
+          "typeography": {
+            "fontFamily": "Actay Wide",
+            "color": "#1E1E1E",
+            "fontWeight": 700,
+            "fontSize": 60,
+            "text": "",
+            "lineHeight": 75,
+            "width": 965
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 0,
+            "y": 80,
+            "z": 0
+          },
+          "typeography": null,
+          "image": null,
+          "chart": {
+            "width": 1920,
+            "height": 746,
+            "url": "",
+            "charType": ""
+          },
+          "elementType": "IMAGE",
+          "figure": null
+        },
+        {
+          "position": {
+            "x": 52,
+            "y": 1000,
+            "z": 0
+          },
+          "typeography": {
+            "fontFamily": "Manrope",
+            "color": "#D1D1D1",
+            "fontWeight": 700,
+            "fontSize": 48,
+            "text": "",
+            "lineHeight": 140,
+            "width": 480
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "NUMERIC",
+          "figure": null
+        }
+      ]
+    },
+    "ENDING": {
+      "slideType": "ENDING",
+      "elements": [
+        {
+          "position": {
+            "x": 150,
+            "y": 372,
+            "z": 1
+          },
+          "typeography": {
+            "fontFamily": "Actay Wide",
+            "color": "#FFFFFF",
+            "fontWeight": 700,
+            "fontSize": 170,
+            "text": "",
+            "lineHeight": 168,
+            "width": 1620
+          },
+          "image": null,
+          "chart": null,
+          "elementType": "TEXT",
+          "figure": null
+        }
+      ]
+    }
+  }
