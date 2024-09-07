@@ -2,18 +2,42 @@ import { Fragment } from 'react';
 import { FormSection } from '../FormSection';
 import { Title } from 'shared/ui/Title';
 import { Divider, Flex, Stack } from '@mantine/core';
-import { Button } from 'shared/ui/Button';
 import { Textarea } from 'shared/ui/Textarea';
+import { Controller, useFormContext } from 'react-hook-form';
+import { Upload } from 'shared/ui/Upload';
+import { IconFileFilled, IconPaperclip } from '@tabler/icons-react';
+import { useCreatingPage } from 'pages/creating/useCreatingPage';
 
 export const InitialForm = () => {
+  const { control, watch } = useFormContext();
+  const {
+    setDocFile,
+    setTableFile,
+    resetDocRef,
+    resetTableRef,
+    docFile,
+    tableFile,
+  } = useCreatingPage();
+
+  const text = watch('text');
+
   return (
     <Fragment>
       <FormSection>
         <Title semibold level={4} title="Текст презентации*" />
 
-        <Textarea
-          label="Текст презентации"
-          placeholder="Введите текст презентации"
+        <Controller
+          control={control}
+          name="text"
+          render={({ field }) => (
+            <Textarea
+              disabled={!!docFile}
+              field={field}
+              {...field}
+              label="Текст презентации"
+              placeholder="Введите текст презентации"
+            />
+          )}
         />
 
         <Flex gap={16} align={'center'}>
@@ -29,7 +53,27 @@ export const InitialForm = () => {
               Выберите файл до 10 мб для анализа текста презентации
             </p>
           </Stack>
-          <Button label="Загрузить файл .xlsx" variant="accent" />
+
+          <Stack gap={16}>
+            <Upload
+              disabled={!!text}
+              resetRef={resetDocRef}
+              onChange={setDocFile}
+              label="Загрузить файл .docx"
+              accept=".doc,.docx,.pdf,.txt,.rtf"
+              variant="accent"
+              icon={<IconPaperclip />}
+            />
+            {!!docFile && (
+              <Flex gap={16}>
+                <p className="text medium secondary">Загружено:</p>
+                <Flex gap={8} align={'center'}>
+                  <IconFileFilled color="#383838" size={18} />
+                  <p className="text medium secondary">{docFile.name}</p>
+                </Flex>
+              </Flex>
+            )}
+          </Stack>
         </Stack>
       </FormSection>
 
@@ -43,7 +87,25 @@ export const InitialForm = () => {
               Выберите файл до 10 мб для анализа данных для визуализации
             </p>
           </Stack>
-          <Button label="Загрузить файл .xlsx" variant="accent" />
+          <Stack gap={16}>
+            <Upload
+              label="Загрузить файл .xlsx"
+              variant="accent"
+              icon={<IconPaperclip />}
+              resetRef={resetTableRef}
+              onChange={setTableFile}
+              accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            />
+            {!!tableFile && (
+              <Flex gap={16}>
+                <p className="text medium secondary">Загружено:</p>
+                <Flex gap={8} align={'center'}>
+                  <IconFileFilled color="#383838" size={18} />
+                  <p className="text medium secondary">{tableFile.name}</p>
+                </Flex>
+              </Flex>
+            )}
+          </Stack>
         </Stack>
 
         <Stack gap={20}>
