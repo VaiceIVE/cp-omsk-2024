@@ -8,7 +8,7 @@ function createEntitiesIndex() {
     console.log(`App backend cannot be found. Path not exist: ${src}`);
     process.exit(1);
   }
-  const outDir = `${src}/database`;
+  const outDir = `${src}/apps/backend/src/database`;
   const tmpFile = `${outDir}/tmp-entities-index.ts`;
   const outFile = `${outDir}/entities-index.ts`;
   if (!fs.existsSync(outDir)) {

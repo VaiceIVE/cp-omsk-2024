@@ -216,12 +216,12 @@ export class PresentationService {
           slideInfo['text_svg_pairs'] = Object.values(slideInfo['text_svg_pairs'])
         }
       
-      if(!('slide_type' in Object.keys(slideInfo)))
-        {
-          console.log('SLIDE TYPE NOT FOUND')
-          console.log(slideInfo)
-          continue
-        }
+      // if(!('slide_type' in Object.keys(slideInfo)))
+      //   {
+      //     console.log('SLIDE TYPE NOT FOUND')
+      //     console.log(slideInfo)
+      //     continue
+      //   }
 
       const slideTemplate = template.slides[slideInfo['slide_type']]
 
