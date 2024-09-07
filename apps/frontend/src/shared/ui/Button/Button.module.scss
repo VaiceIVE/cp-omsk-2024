@@ -3,7 +3,7 @@
 .button {
   height: 50px;
   width: fit-content;
-  padding: 12px 20px;
+  padding: 14px 20px;
   background: $text-primary-default;
   border-radius: 12px;
   color: $white-color;
@@ -29,73 +29,58 @@
     }
   }
 
-  // &.active {
-  //   border: 1px solid $link-hover-color;
-  // }
-
   &.disabled {
     background-color: $gray100;
-    color: $text-primary-default;
+    color: $text-tertiary-default;
   }
 
   &.loading {
     opacity: 0.5;
   }
 
-  // &.light {
-  //   background-color: #eef6fc;
-  //   color: $main-blue-color;
+  &.outline {
+    background: transparent;
+    border: 2px solid $divider-default;
+    color: $text-primary-default;
 
-  //   @media (hover: hover) {
-  //     &:hover {
-  //       background-color: #d9efff;
-  //     }
-  //   }
-  // }
+    svg {
+      color: $text-primary-default;
+    }
+    &:not(.disabled) {
+      @media (hover: hover) {
+        &:hover {
+          border-color: $divider-hover;
+          background-color: transparent;
+        }
+      }
+    }
 
-  // &.orange {
-  //   color: white;
+    &.disabled {
+      background-color: $gray25;
+      color: $gray300;
+    }
+  }
 
-  //   background-color: $main-orange-color;
+  &.accent {
+    background: $primary-acent-default;
+    color: $white-color;
 
-  //   @media (hover: hover) {
-  //     &:hover {
-  //       background-color: #ed5a39;
-  //     }
-  //   }
-  // }
+    svg {
+      color: $text-primary-default;
+    }
+    &:not(.disabled) {
+      @media (hover: hover) {
+        &:hover {
+          background-color: $primary-acent-hover;
+        }
+      }
+    }
 
-  // &.outline {
-  //   background: transparent;
-  //   border: 1px solid $divider-color;
-  //   color: $text-color;
-
-  //   svg {
-  //     color: $main-blue-color;
-  //   }
-
-  //   @media (hover: hover) {
-  //     &:hover {
-  //       border-color: $link-hover-color;
-  //       background-color: transparent;
-  //     }
-  //   }
-  // }
-
-  // &.white {
-  //   background-color: white;
-  //   color: $text-color;
-
-  //   svg {
-  //     color: $main-blue-color;
-  //   }
-
-  //   @media (hover: hover) {
-  //     &:hover {
-  //       background-color: $gray-color;
-  //     }
-  //   }
-  // }
+    &.disabled {
+      background-color: $gray100;
+      color: $text-tertiary-default;
+    }
+  }
 }
 
 .button-wrapper {

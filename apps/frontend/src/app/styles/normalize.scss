@@ -151,7 +151,7 @@ html {
   line-height: 22px;
   &.small {
     font-size: 14px;
-    line-height: 15.39px;
+    line-height: 19.6px;
   }
   &.medium {
     font-weight: 500;
@@ -162,7 +162,15 @@ html {
   }
 
   &.secondary {
-    //color: $secondary-text-default;
+    color: $text-secondary-default;
+  }
+
+  &.secondary-hover {
+    color: $text-secondary-hover;
+  }
+
+  &.tertiary {
+    color: $text-tertiary-default;
   }
 
   &.center {

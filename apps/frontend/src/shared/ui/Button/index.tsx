@@ -10,7 +10,7 @@ export interface ButtonProps extends ComponentProps<'button'> {
   w?: number;
   className?: string;
   onClick?: () => void;
-  variant?: 'light' | 'outline' | 'white' | 'orange';
+  variant?: 'default' | 'outline' | 'accent';
   fullWidth?: boolean;
   isLoading?: boolean;
   isActive?: boolean;

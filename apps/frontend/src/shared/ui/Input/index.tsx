@@ -4,6 +4,7 @@ import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import classNames from 'classnames';
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   field: ControllerRenderProps<FieldValues, any>;
   w?: number | string;
   size?: string;
