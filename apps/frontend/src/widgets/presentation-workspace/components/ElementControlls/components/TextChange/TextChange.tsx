@@ -41,6 +41,7 @@ export const TextChange = () => {
         render={({ field }) => (
           <Select
             label="Шрифт"
+            disabled
             placeholder="Шрифт"
             data={fonts.map((f) => ({ value: f, label: f }))}
             field={field}

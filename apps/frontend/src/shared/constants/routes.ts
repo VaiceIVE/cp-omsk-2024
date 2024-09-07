@@ -49,6 +49,6 @@ export const authRoutes = [
     Component: home,
     pageTitle: 'Файлы',
     icon: null,
-    isNav: true,
+    isNav: false,
   },
 ];

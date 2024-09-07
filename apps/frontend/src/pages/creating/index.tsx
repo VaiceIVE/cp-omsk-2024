@@ -1,7 +1,7 @@
 import { Divider, Flex, Grid, Stack } from '@mantine/core';
 import styles from './CreatingPage.module.scss';
 import { Title } from 'shared/ui/Title';
-import { ReactNode, useRef, useState } from 'react';
+import { Fragment, ReactNode, useEffect, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { InitialForm } from './components/InitialForm';
 import { Button } from 'shared/ui/Button';
@@ -11,6 +11,7 @@ import { IconCircle } from './components/IconCircle';
 import { EyeIcon } from 'shared/assets/EyeIcon';
 import { CreatingPageContext } from './CreatingPageContext';
 import PresentationServices from 'shared/services/PresentationServices';
+import { LoadingOverlay } from 'shared/ui/LoadingOverlay';
 
 const steps: Record<number, ReactNode> = {
   0: <InitialForm />,
@@ -60,79 +61,94 @@ const CreatingPage = () => {
     }
   };
 
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [loading]);
+
   return (
-    <div className={styles.wrapper}>
-      <Grid className={styles.root}>
-        <Grid.Col className={styles.section} span={6}>
-          <Stack className={styles.form} p={32} gap={32}>
-            <Flex gap={20} align={'center'}>
-              <IconCircle width={56} size={32} src={EyeIcon} />
+    <Fragment>
+      <LoadingOverlay visible={loading} />
+      <div className={styles.wrapper}>
+        <Grid className={styles.root}>
+          <Grid.Col className={styles.section} span={6}>
+            <Stack className={styles.form} p={32} gap={32}>
+              <Flex gap={20} align={'center'}>
+                <IconCircle width={56} size={32} src={EyeIcon} />
 
-              <Stack gap={2}>
-                <Title level={2} title="Создание презентации" />
-                <p className="text small medium secondary-hover">
-                  Шаг {currentStep + 1} из 3
-                </p>
-              </Stack>
-            </Flex>
+                <Stack gap={2}>
+                  <Title level={2} title="Создание презентации" />
+                  <p className="text small medium secondary-hover">
+                    Шаг {currentStep + 1} из 3
+                  </p>
+                </Stack>
+              </Flex>
 
-            <Divider />
+              <Divider />
 
-            <CreatingPageContext.Provider
-              value={{
-                docFile,
-                tableFile,
-                setDocFile,
-                setTableFile,
-                resetDocRef,
-                resetTableRef,
-                selectedChart,
-                setSelectedChart,
-                hasCharts,
-                setHasCharts,
-                logoFiles,
-                setLogoFiles,
-                resetLogoRef,
-                accentColor,
-                setAccentColor,
-              }}
-            >
-              <FormProvider {...creatingForm}>{StepComponent}</FormProvider>
-            </CreatingPageContext.Provider>
-          </Stack>
-        </Grid.Col>
-      </Grid>
-      <footer className={styles.footer}>
-        <Button
-          onClick={() => {
-            setCurrentStep((prev) => prev - 1);
-          }}
-          disabled={!currentStep}
-          w={147}
-          variant="outline"
-          label="Назад"
-        />
-        {currentStep === 2 ? (
-          <Button
-            onClick={creatingForm.handleSubmit(onSubmit)}
-            disabled={!template}
-            w={227}
-            label="Создать презентацию"
-          />
-        ) : (
+              <CreatingPageContext.Provider
+                value={{
+                  docFile,
+                  tableFile,
+                  setDocFile,
+                  setTableFile,
+                  resetDocRef,
+                  resetTableRef,
+                  selectedChart,
+                  setSelectedChart,
+                  hasCharts,
+                  setHasCharts,
+                  logoFiles,
+                  setLogoFiles,
+                  resetLogoRef,
+                  accentColor,
+                  setAccentColor,
+                }}
+              >
+                <FormProvider {...creatingForm}>{StepComponent}</FormProvider>
+              </CreatingPageContext.Provider>
+            </Stack>
+          </Grid.Col>
+        </Grid>
+        <footer className={styles.footer}>
           <Button
             onClick={() => {
-              setCurrentStep((prev) => prev + 1);
+              setCurrentStep((prev) => prev - 1);
             }}
-            disabled={
-              currentStep === 0 ? !text && !docFile : !changeText || !length
-            }
+            disabled={!currentStep}
             w={147}
-            label="Продолжить"
+            variant="outline"
+            label="Назад"
           />
-        )}
-      </footer>
-    </div>
+          {currentStep === 2 ? (
+            <Button
+              onClick={creatingForm.handleSubmit(onSubmit)}
+              disabled={!template}
+              w={227}
+              label="Создать презентацию"
+            />
+          ) : (
+            <Button
+              onClick={() => {
+                setCurrentStep((prev) => prev + 1);
+              }}
+              disabled={
+                currentStep === 0 ? !text && !docFile : !changeText || !length
+              }
+              w={147}
+              label="Продолжить"
+            />
+          )}
+        </footer>
+      </div>
+    </Fragment>
   );
 };
 
