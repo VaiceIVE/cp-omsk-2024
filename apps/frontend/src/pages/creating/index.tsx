@@ -89,14 +89,18 @@ const CreatingPage = () => {
           variant="outline"
           label="Назад"
         />
-        <Button
-          onClick={() => {
-            setCurrentStep((prev) => prev + 1);
-          }}
-          disabled={currentStep === 2}
-          w={147}
-          label="Продолжить"
-        />
+        {currentStep === 2 ? (
+          <Button w={227} label="Создать презентацию" />
+        ) : (
+          <Button
+            onClick={() => {
+              setCurrentStep((prev) => prev + 1);
+            }}
+            disabled={currentStep === 2}
+            w={147}
+            label="Продолжить"
+          />
+        )}
       </footer>
     </div>
   );
