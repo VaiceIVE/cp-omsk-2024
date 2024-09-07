@@ -47,7 +47,12 @@ export const PresentationWorkspace = () => {
           const isActive = e.id === activeElement?.id;
 
           return (
-            <ElementByType isActive={isActive} element={e} scale={scale} />
+            <ElementByType
+              key={e.id}
+              isActive={isActive}
+              element={e}
+              scale={scale}
+            />
           );
         })}
       </div>

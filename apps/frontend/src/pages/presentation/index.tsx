@@ -186,7 +186,7 @@ const PresentationPage = () => {
 
   const updateTypography = (
     slideId: number,
-    key: 'fontSize' | 'fontWeight' | 'fontFamily',
+    key: 'fontSize' | 'fontWeight' | 'fontFamily' | 'text',
     value: string | number
   ) => {
     if (activeElement && activeElement.typeography) {

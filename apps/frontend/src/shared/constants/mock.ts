@@ -7,7 +7,7 @@ import { IPresentation } from 'shared/models/IPresentstion';
 export const mockPres: IPresentation = {
   slides: [
     {
-      id: 0,
+      id: 15,
       slideType: SlideType.Header,
       context: '',
       elements: [
@@ -68,17 +68,39 @@ export const mockPres: IPresentation = {
             borderRadius: 24,
           },
         },
+        {
+          id: 4,
+          position: {
+            x: 136,
+            y: 400,
+            z: 1,
+          },
+          typeography: {
+            fontFamily: 'Manrope',
+            color: '#505050',
+            fontWeight: 500,
+            fontSize: 32,
+            text: 'Господи помоги',
+            lineHeight: 44.8,
+            width: 738,
+          },
+          image: null,
+
+          chart: null,
+          elementType: SlideElementType.Text,
+          figure: null,
+        },
       ],
     },
     {
-      id: 1,
+      id: 121,
       context: '',
       slideType: SlideType.Header,
       elements: [
         {
           id: 0,
           position: {
-            x: 80,
+            x: 180,
             y: 616,
             z: 1,
           },
@@ -88,7 +110,7 @@ export const mockPres: IPresentation = {
             fontSize: 80,
             fontWeight: 700,
             color: '#1E1E1E',
-            text: 'Длинное название в несколько длинных строки для хакатона 2024',
+            text: ' название в несколько длинных строки для хакатона 2024',
             width: 1018,
             lineHeight: 96,
           },

@@ -30,7 +30,7 @@ export interface IPresentationPageContext {
   updateColorElement: (slideId: number, hex: string) => void;
   updateTypography: (
     slideId: number,
-    key: 'fontSize' | 'fontWeight' | 'fontFamily',
+    key: 'fontSize' | 'fontWeight' | 'fontFamily' | 'text',
     value: string | number
   ) => void;
   currentSlideId: number;
