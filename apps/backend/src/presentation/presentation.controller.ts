@@ -7,11 +7,18 @@ import { UpdatePresentationDto } from './dto/update-presentation.dto';
 export class PresentationController {
   constructor(private readonly presentationService: PresentationService) {}
 
+  @Post('old')
+  @Header('Content-Type', 'application/vnd.openxmlformats-officedocument.presentationml.presentation')
+  @Header('Content-Disposition', 'attachment; filename=presentation.pptx')
+  async generateOnly(@Body() createPresentationDto: CreatePresentationDto) {
+    return new StreamableFile(await this.presentationService.create(createPresentationDto));
+  }
+
   @Post()
   @Header('Content-Type', 'application/vnd.openxmlformats-officedocument.presentationml.presentation')
   @Header('Content-Disposition', 'attachment; filename=presentation.pptx')
   async generate(@Body() createPresentationDto: CreatePresentationDto) {
-    return new StreamableFile(await this.presentationService.create(createPresentationDto));
+    return await this.presentationService.handlePresentationPost(createPresentationDto);
   }
 
   @Get()

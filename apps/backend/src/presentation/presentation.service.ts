@@ -185,12 +185,12 @@ export class PresentationService {
     return await pres.stream() as Uint8Array
   }
 
-  async handlePresentationPost(createPresentationDto: CreatePresentationDto, tables: Express.Multer.File[], doc: Express.Multer.File)
+  async handlePresentationPost(createPresentationDto: CreatePresentationDto)//, tables: Express.Multer.File[], doc: Express.Multer.File
   {
 
-    const tablesNames = this.storageService.uploadToS3Many(tables)
+    //const tablesNames = this.storageService.uploadToS3Many(tables)
 
-    const docsName = this.storageService.uploadToS3(doc)
+    //const docsName = this.storageService.uploadToS3(doc)
 
     const backendUrl = 'https://api.adera-team.ru'
     
