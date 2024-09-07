@@ -24,6 +24,7 @@ export const Header = () => {
 
         {isPresentationPage && (
           <Flex gap={12}>
+            <Button label="Экспортировать" variant="outline" />
             <Button label="Сохранить изменения" />
           </Flex>
         )}

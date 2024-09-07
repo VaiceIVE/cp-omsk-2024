@@ -13,6 +13,8 @@ import template2 from 'shared/assets/templates/template2.png';
 import template3 from 'shared/assets/templates/template3.png';
 
 import styles from './PresentationPage.module.scss';
+import { Navigate, useParams } from 'react-router-dom';
+import { HOME_ROUTE } from 'shared/constants/const';
 
 const templates: Record<number, string> = {
   0: template1,
@@ -38,6 +40,8 @@ const PresentationPage = () => {
   const presentationForm = useForm();
 
   const currentSlideId = presentation.slides[currentSlide].id;
+
+  const { id } = useParams();
 
   const updateElementPosition = (
     slideId: number,
@@ -270,6 +274,8 @@ const PresentationPage = () => {
 
     return () => window.removeEventListener('resize', updateHeight);
   }, []);
+
+  if (!id) return <Navigate replace to={HOME_ROUTE} />;
 
   return (
     <section className={styles.root}>

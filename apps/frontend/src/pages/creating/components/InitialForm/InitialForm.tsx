@@ -19,7 +19,7 @@ export const InitialForm = () => {
     tableFile,
   } = useCreatingPage();
 
-  const text = watch('text');
+  const text = watch('text') ?? '';
 
   return (
     <Fragment>
@@ -108,9 +108,9 @@ export const InitialForm = () => {
           </Stack>
         </Stack>
 
-        <Stack gap={20}>
+        {/* <Stack gap={20}>
           <p className="text semibold">Выбрать загруженный файл</p>
-        </Stack>
+        </Stack> */}
       </FormSection>
     </Fragment>
   );

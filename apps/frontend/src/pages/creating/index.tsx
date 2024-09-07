@@ -37,6 +37,11 @@ const CreatingPage = () => {
   const resetTableRef = useRef<() => void>(null);
   const resetLogoRef = useRef<() => void>(null);
 
+  const text = creatingForm.watch('text') ?? '';
+  const length = creatingForm.watch('length') ?? '';
+  const changeText = creatingForm.watch('changeText') ?? '';
+  const template = creatingForm.watch('template') ?? '';
+
   return (
     <div className={styles.wrapper}>
       <Grid className={styles.root}>
@@ -90,13 +95,15 @@ const CreatingPage = () => {
           label="Назад"
         />
         {currentStep === 2 ? (
-          <Button w={227} label="Создать презентацию" />
+          <Button disabled={!template} w={227} label="Создать презентацию" />
         ) : (
           <Button
             onClick={() => {
               setCurrentStep((prev) => prev + 1);
             }}
-            disabled={currentStep === 2}
+            disabled={
+              currentStep === 0 ? !text && !docFile : !changeText || !length
+            }
             w={147}
             label="Продолжить"
           />

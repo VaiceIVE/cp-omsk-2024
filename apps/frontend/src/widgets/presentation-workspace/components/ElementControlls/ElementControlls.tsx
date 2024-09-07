@@ -87,18 +87,12 @@ export const ElementControlls = () => {
           placeholder="Для заголовков"
           label="Выделенный в файле текст"
           field={{
-            onChange: function (...event: any[]): void {
-              throw new Error('Function not implemented.');
-            },
-            onBlur: function (): void {
-              throw new Error('Function not implemented.');
-            },
+            onChange: () => null,
+            onBlur: () => null,
             value: undefined,
             disabled: undefined,
             name: undefined,
-            ref: function (instance: any): void {
-              throw new Error('Function not implemented.');
-            },
+            ref: () => null,
           }}
         />
       )}

@@ -33,6 +33,7 @@ export const StyleForm = () => {
           </Stack>
           <Stack gap={16}>
             <Upload
+              disabled
               values={logoFiles}
               resetRef={resetLogoRef}
               onChangeArray={setLogoFiles}
