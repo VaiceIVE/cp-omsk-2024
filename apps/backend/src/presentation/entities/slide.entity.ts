@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { SlideElement } from "./slideElement.entity";
+import { Presentation } from "./presentation.entity";
 
 @Entity()
 export class Slide {
@@ -10,7 +11,10 @@ export class Slide {
     slideType: SlideType;
 
     @OneToMany(() => SlideElement, (se) => se.slide)
-    SlideElements: SlideElement[] 
+    slideElements: SlideElement[] 
+
+    @ManyToOne(() => Presentation, (p) => p.slides)
+    presentation: Presentation
 }   
 
 

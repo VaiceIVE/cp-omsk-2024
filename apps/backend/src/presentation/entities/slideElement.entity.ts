@@ -45,6 +45,11 @@ export class SlideElement {
     @Column({
         nullable: true
     })
+    typo_width: number;
+
+    @Column({
+        nullable: true
+    })
     image_width: number;
 
     @Column({
@@ -97,11 +102,15 @@ export class SlideElement {
     })
     fig_border_radius: number;
 
-    @ManyToOne(() => Slide, (slide) => slide.SlideElements)
+    @ManyToOne(() => Slide, (slide) => slide.slideElements)
     slide: Slide;
 }
 
 enum SlideElementType {
     Text = 'TEXT',
     Image = 'IMAGE',
+    Figure = 'FIGURE',
+    Heading = 'HEADING',
+    Icon = 'ICON',
+    Numeric = 'NUMERIC'
   }

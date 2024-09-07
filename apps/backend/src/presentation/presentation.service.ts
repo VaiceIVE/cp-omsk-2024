@@ -6,11 +6,23 @@ import resMock from './mocks/response.json'
 import { IPresentation } from './interfaces/IPresentationTemplate';
 import pptxgen from "pptxgenjs";
 import { StorageService } from '../storage/storage.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Slide } from './entities/slide.entity';
+import { SlideElement } from './entities/slideElement.entity';
+import { Presentation } from './entities/presentation.entity';
+
 @Injectable()
 export class PresentationService {
 
   constructor(
     private storageService: StorageService,
+    @InjectRepository(Presentation)
+    private presentationRepository: Repository<Presentation>,
+    @InjectRepository(Slide)
+    private slideRepository: Repository<Slide>,
+    @InjectRepository(SlideElement)
+    private slideElementRepository: Repository<SlideElement>
 ){}
 
   async create(createPresentationDto: CreatePresentationDto) {
@@ -59,15 +71,15 @@ export class PresentationService {
             images.push(element)
           }
 
-            if(element.elementType == 'NUMERIC')
-            {
-              numbers.push(element)
-            }
-            if (element.elementType == 'HEADING')
-            {
-              titles.push(element)
-            }
-        if (element.elementType == 'TEXT')
+          if(element.elementType == 'NUMERIC')
+          {
+            numbers.push(element)
+          }
+          if (element.elementType == 'HEADING')
+          {
+            titles.push(element)
+          }
+          if (element.elementType == 'TEXT')
           {
             texts.push(element)
           }
@@ -180,12 +192,133 @@ export class PresentationService {
 
     const docsName = this.storageService.uploadToS3(doc)
 
+    const backendUrl = 'https://api.adera-team.ru'
+    
+
     //get slides contents from ML API
+
+    resMock // ML response in future
 
     //save data to database
 
-    //send presentation ID
+    const template = defaultTemplates[createPresentationDto.style] as IPresentation // get pres template to fill in ML data
 
+    let slideCounter = 1
+
+    let newSlides = []
+
+    for(const slideId in resMock)
+    {
+      const slideInfo = resMock[slideId]
+
+      if(('text_svg_pairs' in Object.keys(slideInfo)))
+        {
+          slideInfo['text_svg_pairs'] = Object.values(slideInfo['text_svg_pairs'])
+        }
+      
+      if(!('slide_type' in Object.keys(slideInfo)))
+        {
+          console.log('SLIDE TYPE NOT FOUND')
+          continue
+        }
+
+      const slideTemplate = template.slides[slideInfo['slide_type']]
+
+      let newSlideElements = []
+
+      for(const element of slideTemplate.elements)
+      {
+        let newElement = this.slideElementRepository.create()
+        if(element.elementType == 'FIGURE')
+        {
+          newElement.posX = element.position.x / 192
+          newElement.posY = element.position.y / 192
+          newElement.fig_width = element.figure.width / 192
+          newElement.fig_height = element.figure.height / 192
+          newElement.fig_bgcolor = element.figure.backgroundColor
+          newElement.fig_border_radius = element.figure.height / 192 / element.figure.borderRadius
+        }
+
+        if (element.elementType == 'ICON')
+        {
+          const svgName = slideInfo['text_svg_pairs'].pop()
+          newElement.posX = element.position.x / 192
+          newElement.posY = element.position.y / 192
+          newElement.image_width = element.image.width / 192
+          newElement.image_height = element.image.height / 192
+          newElement.image_url = `${backendUrl}/static/${svgName}` 
+        }
+
+        if(element.elementType == 'IMAGE')
+        {
+          if(!('images' in Object.keys(slideInfo)))
+          {
+            continue
+          }
+          if(!slideInfo['images'])
+          {
+            continue
+          }
+          newElement.posX = element.position.x / 192
+          newElement.posY = element.position.y / 192        
+          newElement.image_width = element.image.width / 192
+          newElement.image_height = element.image.height / 192
+          newElement.image_url = `${backendUrl}/storage/${slideInfo['images'][0]}` 
+        }
+
+        if(element.elementType == 'NUMERIC')
+        {
+          newElement.posX = element.position.x / 192
+          newElement.posY = element.position.y / 192     
+          newElement.typo_color = element.typeography.color
+          newElement.typo_fontFamily = element.typeography.fontFamily
+          newElement.typo_fontWeight = element.typeography.fontWeight
+          newElement.typo_fontSize = element.typeography.fontSize / 4
+          newElement.typo_width = element.typeography.width / 192
+          newElement.typo_text = slideCounter.toString()
+        }
+
+        if(element.elementType == 'HEADING')
+        {
+
+          newElement.posX = element.position.x / 192
+          newElement.posY = element.position.y / 192     
+          newElement.typo_color = element.typeography.color
+          newElement.typo_fontFamily = element.typeography.fontFamily
+          newElement.typo_fontWeight = element.typeography.fontWeight
+          newElement.typo_fontSize = element.typeography.fontSize / 4
+          newElement.typo_width = element.typeography.width / 192
+          newElement.typo_text = slideInfo['title']
+
+        }
+
+        if(element.elementType == 'TEXT')
+        {
+          newElement.posX = element.position.x / 192
+          newElement.posY = element.position.y / 192     
+          newElement.typo_color = element.typeography.color
+          newElement.typo_fontFamily = element.typeography.fontFamily
+          newElement.typo_fontWeight = element.typeography.fontWeight
+          newElement.typo_fontSize = element.typeography.fontSize / 4
+          newElement.typo_width = element.typeography.width / 192
+          newElement.typo_text = slideInfo['slide_text']
+        }
+        await this.slideElementRepository.insert(newElement)
+        newSlideElements.push(newElement)
+      }
+      let newSlide = this.slideRepository.create()
+      newSlide.slideElements = newSlideElements
+      newSlide.slideType = slideInfo['slide_type']
+      await this.slideRepository.insert(newSlide)
+      newSlides.push(newSlide)
+      slideCounter += 1
+    } 
+
+    let newPresentation = this.presentationRepository.create()
+    newPresentation.slides = newSlides
+    const insertResponse = await this.presentationRepository.insert(newPresentation)
+
+    return insertResponse.identifiers[0]
   }
 
   async saveResponseToDatabase()
