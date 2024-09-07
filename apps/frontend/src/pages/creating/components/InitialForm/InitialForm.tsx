@@ -3,12 +3,18 @@ import { FormSection } from '../FormSection';
 import { Title } from 'shared/ui/Title';
 import { Divider, Flex, Stack } from '@mantine/core';
 import { Button } from 'shared/ui/Button';
+import { Textarea } from 'shared/ui/Textarea';
 
 export const InitialForm = () => {
   return (
     <Fragment>
       <FormSection>
-        <Title level={4} title="Текст презентации*" />
+        <Title semibold level={4} title="Текст презентации*" />
+
+        <Textarea
+          label="Текст презентации"
+          placeholder="Введите текст презентации"
+        />
 
         <Flex gap={16} align={'center'}>
           <Divider flex={1} />
@@ -28,7 +34,7 @@ export const InitialForm = () => {
       </FormSection>
 
       <FormSection>
-        <Title level={4} title="Файл графиков (опционально)" />
+        <Title semibold level={4} title="Файл графиков (опционально)" />
         <Stack gap={20}>
           <Stack gap={10}>
             <p className="text semibold">Загрузить новый файл</p>

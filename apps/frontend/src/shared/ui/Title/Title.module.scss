@@ -7,17 +7,9 @@
 
   z-index: 2;
 
-  // &.gray {
-  //   color: $placeholder-color;
-  // }
-
-  // &.error {
-  //   color: $error-color;
-  // }
-
-  // &.blue {
-  //   color: $main-blue-color;
-  // }
+  &.semibold {
+    font-weight: 600;
+  }
 }
 
 .h1 {

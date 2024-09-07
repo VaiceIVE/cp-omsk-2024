@@ -4,11 +4,15 @@ import { Title } from 'shared/ui/Title';
 import { ReactNode, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { InitialForm } from './components/InitialForm';
-import { IconSquareRoundedPlusFilled } from '@tabler/icons-react';
+import { IconPresentation } from '@tabler/icons-react';
 import { Button } from 'shared/ui/Button';
+import { StyleForm } from './components/StyleForm';
+import { OptionsForm } from './components/OptionsForm';
 
 const steps: Record<number, ReactNode> = {
   0: <InitialForm />,
+  1: <OptionsForm />,
+  2: <StyleForm />,
 };
 
 const CreatingPage = () => {
@@ -25,12 +29,12 @@ const CreatingPage = () => {
           <Stack className={styles.form} p={32} gap={32}>
             <Flex gap={20} align={'center'}>
               <div className={styles.icon}>
-                <IconSquareRoundedPlusFilled />
+                <IconPresentation />
               </div>
               <Stack gap={2}>
                 <Title level={2} title="Создание презентации" />
                 <p className="text small medium secondary-hover">
-                  Шаг {currentStep + 1} из 4
+                  Шаг {currentStep + 1} из 3
                 </p>
               </Stack>
             </Flex>
@@ -55,7 +59,7 @@ const CreatingPage = () => {
           onClick={() => {
             setCurrentStep((prev) => prev + 1);
           }}
-          disabled={currentStep === 3}
+          disabled={currentStep === 2}
           w={147}
           label="Продолжить"
         />

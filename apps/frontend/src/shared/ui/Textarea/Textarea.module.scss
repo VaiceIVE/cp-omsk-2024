@@ -1,0 +1,33 @@
+@import '@styles/__defines.scss';
+
+.root {
+  label {
+    margin-bottom: 8px;
+    color: #383838;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+  }
+
+  textarea {
+    background-color: transparent;
+    padding: 14px;
+    border-radius: 14px;
+    height: 182px;
+
+    border-color: $divider-default;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+
+    &::placeholder {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 22px;
+      color: $text-secondary-default;
+    }
+  }
+}
