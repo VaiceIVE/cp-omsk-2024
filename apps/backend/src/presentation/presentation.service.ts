@@ -29,9 +29,9 @@ export class PresentationService {
       slideInfo[slide]['slide_text'] = slideInfo[slide]['slide_text'].replace('\"]"', '').replace('"[\"', '')
       let newSlide = pres.addSlide();
 
-      console.log(slideInfo[slide]['type'])
+      console.log(slideInfo[slide]['slide_type'])
 
-      console.log(template[slideInfo[slide]['type']])
+      console.log(template[slideInfo[slide]['slide_type']])
 
       let images = []
       let figures = []
@@ -40,7 +40,7 @@ export class PresentationService {
       let titles = []
       let icons = []
 
-      for (const element of template[slideInfo[slide]['type']].elements)
+      for (const element of template[slideInfo[slide]['slide_type']].elements)
       {
 
         if(element.elementType == 'FIGURE')
