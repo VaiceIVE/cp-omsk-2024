@@ -11,6 +11,9 @@ import { Any, Repository } from 'typeorm';
 import { Slide } from './entities/slide.entity';
 import { SlideElement } from './entities/slideElement.entity';
 import { Presentation } from './entities/presentation.entity';
+import { ISlide } from './interfaces/ISlide';
+import { ISlideElement } from './interfaces/ISlideElement';
+import { rawListeners } from 'process';
 
 @Injectable()
 export class PresentationService {
@@ -298,6 +301,7 @@ export class PresentationService {
           newElement.typo_fontSize = element.typeography.fontSize
           newElement.typo_width = element.typeography.width
           newElement.typo_text = slideCounter.toString()
+          newElement.typo_lineHeight = element.typeography.lineHeight
         }
 
         if(element.elementType == 'HEADING')
@@ -311,6 +315,7 @@ export class PresentationService {
           newElement.typo_fontWeight = element.typeography.fontWeight
           newElement.typo_fontSize = element.typeography.fontSize
           newElement.typo_width = element.typeography.width
+          newElement.typo_lineHeight = element.typeography.lineHeight
           newElement.typo_text = slideInfo['title']
 
         }
@@ -326,6 +331,7 @@ export class PresentationService {
           newElement.typo_fontWeight = element.typeography.fontWeight
           newElement.typo_fontSize = element.typeography.fontSize
           newElement.typo_width = element.typeography.width
+          newElement.typo_lineHeight = element.typeography.lineHeight
           newElement.typo_text = slideInfo['slide_text']
         }
         await this.slideElementRepository.insert(newElement)
@@ -506,7 +512,45 @@ export class PresentationService {
     return `This action returns all presentation`;
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
+
+    const presentation = await this.presentationRepository.findOne({where: {id: id}})
+
+    let response: IPresentation
+
+    for(const slide of presentation.slides)
+    {
+      let resSlide: ISlide
+      for(const element of slide.slideElements)
+      {
+        let resElement: ISlideElement
+        resElement.position.x = element.posX
+        resElement.position.y = element.posY
+        resElement.position.z = element.posZ
+        resElement.chart.charType = element.chart_type
+        resElement.chart.height = element.chart_height
+        resElement.chart.url = element.chart_url
+        resElement.chart.width = element.chart_width
+        resElement.elementType = element.elementType
+        resElement.figure.backgroundColor = element.fig_bgcolor
+        resElement.figure.borderRadius = element.fig_border_radius
+        resElement.figure.height = element.fig_height
+        resElement.figure.width = element.fig_width
+        resElement.id = element.id
+        resElement.image.height = element.image_height
+        resElement.image.url = element.image_url
+        resElement.image.width = element.image_width
+        resElement.typeography.color = element.typo_color
+        resElement.typeography.fontFamily = element.typo_fontFamily
+        resElement.typeography.fontSize = element.typo_fontSize
+        resElement.typeography.fontWeight = element.typo_fontWeight
+        resElement.typeography.text = element.typo_text
+        resElement.typeography.width = element.typo_width
+      }
+    }
+
+
+
     return `This action returns a #${id} presentation`;
   }
 

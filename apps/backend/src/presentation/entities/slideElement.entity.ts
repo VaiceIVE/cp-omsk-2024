@@ -52,6 +52,11 @@ export class SlideElement {
     @Column({
         nullable: true
     })
+    typo_lineHeight: number;
+
+    @Column({
+        nullable: true
+    })
     typo_text: string;
 
     @Column({
