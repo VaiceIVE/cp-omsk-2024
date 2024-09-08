@@ -34,6 +34,7 @@ export interface IPresentationPageContext {
     value: string | number
   ) => void;
   currentSlideId: number | undefined;
+  updateBorderRadius: (slideId: number, borderRadius: string) => void;
 }
 
 export const PresentationPageContext =

@@ -12,6 +12,7 @@ import { TextChange } from './components/TextChange';
 import { SlideType } from 'shared/models/ISlide';
 import { useEffect } from 'react';
 import { Textarea } from 'shared/ui/Textarea';
+import { Input } from 'shared/ui/Input';
 
 const titleByType: Record<SlideElementType, string> = {
   [SlideElementType.Icon]: 'Настройки изображения',
@@ -33,8 +34,14 @@ const slideByType: Record<SlideType, string> = {
 };
 
 export const ElementControlls = () => {
-  const { activeElement, presentation, currentSlide, handleRegenerate } =
-    usePresentationPage();
+  const {
+    activeElement,
+    presentation,
+    currentSlide,
+    handleRegenerate,
+    currentSlideId,
+    updateBorderRadius,
+  } = usePresentationPage();
 
   const { control, setValue } = useFormContext();
 
@@ -43,6 +50,12 @@ export const ElementControlls = () => {
       setValue('slideType', presentation?.slides[currentSlide].slideType);
     }
   }, [activeElement, currentSlide, presentation?.slides, setValue]);
+
+  useEffect(() => {
+    if (activeElement) {
+      setValue('borderRadius', activeElement.figure?.borderRadius);
+    }
+  }, [activeElement, setValue]);
 
   return (
     <Stack p={28} gap={28}>
@@ -140,6 +153,29 @@ export const ElementControlls = () => {
           (activeElement?.elementType === SlideElementType.Text && (
             <TextChange />
           ))}
+
+        {activeElement?.elementType === SlideElementType.Figure && (
+          <Controller
+            name="borderRadius"
+            defaultValue={activeElement?.typeography?.fontSize.toString()}
+            control={control}
+            render={({ field }) => (
+              <Input
+                placeholder="Величина скругления"
+                field={field}
+                label="Скургление"
+                fullWidth
+                type="number"
+                onChange={(e) => {
+                  field.onChange(e);
+
+                  currentSlideId &&
+                    updateBorderRadius(currentSlideId, e.target.value);
+                }}
+              />
+            )}
+          />
+        )}
 
         {activeElement?.elementType !== SlideElementType.Image &&
           activeElement?.elementType !== SlideElementType.Icon &&

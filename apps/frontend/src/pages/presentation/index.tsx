@@ -290,6 +290,36 @@ const PresentationPage = () => {
     }
   };
 
+  const updateBorderRadius = (slideId: number, value: string) => {
+    if (activeElement && activeElement.figure) {
+      setPresentation((prevPresentation) => {
+        if (!prevPresentation) return null;
+
+        return {
+          ...prevPresentation,
+          slides: prevPresentation.slides.map((slide) =>
+            slide.id === slideId
+              ? {
+                  ...slide,
+                  elements: slide.elements.map((element) =>
+                    element.id === activeElement.id
+                      ? {
+                          ...element,
+                          figure: {
+                            ...element.figure!,
+                            borderRadius: +value,
+                          },
+                        }
+                      : element
+                  ),
+                }
+              : slide
+          ),
+        };
+      });
+    }
+  };
+
   const handleRegenerate = async () => {
     if (!currentSlideId) return;
 
@@ -382,6 +412,7 @@ const PresentationPage = () => {
             updateColorElement,
             updateTypography,
             currentSlideId,
+            updateBorderRadius,
           }}
         >
           <ul className={styles.slideList}>
