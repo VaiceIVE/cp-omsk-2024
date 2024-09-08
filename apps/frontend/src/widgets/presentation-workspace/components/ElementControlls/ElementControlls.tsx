@@ -41,6 +41,7 @@ export const ElementControlls = () => {
     handleRegenerate,
     currentSlideId,
     updateBorderRadius,
+    updateZIndex,
   } = usePresentationPage();
 
   const { control, setValue } = useFormContext();
@@ -54,6 +55,7 @@ export const ElementControlls = () => {
   useEffect(() => {
     if (activeElement) {
       setValue('borderRadius', activeElement.figure?.borderRadius);
+      setValue('zIndex', activeElement.position?.z);
     }
   }, [activeElement, setValue]);
 
@@ -122,6 +124,28 @@ export const ElementControlls = () => {
           />
         )}
 
+      {activeElement && (
+        <Controller
+          name="zIndex"
+          defaultValue={activeElement?.position?.z.toString()}
+          control={control}
+          render={({ field }) => (
+            <Input
+              placeholder="Относительное положение"
+              field={field}
+              label="Относительное положение"
+              fullWidth
+              type="number"
+              onChange={(e) => {
+                field.onChange(e);
+
+                currentSlideId && updateZIndex(currentSlideId, e.target.value);
+              }}
+            />
+          )}
+        />
+      )}
+
       <Stack gap={22}>
         {activeElement?.elementType === SlideElementType.Image && (
           <Controller
@@ -148,16 +172,16 @@ export const ElementControlls = () => {
           <SizeChange />
         )}
 
-        {activeElement?.elementType === SlideElementType.Heading ||
+        {(activeElement?.elementType === SlideElementType.Heading ||
           activeElement?.elementType === SlideElementType.Numeric ||
-          (activeElement?.elementType === SlideElementType.Text && (
-            <TextChange />
-          ))}
+          activeElement?.elementType === SlideElementType.Text) && (
+          <TextChange />
+        )}
 
         {activeElement?.elementType === SlideElementType.Figure && (
           <Controller
             name="borderRadius"
-            defaultValue={activeElement?.typeography?.fontSize.toString()}
+            defaultValue={activeElement?.figure?.borderRadius.toString()}
             control={control}
             render={({ field }) => (
               <Input

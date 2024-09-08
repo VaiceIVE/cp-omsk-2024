@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import { PresentationPageContext } from './PresentationPageContext';
-import { mockPres } from 'shared/constants/mock';
 import { DraggableEvent } from 'react-draggable';
 import { ISlideElement, SlideElementType } from 'shared/models/ISlideElement';
 import { PresentationWorkspace } from 'widgets/presentation-workspace';
@@ -14,21 +13,22 @@ import template2 from 'shared/assets/templates/template2.png';
 import template3 from 'shared/assets/templates/template3.png';
 
 import styles from './PresentationPage.module.scss';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { HOME_ROUTE } from 'shared/constants/const';
 import RegenServices from 'shared/services/RegenServices';
 import PresentationServices from 'shared/services/PresentationServices';
 import { IPresentation } from 'shared/models/IPresentstion';
 import { Header } from 'widgets/header';
 
-const templates: Record<number, string> = {
-  0: template1,
-  1: template2,
-  2: template3,
+const templates: Record<string, string> = {
+  Template1: template1,
+  Template2: template2,
+  Template3: template3,
 };
 
 const PresentationPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   const [leftHeight, setLeftHeight] = useState(0);
   const [presentation, setPresentation] = useState<IPresentation | null>(null);
@@ -50,22 +50,26 @@ const PresentationPage = () => {
 
   const { id } = useParams();
 
-  const getPresentation = async (id: string) => {
-    try {
-      setLoading(true);
+  const getPresentation = useCallback(
+    async (id: string) => {
+      try {
+        setLoading(true);
 
-      //const response = await PresentationServices.getPresentation(+id);
-      const response = { data: mockPres };
+        const response = await PresentationServices.getPresentation(+id);
 
-      if (response.data) {
-        setPresentation(response.data);
+        if (response.data) {
+          setPresentation(response.data);
+        }
+      } catch (error) {
+        console.error(error);
+
+        navigate(HOME_ROUTE);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [navigate]
+  );
 
   const onExport = async () => {
     if (presentation) {
@@ -215,6 +219,36 @@ const PresentationPage = () => {
       } else {
         presentationForm.setValue('width', newWidth);
       }
+    }
+  };
+
+  const updateZIndex = (slideId: number, zIndex: string) => {
+    if (activeElement && activeElement.typeography) {
+      setPresentation((prevPresentation) => {
+        if (!prevPresentation) return null;
+
+        return {
+          ...prevPresentation,
+          slides: prevPresentation.slides.map((slide) =>
+            slide.id === slideId
+              ? {
+                  ...slide,
+                  elements: slide.elements.map((element) =>
+                    element.id === activeElement.id
+                      ? {
+                          ...element,
+                          position: {
+                            ...element.position!,
+                            z: +zIndex,
+                          },
+                        }
+                      : element
+                  ),
+                }
+              : slide
+          ),
+        };
+      });
     }
   };
 
@@ -385,7 +419,7 @@ const PresentationPage = () => {
     if (id) {
       getPresentation(id);
     }
-  }, [id]);
+  }, [id, getPresentation]);
 
   if (!id) return <Navigate replace to={HOME_ROUTE} />;
 
@@ -413,12 +447,13 @@ const PresentationPage = () => {
             updateTypography,
             currentSlideId,
             updateBorderRadius,
+            updateZIndex,
           }}
         >
           <ul className={styles.slideList}>
-            {presentation?.slides.map((s, index) => (
+            {presentation?.slides.map((_, index) => (
               <li
-                key={s.id}
+                key={index}
                 className={classNames(styles.slide, {
                   [styles.active]: index === currentSlide,
                 })}
