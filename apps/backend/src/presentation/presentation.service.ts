@@ -185,21 +185,30 @@ export class PresentationService {
     return await pres.stream() as Uint8Array
   }
 
-  async handlePresentationPost(createPresentationDto: CreatePresentationDto)//, tables: Express.Multer.File[], doc: Express.Multer.File
+  async handlePresentationPost(createPresentationDto: CreatePresentationDto, tables: Express.Multer.File[] = null, doc: Express.Multer.File = null)
   {
 
-    //const tablesNames = this.storageService.uploadToS3Many(tables)
+    const tablesNames = tables ? this.storageService.uploadToS3Many(tables) : null
 
-    //const docsName = this.storageService.uploadToS3(doc)
+    const docsName = doc ? this.storageService.uploadToS3(doc) : null
 
     const backendUrl = 'https://api.adera-team.ru'
     
-
     //get slides contents from ML API
 
     resMock // ML response in future
 
     //save data to database
+
+    const presentationId = await this.saveResponseToDatabase(createPresentationDto)
+    
+    return presentationId
+  }
+
+  async saveResponseToDatabase(createPresentationDto: CreatePresentationDto,)
+  {
+
+    const backendUrl = 'https://api.adera-team.ru'
 
     const template = defaultTemplates[createPresentationDto.style] as IPresentation // get pres template to fill in ML data
 
@@ -336,8 +345,12 @@ export class PresentationService {
     return insertResponse.identifiers[0]
   }
 
-  async saveResponseToDatabase()
-  {
+  async generatePresentationFile(presentationId)
+  { 
+
+    const presentation = this.presentationRepository.findOne({where: {id: presentationId}, select: {slides: {slideElements: true}}})
+
+    console.log(presentation)
 
   }
 
