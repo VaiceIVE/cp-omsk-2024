@@ -17,4 +17,9 @@ export class Presentation {
         nullable: true
     })
     templateId: string;
+
+    @Column({
+        nullable: true
+    })
+    backgroundImageUrl: string;    
 }

@@ -4,4 +4,5 @@ export interface IPresentation {
     slides: ISlide[];
     id: number;
     templateId: string;
+    backgroundImageUrl: string;
   }

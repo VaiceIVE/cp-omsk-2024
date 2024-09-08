@@ -32,9 +32,9 @@ export class StorageController {
     return this.storageService.getNames()
   }
 
-  @Get('')
-  public async getByName(@Body() data: Record<string, any>){
-    return new StreamableFile(await this.storageService.getFromS3ByName(data.name))
+  @Get(':name')
+  public async getByName(@Param() name: string){
+    return new StreamableFile(await this.storageService.getFromS3ByName(name))
   }
 
   @UseGuards(AccessTokenGuard)

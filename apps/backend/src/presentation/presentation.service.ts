@@ -106,18 +106,18 @@ export class PresentationService {
 
       if(images)
         {
-          // for(const element of images)
-          // {
-          //   console.log(slideInfo[slide])
-          //   console.log(slideInfo[slide]['images'])
-          //   newSlide.addImage({
-          //     x: element.position.x / 192, // 1,
-          //     y: element.position.y / 192, // 1,
-          //     w: element.image.width / 192, // 15
-          //     h: element.image.height / 192, // 15
-          //     data: (await this.storageService.getFromS3ByName(slideInfo[slide]['images'][0])).read()
-          //   })
-          // }
+          for(const element of images)
+          {
+            console.log(slideInfo[slide])
+            console.log(slideInfo[slide]['images'])
+            newSlide.addImage({
+              x: element.position.x / 192, // 1,
+              y: element.position.y / 192, // 1,
+              w: element.image.width / 192, // 15
+              h: element.image.height / 192, // 15
+              data: (await this.storageService.getFromS3ByName(slideInfo[slide]['images'][0])).read()
+            })
+          }
         }
 
         if(icons)
@@ -209,11 +209,6 @@ export class PresentationService {
     const res = await axios.post(MLUrl + '/generate_presentation', payload)
 
     console.log(res.data)
-    //get slides contents from ML API
-
-    resMock // ML response in future
-
-    //save data to database
 
     const presentationId = await this.saveResponseToDatabase(createPresentationDto, res.data)
     
@@ -226,6 +221,7 @@ export class PresentationService {
     const backendUrl = 'https://api.adera-team.ru'
 
     const template = defaultTemplates[createPresentationDto.style] as IPresentation // get pres template to fill in ML data
+
 
     let slideCounter = 1
 
@@ -310,7 +306,7 @@ export class PresentationService {
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight
-          newElement.typo_fontSize = element.typeography.fontSize
+          newElement.typo_fontSize = element.typeography.fontSize / 2
           newElement.typo_width = element.typeography.width
           newElement.typo_text = slideCounter.toString()
           newElement.typo_lineHeight = element.typeography.lineHeight
@@ -325,7 +321,7 @@ export class PresentationService {
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight
-          newElement.typo_fontSize = element.typeography.fontSize
+          newElement.typo_fontSize = element.typeography.fontSize / 2
           newElement.typo_width = element.typeography.width
           newElement.typo_lineHeight = element.typeography.lineHeight
           newElement.typo_text = slideInfo['title']
@@ -341,7 +337,7 @@ export class PresentationService {
           newElement.typo_color = element.typeography.color
           newElement.typo_fontFamily = element.typeography.fontFamily
           newElement.typo_fontWeight = element.typeography.fontWeight
-          newElement.typo_fontSize = element.typeography.fontSize
+          newElement.typo_fontSize = element.typeography.fontSize / 2
           newElement.typo_width = element.typeography.width
           newElement.typo_lineHeight = element.typeography.lineHeight
           newElement.typo_text = slideInfo['slide_text']
@@ -361,6 +357,7 @@ export class PresentationService {
 
     let newPresentation = this.presentationRepository.create()
     newPresentation.slides = newSlides
+    newPresentation.backgroundImageUrl = createPresentationDto.style == 'Template1' ? backendUrl + 'static/89.png' : backendUrl + 'static/90.png' 
     newPresentation.templateId = createPresentationDto.style
     const insertResponse = await this.presentationRepository.insert(newPresentation)
 
@@ -530,7 +527,7 @@ export class PresentationService {
 
     const presentation = await this.presentationRepository.findOne({where: {id: id}})
 
-    let response: IPresentation = {id: presentation.id, slides: [], templateId: presentation.templateId}
+    let response: IPresentation = {id: presentation.id, slides: [], templateId: presentation.templateId, backgroundImageUrl: presentation.backgroundImageUrl}
 
     for(const slide of presentation.slides)
     {
