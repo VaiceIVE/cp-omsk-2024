@@ -373,6 +373,7 @@ export class PresentationService {
 
       for(const element of slide.slideElements)
       {
+        console.log(element)
         if(element.elementType == 'FIGURE')
           {
             figures.push(element)
@@ -406,7 +407,6 @@ export class PresentationService {
           for(const element of figures)
           {
             newSlide.addShape(pres.ShapeType.roundRect, {
-
               x: element.posX / 192,
               y: element.posY / 192,
               w: element.fig_width / 192,
