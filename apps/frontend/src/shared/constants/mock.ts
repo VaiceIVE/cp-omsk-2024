@@ -141,5 +141,5 @@ export const mockPres: IPresentation = {
     },
   ],
   id: 0,
-  templateId: 0,
+  templateId: 'template2',
 };

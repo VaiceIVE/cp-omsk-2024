@@ -12,6 +12,7 @@ import { TextChange } from './components/TextChange';
 import { SlideType } from 'shared/models/ISlide';
 import { useEffect } from 'react';
 import { Textarea } from 'shared/ui/Textarea';
+import { Input } from 'shared/ui/Input';
 
 const titleByType: Record<SlideElementType, string> = {
   [SlideElementType.Icon]: 'Настройки изображения',
@@ -33,8 +34,15 @@ const slideByType: Record<SlideType, string> = {
 };
 
 export const ElementControlls = () => {
-  const { activeElement, presentation, currentSlide, handleRegenerate } =
-    usePresentationPage();
+  const {
+    activeElement,
+    presentation,
+    currentSlide,
+    handleRegenerate,
+    currentSlideId,
+    updateBorderRadius,
+    updateZIndex,
+  } = usePresentationPage();
 
   const { control, setValue } = useFormContext();
 
@@ -43,6 +51,13 @@ export const ElementControlls = () => {
       setValue('slideType', presentation?.slides[currentSlide].slideType);
     }
   }, [activeElement, currentSlide, presentation?.slides, setValue]);
+
+  useEffect(() => {
+    if (activeElement) {
+      setValue('borderRadius', activeElement.figure?.borderRadius);
+      setValue('zIndex', activeElement.position?.z);
+    }
+  }, [activeElement, setValue]);
 
   return (
     <Stack p={28} gap={28}>
@@ -109,6 +124,28 @@ export const ElementControlls = () => {
           />
         )}
 
+      {activeElement && (
+        <Controller
+          name="zIndex"
+          defaultValue={activeElement?.position?.z.toString()}
+          control={control}
+          render={({ field }) => (
+            <Input
+              placeholder="Относительное положение"
+              field={field}
+              label="Относительное положение"
+              fullWidth
+              type="number"
+              onChange={(e) => {
+                field.onChange(e);
+
+                currentSlideId && updateZIndex(currentSlideId, e.target.value);
+              }}
+            />
+          )}
+        />
+      )}
+
       <Stack gap={22}>
         {activeElement?.elementType === SlideElementType.Image && (
           <Controller
@@ -135,11 +172,34 @@ export const ElementControlls = () => {
           <SizeChange />
         )}
 
-        {activeElement?.elementType === SlideElementType.Heading ||
+        {(activeElement?.elementType === SlideElementType.Heading ||
           activeElement?.elementType === SlideElementType.Numeric ||
-          (activeElement?.elementType === SlideElementType.Text && (
-            <TextChange />
-          ))}
+          activeElement?.elementType === SlideElementType.Text) && (
+          <TextChange />
+        )}
+
+        {activeElement?.elementType === SlideElementType.Figure && (
+          <Controller
+            name="borderRadius"
+            defaultValue={activeElement?.figure?.borderRadius.toString()}
+            control={control}
+            render={({ field }) => (
+              <Input
+                placeholder="Величина скругления"
+                field={field}
+                label="Скургление"
+                fullWidth
+                type="number"
+                onChange={(e) => {
+                  field.onChange(e);
+
+                  currentSlideId &&
+                    updateBorderRadius(currentSlideId, e.target.value);
+                }}
+              />
+            )}
+          />
+        )}
 
         {activeElement?.elementType !== SlideElementType.Image &&
           activeElement?.elementType !== SlideElementType.Icon &&

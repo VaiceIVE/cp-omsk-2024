@@ -75,19 +75,19 @@ export const StyleForm = () => {
                     type="block"
                     image={template1}
                     label={''}
-                    value={'template1'}
+                    value={'Template1'}
                   />
                   <Radio
                     type="block"
                     image={template2}
                     label={''}
-                    value={'template2'}
+                    value={'Template2'}
                   />
                   <Radio
                     type="block"
                     image={template3}
                     label={''}
-                    value={'template3'}
+                    value={'Template3'}
                   />
                 </Flex>
               </MantineRadio.Group>

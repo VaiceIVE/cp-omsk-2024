@@ -60,7 +60,7 @@ export const InitialForm = () => {
               resetRef={resetDocRef}
               onChange={setDocFile}
               label="Загрузить файл .docx"
-              accept=".doc,.docx,.pdf,.txt,.rtf"
+              accept=".doc,.docx"
               variant="accent"
               icon={<IconPaperclip />}
             />

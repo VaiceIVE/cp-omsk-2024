@@ -19,6 +19,19 @@ export const TextElement = ({ element, scale, isActive }: TextElementProps) => {
 
   const textareaRef = useRef<HTMLDivElement>(null);
 
+  const clearString = (value: string | undefined) => {
+    if (value) {
+      return value
+        .replace(/\\+/g, '')
+        .replace(/^["[\]]+|["[\]]+$/g, '')
+        .replace(/\\"/g, '"')
+        .replace(/[\n\r]+/g, ' ')
+        .trim();
+    }
+
+    return '';
+  };
+
   useEffect(() => {
     if (textareaRef.current && !!textareaRef.current.firstElementChild) {
       textareaRef.current.style.height = '10px';
@@ -26,7 +39,7 @@ export const TextElement = ({ element, scale, isActive }: TextElementProps) => {
       textareaRef.current.style.height =
         textareaRef.current.firstElementChild.scrollHeight.toString() + 'px';
     }
-  }, [text, scale, currentSlideId]);
+  }, [text, scale, currentSlideId, element]);
 
   return (
     <Draggable
@@ -68,7 +81,7 @@ export const TextElement = ({ element, scale, isActive }: TextElementProps) => {
             currentSlideId &&
               updateTypography(currentSlideId, 'text', e.currentTarget.value);
           }}
-          value={element.typeography?.text}
+          value={clearString(element.typeography?.text)}
         />
       </div>
     </Draggable>

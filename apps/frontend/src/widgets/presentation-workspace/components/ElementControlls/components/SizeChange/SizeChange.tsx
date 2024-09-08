@@ -20,13 +20,13 @@ export const SizeChange = () => {
     if (activeElement) {
       setValue(
         'width',
-        activeElement?.image?.width.toString() ??
-          activeElement?.figure?.width.toString()
+        activeElement?.image?.width?.toString() ??
+          activeElement?.figure?.width?.toString()
       );
       setValue(
         'height',
-        activeElement?.image?.height.toString() ??
-          activeElement?.figure?.height.toString()
+        activeElement?.image?.height?.toString() ??
+          activeElement?.figure?.height?.toString()
       );
     }
   }, [activeElement, setValue]);
@@ -37,8 +37,8 @@ export const SizeChange = () => {
         <Controller
           name="width"
           defaultValue={
-            activeElement?.image?.width.toString() ??
-            activeElement?.figure?.width.toString()
+            activeElement?.image?.width?.toString() ??
+            activeElement?.figure?.width?.toString()
           }
           control={control}
           render={({ field }) => (
@@ -59,8 +59,8 @@ export const SizeChange = () => {
         <Controller
           name="height"
           defaultValue={
-            activeElement?.image?.height.toString() ??
-            activeElement?.figure?.height.toString()
+            activeElement?.image?.height?.toString() ??
+            activeElement?.figure?.height?.toString()
           }
           control={control}
           render={({ field }) => (
