@@ -20,8 +20,8 @@ export class PresentationController {
   @Header('Content-Disposition', 'attachment; filename=presentation.pptx')
   @UseInterceptors(FileInterceptor('docFile'))
   @UseInterceptors(FileInterceptor('tableFile'))
-  async generate(@Body() createPresentationDto: CreatePresentationDto, @UploadedFile() docFile: Express.Multer.File, @UploadedFiles() tableFiles: Express.Multer.File) {
-    return await this.presentationService.handlePresentationPost(createPresentationDto, docFile, tableFiles);
+  async generate(@Body() createPresentationDto: CreatePresentationDto, @UploadedFile() docFile: Express.Multer.File, @UploadedFiles() tableFiles: Express.Multer.File[]) {
+    return await this.presentationService.handlePresentationPost(createPresentationDto, tableFiles, docFile);
   }
 
   @Get()
