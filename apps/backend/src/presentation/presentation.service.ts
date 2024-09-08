@@ -202,7 +202,7 @@ export class PresentationService {
 
 
     const payload = {
-      text: createPresentationDto.context, exogen_data: tablesNames, num_of_slides: +createPresentationDto.len, num_of_themes: +createPresentationDto.len
+      text: createPresentationDto.context, exogen_data: tablesNames ?? [], num_of_slides: +createPresentationDto.len, num_of_themes: +createPresentationDto.len
     }
     console.log(payload)
 
