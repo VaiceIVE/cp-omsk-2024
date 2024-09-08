@@ -342,6 +342,9 @@ export class PresentationService {
     newPresentation.slides = newSlides
     const insertResponse = await this.presentationRepository.insert(newPresentation)
 
+    console.log(newPresentation.slides.length)
+    
+
     return insertResponse.identifiers[0]
   }
 
