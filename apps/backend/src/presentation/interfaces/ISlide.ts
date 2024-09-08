@@ -4,6 +4,7 @@ export interface ISlide {
   id: number;
   slideType: SlideType;
   elements: ISlideElement[];
+  context: string;
 }
 
 export enum SlideType {

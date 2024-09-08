@@ -6,13 +6,23 @@ export class SlideElement {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({
+        type: "decimal",
+        precision: 8,
+        scale: 3
+    })
     posX: number;
 
-    @Column()
+    @Column({
+        type: "decimal",
+        precision: 8,
+        scale: 3
+    })
     posY: number;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     posZ: number;
 
     @Column({
@@ -24,7 +34,9 @@ export class SlideElement {
         nullable: true
     })    typo_fontFamily: string;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     typo_color: string;
 
     @Column({
@@ -38,9 +50,25 @@ export class SlideElement {
     typo_fontSize: number;
 
     @Column({
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
+    })
+    typo_lineHeight: number;
+
+    @Column({
         nullable: true
     })
     typo_text: string;
+
+    @Column({
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
+    })
+    typo_width: number;
 
     @Column({
         nullable: true
@@ -48,7 +76,10 @@ export class SlideElement {
     image_width: number;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     image_height: number;
 
@@ -58,12 +89,18 @@ export class SlideElement {
     image_url: string;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     chart_width: number;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     chart_height: number;
 
@@ -78,12 +115,18 @@ export class SlideElement {
     chart_type: string;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     fig_width: number;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     fig_height: number;
 
@@ -93,15 +136,24 @@ export class SlideElement {
     fig_bgcolor: string;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     fig_border_radius: number;
 
-    @ManyToOne(() => Slide, (slide) => slide.SlideElements)
+    @ManyToOne(() => Slide, (slide) => slide.slideElements, {
+        cascade: true
+    })
     slide: Slide;
 }
 
 enum SlideElementType {
     Text = 'TEXT',
     Image = 'IMAGE',
+    Figure = 'FIGURE',
+    Heading = 'HEADING',
+    Icon = 'ICON',
+    Numeric = 'NUMERIC'
   }

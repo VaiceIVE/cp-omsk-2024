@@ -1,19 +1,34 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { SlideElement } from "./slideElement.entity";
+import { Presentation } from "./presentation.entity";
 
 @Entity()
 export class Slide {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column()
+    @Column({
+        nullable: true
+    })
     slideType: SlideType;
 
-    @OneToMany(() => SlideElement, (se) => se.slide)
-    SlideElements: SlideElement[] 
+    @Column({
+        nullable: true
+    })
+    context: string;
+
+    @OneToMany(() => SlideElement, (se) => se.slide, {
+        eager: true,
+        cascade: ['insert', 'update']
+
+    })
+    slideElements: SlideElement[] 
+
+    @ManyToOne(() => Presentation, (p) => p.slides, {
+        cascade: true
+    })
+    presentation: Presentation
 }   
-
-
 
 enum SlideType {
     Header = 'HEADER',

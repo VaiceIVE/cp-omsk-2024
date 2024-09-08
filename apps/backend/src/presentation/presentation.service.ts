@@ -6,11 +6,27 @@ import resMock from './mocks/response.json'
 import { IPresentation } from './interfaces/IPresentationTemplate';
 import pptxgen from "pptxgenjs";
 import { StorageService } from '../storage/storage.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Any, Repository } from 'typeorm';
+import { Slide } from './entities/slide.entity';
+import { SlideElement } from './entities/slideElement.entity';
+import { Presentation } from './entities/presentation.entity';
+import { ISlide, SlideType } from './interfaces/ISlide';
+import { ISlideElement } from './interfaces/ISlideElement';
+import { rawListeners } from 'process';
+import axios from 'axios';
+
 @Injectable()
 export class PresentationService {
 
   constructor(
     private storageService: StorageService,
+    @InjectRepository(Presentation)
+    private presentationRepository: Repository<Presentation>,
+    @InjectRepository(Slide)
+    private slideRepository: Repository<Slide>,
+    @InjectRepository(SlideElement)
+    private slideElementRepository: Repository<SlideElement>
 ){}
 
   async create(createPresentationDto: CreatePresentationDto) {
@@ -29,9 +45,9 @@ export class PresentationService {
       slideInfo[slide]['slide_text'] = slideInfo[slide]['slide_text'].replace('\"]"', '').replace('"[\"', '')
       let newSlide = pres.addSlide();
 
-      console.log(template)
+      console.log(slideInfo[slide]['slide_type'])
 
-      console.log(template[slideInfo[slide]['type']])
+      console.log(template[slideInfo[slide]['slide_type']])
 
       let images = []
       let figures = []
@@ -40,7 +56,7 @@ export class PresentationService {
       let titles = []
       let icons = []
 
-      for (const element of template[slideInfo[slide]['type']].elements)
+      for (const element of template[slideInfo[slide]['slide_type']].elements)
       {
 
         if(element.elementType == 'FIGURE')
@@ -59,15 +75,15 @@ export class PresentationService {
             images.push(element)
           }
 
-            if(element.elementType == 'NUMERIC')
-            {
-              numbers.push(element)
-            }
-            if (element.elementType == 'HEADING')
-            {
-              titles.push(element)
-            }
-        if (element.elementType == 'TEXT')
+          if(element.elementType == 'NUMERIC')
+          {
+            numbers.push(element)
+          }
+          if (element.elementType == 'HEADING')
+          {
+            titles.push(element)
+          }
+          if (element.elementType == 'TEXT')
           {
             texts.push(element)
           }
@@ -92,12 +108,14 @@ export class PresentationService {
         {
           for(const element of images)
           {
+            console.log(slideInfo[slide])
+            console.log(slideInfo[slide]['images'])
             newSlide.addImage({
               x: element.position.x / 192, // 1,
               y: element.position.y / 192, // 1,
               w: element.image.width / 192, // 15
               h: element.image.height / 192, // 15
-              data: (await this.storageService.getFromS3ByName(slide['images'][0])).read()
+              data: (await this.storageService.getFromS3ByName(slideInfo[slide]['images'][0])).read()
             })
           }
         }
@@ -171,23 +189,333 @@ export class PresentationService {
     return await pres.stream() as Uint8Array
   }
 
-  async handlePresentationPost(createPresentationDto: CreatePresentationDto, tables: Express.Multer.File[], doc: Express.Multer.File)
+  async handlePresentationPost(createPresentationDto: CreatePresentationDto, tables: Express.Multer.File[] = null, doc: Express.Multer.File = null)
   {
 
-    const tablesNames = this.storageService.uploadToS3Many(tables)
+    const tablesNames = tables ? this.storageService.uploadToS3Many(tables) : null
 
-    const docsName = this.storageService.uploadToS3(doc)
+    const docsName = doc ? this.storageService.uploadToS3(doc) : null
 
-    //get slides contents from ML API
+    const backendUrl = 'https://api.adera-team.ru'
+    
+    const MLUrl = 'https://pyapi.adera-team.ru'
 
-    //save data to database
 
-    //send presentation ID
+    const payload = {
+      text: createPresentationDto.context, exogen_data: tablesNames ?? [], num_of_slides: +createPresentationDto.len, num_of_themes: +createPresentationDto.len
+    }
+    console.log(payload)
 
+    const res = await axios.post(MLUrl + '/generate_presentation', payload)
+
+    console.log(res.data)
+
+    const presentationId = await this.saveResponseToDatabase(createPresentationDto, res.data)
+    
+    return presentationId
   }
 
-  async saveResponseToDatabase()
+  async saveResponseToDatabase(createPresentationDto: CreatePresentationDto, responseData: Record<string, any>)
   {
+
+    const backendUrl = 'https://api.adera-team.ru'
+
+    const template = defaultTemplates[createPresentationDto.style] as IPresentation // get pres template to fill in ML data
+
+
+    let slideCounter = 1
+
+    let newSlides = []
+
+    for(const slideId in responseData)
+    {
+      const slideInfo = responseData[slideId]
+
+      if(('text_svg_pairs' in Object.keys(slideInfo)))
+        {
+          slideInfo['text_svg_pairs'] = Object.values(slideInfo['text_svg_pairs'])
+        }
+      
+      // if(!('slide_type' in Object.keys(slideInfo)))
+      //   {
+      //     console.log('SLIDE TYPE NOT FOUND')
+      //     console.log(slideInfo)
+      //     continue
+      //   }
+
+      const slideTemplate = template[slideInfo['slide_type']]
+
+      let newSlideElements = []
+
+      for(const element of slideTemplate.elements)
+      {
+        let newElement = this.slideElementRepository.create()
+        newElement.elementType = element.elementType
+        if(element.elementType == 'FIGURE')
+        {
+          newElement.posX = element.position.x 
+          newElement.posY = element.position.y 
+          newElement.posZ = element.position.z         
+
+          newElement.fig_width = element.figure.width
+          newElement.fig_height = element.figure.height
+          newElement.fig_bgcolor = element.figure.backgroundColor
+          newElement.fig_border_radius = element.figure.borderRadius
+        }
+
+        if (element.elementType == 'ICON')
+        {
+          if(!('text_svg_pairs' in Object.keys(slideInfo)))
+            {
+              continue
+            }
+          const svgName = slideInfo['text_svg_pairs'].pop()
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y
+          newElement.posZ = element.position.z         
+
+          newElement.image_width = element.image.width
+          newElement.image_height = element.image.height
+          newElement.image_url = `${backendUrl}/static/${svgName}` 
+        }
+
+        if(element.elementType == 'IMAGE')
+        {
+          if(!('images' in Object.keys(slideInfo)))
+          {
+            continue
+          }
+          if(!slideInfo['images'])
+          {
+            continue
+          }
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y   
+          newElement.posZ = element.position.z         
+     
+          newElement.image_width = element.image.width
+          newElement.image_height = element.image.height
+          newElement.image_url = `${backendUrl}/storage/${slideInfo['images'][0]}` 
+        }
+
+        if(element.elementType == 'NUMERIC')
+        {
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y     
+          newElement.posZ = element.position.z         
+          newElement.typo_color = element.typeography.color
+          newElement.typo_fontFamily = element.typeography.fontFamily
+          newElement.typo_fontWeight = element.typeography.fontWeight
+          newElement.typo_fontSize = element.typeography.fontSize / 2
+          newElement.typo_width = element.typeography.width
+          newElement.typo_text = slideCounter.toString()
+          newElement.typo_lineHeight = element.typeography.lineHeight
+        }
+
+        if(element.elementType == 'HEADING')
+        {
+
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y
+          newElement.posZ = element.position.z         
+          newElement.typo_color = element.typeography.color
+          newElement.typo_fontFamily = element.typeography.fontFamily
+          newElement.typo_fontWeight = element.typeography.fontWeight
+          newElement.typo_fontSize = element.typeography.fontSize / 2
+          newElement.typo_width = element.typeography.width
+          newElement.typo_lineHeight = element.typeography.lineHeight
+          newElement.typo_text = slideInfo['title']
+
+        }
+
+        if(element.elementType == 'TEXT')
+        {
+          newElement.posX = element.position.x
+          newElement.posY = element.position.y 
+          newElement.posZ = element.position.z         
+    
+          newElement.typo_color = element.typeography.color
+          newElement.typo_fontFamily = element.typeography.fontFamily
+          newElement.typo_fontWeight = element.typeography.fontWeight
+          newElement.typo_fontSize = element.typeography.fontSize / 2
+          newElement.typo_width = element.typeography.width
+          newElement.typo_lineHeight = element.typeography.lineHeight
+          newElement.typo_text = slideInfo['slide_text']
+        }
+        await this.slideElementRepository.insert(newElement)
+        newSlideElements.push(newElement)
+      }
+      let newSlide = this.slideRepository.create()
+      newSlide.slideElements = newSlideElements
+      newSlide.context = slideInfo['context']
+      newSlide.slideType = slideInfo['slide_type']
+      await this.slideRepository.insert(newSlide)
+      await this.slideRepository.save(newSlide)
+      newSlides.push(newSlide)
+      slideCounter += 1
+    } 
+
+    let newPresentation = this.presentationRepository.create()
+    newPresentation.slides = newSlides
+    newPresentation.backgroundImageUrl = createPresentationDto.style == 'Template1' ? backendUrl + 'static/89.png' : backendUrl + 'static/90.png' 
+    newPresentation.templateId = createPresentationDto.style
+    const insertResponse = await this.presentationRepository.insert(newPresentation)
+
+    await this.presentationRepository.save(newPresentation)    
+
+    return insertResponse.identifiers[0]
+  }
+
+  async exportById(presentationId: number)
+  { 
+
+    let pres = new pptxgen();
+      
+    const presentation = await this.presentationRepository.findOne({where: {id: presentationId}, relations: {slides: {slideElements: true}}})
+
+    let slideCounter = 1
+
+    for (const slide of presentation.slides)
+    {
+      let newSlide = pres.addSlide();
+
+      let images :SlideElement[] = []
+      let figures :SlideElement[]= []
+      let numbers :SlideElement[]= []
+      let texts :SlideElement[]= []
+      let titles :SlideElement[]= []
+      let icons :SlideElement[]= []
+
+
+      for(const element of slide.slideElements)
+      {
+        console.log(element)
+        if(element.elementType == 'FIGURE')
+          {
+            figures.push(element)
+          }
+
+          if(element.elementType == 'ICON')
+          {
+            icons.push(element)
+          }
+
+          if(element.elementType == 'IMAGE')
+          {
+            images.push(element)
+          }
+
+          if(element.elementType == 'NUMERIC')
+          {
+            numbers.push(element)
+          }
+          if (element.elementType == 'HEADING')
+          {
+            titles.push(element)
+          }
+          if (element.elementType == 'TEXT')
+          {
+            texts.push(element)
+          }
+      }
+      if(figures)
+        {
+          for(const element of figures)
+          {
+            newSlide.addShape(pres.ShapeType.roundRect, {
+              x: +element.posX / 192,
+              y: +element.posY / 192,
+              w: +element.fig_width / 192,
+              h: +element.fig_height / 192,
+              fill: element.fig_bgcolor as any,
+              rectRadius: +element.fig_height / 192 / element.fig_border_radius
+            })
+          }
+        }
+  
+        if(images)
+          {
+            // for(const element of images)
+            // {
+            //   console.log(slideInfo[slide])
+            //   console.log(slideInfo[slide]['images'])
+            //   newSlide.addImage({
+            //     x: element.position.x / 192, // 1,
+            //     y: element.position.y / 192, // 1,
+            //     w: element.image.width / 192, // 15
+            //     h: element.image.height / 192, // 15
+            //     data: (await this.storageService.getFromS3ByName(slideInfo[slide]['images'][0])).read()
+            //   })
+            // }
+          }
+  
+          if(icons)
+            {
+              for(const element of icons)
+              {
+                newSlide.addImage({
+                  x: +element.posX / 192,
+                  y: +element.posY / 192,
+                  w: +element.image_width / 192,
+                  h: +element.image_height / 192,
+                  data: element.image_url
+                  //select image
+                })
+              }
+            }
+  
+          if(numbers)
+            {
+              for(const element of numbers)
+              {
+                newSlide.addText(slideCounter.toString(), {
+                  x: +element.posX / 192,
+                  y: +element.posY / 192,
+                  color: element.typo_color,
+                  fontFace: element.typo_fontFamily,
+                  bold: element.typo_fontWeight == 700 ? true : false,
+                  fontSize: +element.typo_fontSize / 4,
+                  w: +element.typo_width / 192
+  
+                })
+              }
+            }
+  
+            if(titles)
+              {
+                for(const element of titles)
+                {
+                  newSlide.addText(element.typo_text, {
+                    x: +element.posX / 192, // 1,
+                    y: +element.posY / 192, // 1,
+                    color: element.typo_color,
+                    fontFace: element.typo_fontFamily,
+                    bold: element.typo_fontWeight == 700 ? true : false,
+                    fontSize: +element.typo_fontSize / 4,
+                    w: +element.typo_width / 192, // 15
+                });
+                }
+              }
+  
+              if(texts)
+                {
+                  for(const element of texts)
+                  {
+                    newSlide.addText(element.typo_text, {
+                      x: +element.posX / 192, // 1,
+                      y: +element.posY / 192, // 1,
+                      color: element.typo_color,
+                      fontFace: element.typo_fontFamily,
+                      bold: element.typo_fontWeight == 700 ? true : false,
+                      fontSize: +element.typo_fontSize / 4,
+                      //lineSpacing: element.typeography.lineHeight,
+                      w: +element.typo_width / 192, // 15
+                  });
+                  }
+                }
+                slideCounter += 1
+    }
+    return await pres.stream() as Uint8Array
 
   }
 
@@ -195,8 +523,52 @@ export class PresentationService {
     return `This action returns all presentation`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} presentation`;
+  async findOne(id: number) {
+
+    const presentation = await this.presentationRepository.findOne({where: {id: id}})
+
+    let response: IPresentation = {id: presentation.id, slides: [], templateId: presentation.templateId, backgroundImageUrl: presentation.backgroundImageUrl}
+
+    for(const slide of presentation.slides)
+    {
+      let resSlide: ISlide = {elements: [], id: 0, slideType: SlideType.Header, context: null}
+      for(const element of slide.slideElements)
+      {
+        let resElement: ISlideElement = {chart: {charType: null, height: null, url: null, width: null},
+         elementType: null, figure: {backgroundColor: null, borderRadius: null, height: null, width: null}, id: element.id, image: {height: null, url: null, width: null}, 
+         position: {x: null, y: null, z: null}, typeography: {color: null, fontFamily: null, fontSize: null, fontWeight: null, lineHeight: null, text: null, width: null}}
+        resElement.position.x = element.posX
+        resElement.position.y = element.posY
+        resElement.position.z = element.posZ
+        resElement.chart.charType = element.chart_type
+        resElement.chart.height = element.chart_height
+        resElement.chart.url = element.chart_url
+        resElement.chart.width = element.chart_width
+        resElement.elementType = element.elementType
+        resElement.figure.backgroundColor = element.fig_bgcolor
+        resElement.figure.borderRadius = element.fig_border_radius
+        resElement.figure.height = element.fig_height
+        resElement.figure.width = element.fig_width
+        resElement.id = element.id
+        resElement.image.height = element.image_height
+        resElement.image.url = element.image_url
+        resElement.image.width = element.image_width
+        resElement.typeography.color = element.typo_color
+        resElement.typeography.fontFamily = element.typo_fontFamily
+        resElement.typeography.fontSize = element.typo_fontSize
+        resElement.typeography.fontWeight = element.typo_fontWeight
+        resElement.typeography.text = element.typo_text
+        resElement.typeography.width = element.typo_width
+        resSlide.elements.push(resElement)
+      }
+      resSlide.id = slide.id
+      resSlide.context = slide.context
+      response.slides.push(resSlide)
+    }
+
+
+
+    return response;
   }
 
   update(id: number, updatePresentationDto: UpdatePresentationDto) {
@@ -206,4 +578,17 @@ export class PresentationService {
   remove(id: number) {
     return `This action removes a #${id} presentation`;
   }
+
+  clearString = (value: string | undefined) => {
+    if (value) {
+      return value
+        .replace(/\+/g, '')
+        .replace(/^["[]]+|["[]]+$/g, '')
+        .replace(/\"/g, '"')
+        .replace(/[\n\r]+/g, ' ')
+        .trim();
+    }
+
+    return '';
+  };
 }
