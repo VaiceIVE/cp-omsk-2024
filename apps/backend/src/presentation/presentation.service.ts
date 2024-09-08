@@ -206,11 +206,11 @@ export class PresentationService {
     }
     console.log(payload)
 
-    const res = await axios.post(MLUrl + '/generate_presentation', payload)
+    //const res = await axios.post(MLUrl + '/generate_presentation', payload)
 
     console.log(res.data)
 
-    const presentationId = await this.saveResponseToDatabase(createPresentationDto, res.data)
+    const presentationId = await this.saveResponseToDatabase(createPresentationDto, resMock)
     
     return presentationId
   }
@@ -519,8 +519,9 @@ export class PresentationService {
 
   }
 
-  findAll() {
-    return `This action returns all presentation`;
+  async findAll() {
+    const pres = await this.presentationRepository.find()
+    return pres;
   }
 
   async findOne(id: number) {
@@ -565,13 +566,10 @@ export class PresentationService {
       resSlide.context = slide.context
       response.slides.push(resSlide)
     }
-
-
-
     return response;
   }
 
-  update(id: number, updatePresentationDto: UpdatePresentationDto) {
+  async update(id: number, updatePresentationDto: UpdatePresentationDto) {
     return `This action updates a #${id} presentation`;
   }
 
