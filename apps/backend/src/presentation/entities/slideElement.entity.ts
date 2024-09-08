@@ -135,7 +135,9 @@ export class SlideElement {
     })
     fig_border_radius: number;
 
-    @ManyToOne(() => Slide, (slide) => slide.slideElements)
+    @ManyToOne(() => Slide, (slide) => slide.slideElements, {
+        cascade: true
+    })
     slide: Slide;
 }
 

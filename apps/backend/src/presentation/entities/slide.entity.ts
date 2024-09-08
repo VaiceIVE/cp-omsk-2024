@@ -13,11 +13,13 @@ export class Slide {
     slideType: SlideType;
 
     @OneToMany(() => SlideElement, (se) => se.slide, {
-        eager: true
+        eager: true,
     })
     slideElements: SlideElement[] 
 
-    @ManyToOne(() => Presentation, (p) => p.slides)
+    @ManyToOne(() => Presentation, (p) => p.slides, {
+        cascade: true
+    })
     presentation: Presentation
 }   
 
