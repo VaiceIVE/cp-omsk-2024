@@ -10,6 +10,8 @@ export class Presentation {
     @OneToMany(() => Slide, (s) => s.presentation)
     slides: Slide[];
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     templateId: number;
 }

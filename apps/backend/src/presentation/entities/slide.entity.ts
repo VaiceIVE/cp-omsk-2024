@@ -7,7 +7,9 @@ export class Slide {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column()
+    @Column({
+        nullable: true
+    })
     slideType: SlideType;
 
     @OneToMany(() => SlideElement, (se) => se.slide)
