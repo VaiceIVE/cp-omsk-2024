@@ -18,18 +18,10 @@ export const Footer = () => {
         <a
           className="text medium"
           target="_blank"
-          href={DEMO_LINK}
-          rel="noreferrer"
-        >
-          Демо
-        </a>
-        <a
-          className="text medium"
-          target="_blank"
           href={SLIDES_LINK}
           rel="noreferrer"
         >
-          Презентация
+          Репозиторий
         </a>
       </Flex>
     </Flex>

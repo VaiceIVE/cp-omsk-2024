@@ -11,14 +11,18 @@ import { Title } from 'shared/ui/Title';
 import bg from 'shared/assets/bg.png';
 import empty from 'shared/assets/empty.png';
 import PresentationServices from 'shared/services/PresentationServices';
-import { IPresentation } from 'shared/models/IPresentstion';
+
+export interface IPres {
+  id: number;
+  templateId: string;
+}
 
 const HomePage = () => {
-  const [presentations, setPresintations] = useState<IPresentation[]>([]);
+  const [presentations, setPresintations] = useState<IPres[]>([]);
 
   useEffect(() => {
     PresentationServices.getPresentations().then((response) => {
-      if (typeof response.data !== 'string') {
+      if (response.data) {
         setPresintations(response.data);
       }
     });
