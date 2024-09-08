@@ -348,7 +348,7 @@ export class PresentationService {
   async exportById(presentationId: number)
   { 
 
-    const presentation = this.presentationRepository.findOne({where: {id: presentationId}, select: {slides: {slideElements: true}}})
+    const presentation = await this.presentationRepository.findOne({where: {id: presentationId}, select: {slides: {slideElements: true}}})
 
     console.log(presentation)
 
