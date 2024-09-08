@@ -348,6 +348,7 @@ export class PresentationService {
 
     let newPresentation = this.presentationRepository.create()
     newPresentation.slides = newSlides
+    newPresentation.templateId = createPresentationDto.style
     const insertResponse = await this.presentationRepository.insert(newPresentation)
 
     await this.presentationRepository.save(newPresentation)    
@@ -517,6 +518,7 @@ export class PresentationService {
     const presentation = await this.presentationRepository.findOne({where: {id: id}})
 
     let response: IPresentation
+    response.templateId = presentation.templateId
 
     for(const slide of presentation.slides)
     {
@@ -546,7 +548,9 @@ export class PresentationService {
         resElement.typeography.fontWeight = element.typo_fontWeight
         resElement.typeography.text = element.typo_text
         resElement.typeography.width = element.typo_width
+        resSlide.elements.push(resElement)
       }
+      response.slides.push(resSlide)
     }
 
 
