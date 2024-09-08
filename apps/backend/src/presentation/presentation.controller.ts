@@ -16,8 +16,6 @@ export class PresentationController {
   }
 
   @Post()
-  @Header('Content-Type', 'application/vnd.openxmlformats-officedocument.presentationml.presentation')
-  @Header('Content-Disposition', 'attachment; filename=presentation.pptx')
   @UseInterceptors(FileInterceptor('docFile'))
   @UseInterceptors(FileInterceptor('tableFile'))
   async generate(@Body() createPresentationDto: CreatePresentationDto, @UploadedFile() docFile: Express.Multer.File, @UploadedFiles() tableFiles: Express.Multer.File[]) {
@@ -35,8 +33,10 @@ export class PresentationController {
   }
 
   @Get(':id/export')
-  exportOne(@Param('id') id: string) {
-    return this.presentationService.exportById(+id);
+  @Header('Content-Type', 'application/vnd.openxmlformats-officedocument.presentationml.presentation')
+  @Header('Content-Disposition', 'attachment; filename=presentation.pptx')
+  async exportOne(@Param('id') id: string) {
+    return new StreamableFile(await this.presentationService.exportById(+id));
   }
 
   @Patch(':id')
