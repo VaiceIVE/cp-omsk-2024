@@ -200,9 +200,13 @@ export class PresentationService {
     
     const MLUrl = 'https://pyapi.adera-team.ru'
 
-    const res = await axios.post(MLUrl + '/generate_presentation', {
+
+    const payload = {
       text: createPresentationDto.context, exogen_data: tablesNames, num_of_slides: +createPresentationDto.len, num_of_themes: +createPresentationDto.len
-    })
+    }
+    console.log(payload)
+
+    const res = await axios.post(MLUrl + '/generate_presentation', payload)
 
     console.log(res)
     //get slides contents from ML API
