@@ -12,7 +12,9 @@ export class Slide {
     })
     slideType: SlideType;
 
-    @OneToMany(() => SlideElement, (se) => se.slide)
+    @OneToMany(() => SlideElement, (se) => se.slide, {
+        eager: true
+    })
     slideElements: SlideElement[] 
 
     @ManyToOne(() => Presentation, (p) => p.slides)

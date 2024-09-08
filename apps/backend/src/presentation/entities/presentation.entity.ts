@@ -7,7 +7,9 @@ export class Presentation {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToMany(() => Slide, (s) => s.presentation)
+    @OneToMany(() => Slide, (s) => s.presentation, {
+        eager: true
+    })
     slides: Slide[];
 
     @Column({
