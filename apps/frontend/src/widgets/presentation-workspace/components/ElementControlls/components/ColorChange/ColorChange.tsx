@@ -27,7 +27,7 @@ export const ColorChange = () => {
         value={color}
         onChange={(value: string) => {
           setColor(value);
-          updateColorElement(currentSlideId, value);
+          currentSlideId && updateColorElement(currentSlideId, value);
         }}
       />
     </Stack>

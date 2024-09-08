@@ -1,7 +1,7 @@
 import { Divider, Flex, Grid, Stack } from '@mantine/core';
 import styles from './CreatingPage.module.scss';
 import { Title } from 'shared/ui/Title';
-import { ReactNode, useRef, useState } from 'react';
+import { Fragment, ReactNode, useEffect, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { InitialForm } from './components/InitialForm';
 import { Button } from 'shared/ui/Button';
@@ -10,6 +10,9 @@ import { OptionsForm } from './components/OptionsForm';
 import { IconCircle } from './components/IconCircle';
 import { EyeIcon } from 'shared/assets/EyeIcon';
 import { CreatingPageContext } from './CreatingPageContext';
+import PresentationServices from 'shared/services/PresentationServices';
+import { LoadingOverlay } from 'shared/ui/LoadingOverlay';
+import { useNavigate } from 'react-router-dom';
 
 const steps: Record<number, ReactNode> = {
   0: <InitialForm />,
@@ -21,6 +24,9 @@ const CreatingPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const creatingForm = useForm();
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   const [docFile, setDocFile] = useState<File | null>(null);
   const [tableFile, setTableFile] = useState<File | null>(null);
@@ -37,72 +43,126 @@ const CreatingPage = () => {
   const resetTableRef = useRef<() => void>(null);
   const resetLogoRef = useRef<() => void>(null);
 
+  const text = creatingForm.watch('text') ?? '';
+  const length = creatingForm.watch('length') ?? '';
+  const changeText = creatingForm.watch('changeText') ?? '';
+  const template = creatingForm.watch('template') ?? '';
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = async (data: any) => {
+    console.log(data);
+
+    try {
+      setLoading(true);
+
+      const response = await PresentationServices.createPresentation(
+        data.text,
+        data.changeText,
+        data.template,
+        data.length,
+        selectedChart,
+        docFile,
+        tableFile
+      );
+
+      if (response.data) {
+        navigate('/presentation/' + response.data.id);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [loading]);
+
   return (
-    <div className={styles.wrapper}>
-      <Grid className={styles.root}>
-        <Grid.Col className={styles.section} span={6}>
-          <Stack className={styles.form} p={32} gap={32}>
-            <Flex gap={20} align={'center'}>
-              <IconCircle width={56} size={32} src={EyeIcon} />
+    <Fragment>
+      <LoadingOverlay visible={loading} />
+      <div className={styles.wrapper}>
+        <Grid className={styles.root}>
+          <Grid.Col className={styles.section} span={6}>
+            <Stack className={styles.form} p={32} gap={32}>
+              <Flex gap={20} align={'center'}>
+                <IconCircle width={56} size={32} src={EyeIcon} />
 
-              <Stack gap={2}>
-                <Title level={2} title="Создание презентации" />
-                <p className="text small medium secondary-hover">
-                  Шаг {currentStep + 1} из 3
-                </p>
-              </Stack>
-            </Flex>
+                <Stack gap={2}>
+                  <Title level={2} title="Создание презентации" />
+                  <p className="text small medium secondary-hover">
+                    Шаг {currentStep + 1} из 3
+                  </p>
+                </Stack>
+              </Flex>
 
-            <Divider />
+              <Divider />
 
-            <CreatingPageContext.Provider
-              value={{
-                docFile,
-                tableFile,
-                setDocFile,
-                setTableFile,
-                resetDocRef,
-                resetTableRef,
-                selectedChart,
-                setSelectedChart,
-                hasCharts,
-                setHasCharts,
-                logoFiles,
-                setLogoFiles,
-                resetLogoRef,
-                accentColor,
-                setAccentColor,
-              }}
-            >
-              <FormProvider {...creatingForm}>{StepComponent}</FormProvider>
-            </CreatingPageContext.Provider>
-          </Stack>
-        </Grid.Col>
-      </Grid>
-      <footer className={styles.footer}>
-        <Button
-          onClick={() => {
-            setCurrentStep((prev) => prev - 1);
-          }}
-          disabled={!currentStep}
-          w={147}
-          variant="outline"
-          label="Назад"
-        />
-        {currentStep === 2 ? (
-          <Button w={227} label="Создать презентацию" />
-        ) : (
+              <CreatingPageContext.Provider
+                value={{
+                  docFile,
+                  tableFile,
+                  setDocFile,
+                  setTableFile,
+                  resetDocRef,
+                  resetTableRef,
+                  selectedChart,
+                  setSelectedChart,
+                  hasCharts,
+                  setHasCharts,
+                  logoFiles,
+                  setLogoFiles,
+                  resetLogoRef,
+                  accentColor,
+                  setAccentColor,
+                }}
+              >
+                <FormProvider {...creatingForm}>{StepComponent}</FormProvider>
+              </CreatingPageContext.Provider>
+            </Stack>
+          </Grid.Col>
+        </Grid>
+        <footer className={styles.footer}>
           <Button
             onClick={() => {
-              setCurrentStep((prev) => prev + 1);
+              setCurrentStep((prev) => prev - 1);
             }}
-            disabled={currentStep === 2}
+            disabled={!currentStep}
             w={147}
-            label="Продолжить"
+            variant="outline"
+            label="Назад"
           />
-        )}
-      </footer>
-    </div>
+          {currentStep === 2 ? (
+            <Button
+              onClick={creatingForm.handleSubmit(onSubmit)}
+              disabled={!template}
+              w={227}
+              label="Создать презентацию"
+            />
+          ) : (
+            <Button
+              onClick={() => {
+                setCurrentStep((prev) => prev + 1);
+              }}
+              disabled={
+                currentStep === 0 ? !text && !docFile : !changeText || !length
+              }
+              w={147}
+              label="Продолжить"
+            />
+          )}
+        </footer>
+      </div>
+    </Fragment>
   );
 };
 

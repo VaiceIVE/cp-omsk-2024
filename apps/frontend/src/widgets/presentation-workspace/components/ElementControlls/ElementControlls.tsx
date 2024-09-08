@@ -40,9 +40,9 @@ export const ElementControlls = () => {
 
   useEffect(() => {
     if (!activeElement) {
-      setValue('slideType', presentation.slides[currentSlide].slideType);
+      setValue('slideType', presentation?.slides[currentSlide].slideType);
     }
-  }, [activeElement, currentSlide, presentation.slides, setValue]);
+  }, [activeElement, currentSlide, presentation?.slides, setValue]);
 
   return (
     <Stack p={28} gap={28}>
@@ -55,7 +55,7 @@ export const ElementControlls = () => {
         }
       />
 
-      {!activeElement && (
+      {!activeElement && presentation && (
         <Stack gap={12}>
           <p className="text bold">
             Тип слайда:{' '}
@@ -87,18 +87,12 @@ export const ElementControlls = () => {
           placeholder="Для заголовков"
           label="Выделенный в файле текст"
           field={{
-            onChange: function (...event: any[]): void {
-              throw new Error('Function not implemented.');
-            },
-            onBlur: function (): void {
-              throw new Error('Function not implemented.');
-            },
+            onChange: () => null,
+            onBlur: () => null,
             value: undefined,
             disabled: undefined,
             name: undefined,
-            ref: function (instance: any): void {
-              throw new Error('Function not implemented.');
-            },
+            ref: () => null,
           }}
         />
       )}

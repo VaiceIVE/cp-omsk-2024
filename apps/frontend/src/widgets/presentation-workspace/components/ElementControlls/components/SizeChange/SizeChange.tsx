@@ -49,7 +49,8 @@ export const SizeChange = () => {
               type="number"
               onChange={(e) => {
                 field.onChange(e);
-                updateSizeElement(currentSlideId, 'width', e.target.value);
+                currentSlideId &&
+                  updateSizeElement(currentSlideId, 'width', e.target.value);
               }}
             />
           )}
@@ -71,7 +72,8 @@ export const SizeChange = () => {
               onChange={(e) => {
                 field.onChange(e);
 
-                updateSizeElement(currentSlideId, 'height', e.target.value);
+                currentSlideId &&
+                  updateSizeElement(currentSlideId, 'height', e.target.value);
               }}
             />
           )}

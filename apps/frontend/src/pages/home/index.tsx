@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconSquareRoundedPlusFilled } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 import { CREATING_ROUTE } from 'shared/constants/const';
@@ -10,47 +10,59 @@ import { Title } from 'shared/ui/Title';
 
 import bg from 'shared/assets/bg.png';
 import empty from 'shared/assets/empty.png';
+import PresentationServices from 'shared/services/PresentationServices';
+import { IPresentation } from 'shared/models/IPresentstion';
 
 const HomePage = () => {
-  const [x] = useState(false);
+  const [presentations, setPresintations] = useState<IPresentation[]>([]);
+
+  useEffect(() => {
+    PresentationServices.getPresentations().then((response) => {
+      if (typeof response.data !== 'string') {
+        setPresintations(response.data);
+      }
+    });
+  }, []);
 
   return (
     <Stack pt={40} gap={48} flex={1}>
-      <Stack
-        style={{
-          backgroundColor: '#EFF4FF',
-          borderRadius: '16px',
-          overflow: 'hidden',
-        }}
-        pos={'relative'}
-        p={32}
-        className="container"
-        gap={24}
-      >
-        <Stack w={644}>
-          <Title
-            level={1}
-            title="Я Пиксель - робот-художник.  Создадим вашу первую презентацию?"
+      {!presentations.length && (
+        <Stack
+          style={{
+            backgroundColor: '#EFF4FF',
+            borderRadius: '16px',
+            overflow: 'hidden',
+          }}
+          pos={'relative'}
+          p={32}
+          className="container"
+          gap={24}
+        >
+          <Stack w={644}>
+            <Title
+              level={1}
+              title="Я Пиксель - робот-художник.  Создадим вашу первую презентацию?"
+            />
+          </Stack>
+          <Link to={CREATING_ROUTE}>
+            <Button
+              label="Новая презентация"
+              icon={<IconSquareRoundedPlusFilled />}
+              variant="accent"
+            />
+          </Link>
+
+          <img
+            style={{ position: 'absolute', right: 0, bottom: 0, width: '42%' }}
+            alt="bg"
+            src={bg}
           />
         </Stack>
-        <Link to={CREATING_ROUTE}>
-          <Button
-            label="Новая презентация"
-            icon={<IconSquareRoundedPlusFilled />}
-            variant="accent"
-          />
-        </Link>
-
-        <img
-          style={{ position: 'absolute', right: 0, bottom: 0, width: '42%' }}
-          alt="bg"
-          src={bg}
-        />
-      </Stack>
+      )}
       <PageWrapper
         pt={0}
         button={
-          x ? (
+          presentations?.length ? (
             <Link to={CREATING_ROUTE}>
               <Button
                 label="Новая презентация"
@@ -61,8 +73,8 @@ const HomePage = () => {
         }
         title="Лаборатории"
       >
-        {x ? (
-          <HomeList />
+        {presentations?.length ? (
+          <HomeList presentations={presentations} />
         ) : (
           <Stack mt={16} gap={40} align="center">
             <img alt="empty" src={empty} />

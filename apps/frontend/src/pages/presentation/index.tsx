@@ -7,12 +7,19 @@ import { mockPres } from 'shared/constants/mock';
 import { DraggableEvent } from 'react-draggable';
 import { ISlideElement, SlideElementType } from 'shared/models/ISlideElement';
 import { PresentationWorkspace } from 'widgets/presentation-workspace';
+import FileDownload from 'js-file-download';
 
 import template1 from 'shared/assets/templates/template1.png';
 import template2 from 'shared/assets/templates/template2.png';
 import template3 from 'shared/assets/templates/template3.png';
 
 import styles from './PresentationPage.module.scss';
+import { Navigate, useParams } from 'react-router-dom';
+import { HOME_ROUTE } from 'shared/constants/const';
+import RegenServices from 'shared/services/RegenServices';
+import PresentationServices from 'shared/services/PresentationServices';
+import { IPresentation } from 'shared/models/IPresentstion';
+import { Header } from 'widgets/header';
 
 const templates: Record<number, string> = {
   0: template1,
@@ -24,8 +31,10 @@ const PresentationPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const [leftHeight, setLeftHeight] = useState(0);
-  const [presentation, setPresentation] = useState(mockPres);
+  const [presentation, setPresentation] = useState<IPresentation | null>(null);
   const [scale, setScale] = useState(1);
+
+  const [loading, setLoading] = useState(false);
 
   const [activeElement, setActiveElement] = useState<ISlideElement | null>(
     null
@@ -37,35 +46,90 @@ const PresentationPage = () => {
 
   const presentationForm = useForm();
 
-  const currentSlideId = presentation.slides[currentSlide].id;
+  const currentSlideId = presentation?.slides[currentSlide].id;
+
+  const { id } = useParams();
+
+  const getPresentation = async (id: string) => {
+    try {
+      setLoading(true);
+
+      //const response = await PresentationServices.getPresentation(+id);
+      const response = { data: mockPres };
+
+      if (response.data) {
+        setPresentation(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onExport = async () => {
+    if (presentation) {
+      try {
+        setLoading(true);
+        const response = await PresentationServices.exportPresentation(
+          presentation.id
+        );
+
+        if (response.data) {
+          FileDownload(response.data, 'Report.xlsx');
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const onSave = async () => {
+    if (presentation) {
+      try {
+        setLoading(true);
+        await PresentationServices.savePresentation(presentation);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   const updateElementPosition = (
     slideId: number,
     elementId: number,
     newPosition: { x: number; y: number }
   ) => {
-    setPresentation((prevPresentation) => ({
-      ...prevPresentation,
-      slides: prevPresentation.slides.map((slide) =>
-        slide.id === slideId
-          ? {
-              ...slide,
-              elements: slide.elements.map((element) =>
-                element.id === elementId
-                  ? {
-                      ...element,
-                      position: {
-                        ...element.position,
-                        x: newPosition.x,
-                        y: newPosition.y,
-                      },
-                    }
-                  : element
-              ),
-            }
-          : slide
-      ),
-    }));
+    setPresentation((prevPresentation) => {
+      if (!prevPresentation) return null;
+
+      return {
+        ...prevPresentation,
+        slides: prevPresentation.slides.map((slide) =>
+          slide.id === slideId
+            ? {
+                ...slide,
+                elements: slide.elements.map((element) =>
+                  element.id === elementId
+                    ? {
+                        ...element,
+                        position: {
+                          ...element.position,
+                          x: newPosition.x,
+                          y: newPosition.y,
+                        },
+                      }
+                    : element
+                ),
+              }
+            : slide
+        ),
+      };
+    });
   };
 
   const updateSizeElement = (
@@ -110,37 +174,41 @@ const PresentationPage = () => {
         }
       }
 
-      setPresentation((prevPresentation) => ({
-        ...prevPresentation,
-        slides: prevPresentation.slides.map((slide) =>
-          slide.id === slideId
-            ? {
-                ...slide,
-                elements: slide.elements.map((element) =>
-                  element.id === activeElement.id
-                    ? {
-                        ...element,
-                        image: activeElement.image
-                          ? {
-                              ...element.image!,
-                              width: newWidth,
-                              height: newHeight,
-                            }
-                          : element.image,
-                        figure: activeElement.figure
-                          ? {
-                              ...element.figure!,
-                              width: newWidth,
-                              height: newHeight,
-                            }
-                          : element.figure,
-                      }
-                    : element
-                ),
-              }
-            : slide
-        ),
-      }));
+      setPresentation((prevPresentation) => {
+        if (!prevPresentation) return null;
+
+        return {
+          ...prevPresentation,
+          slides: prevPresentation.slides.map((slide) =>
+            slide.id === slideId
+              ? {
+                  ...slide,
+                  elements: slide.elements.map((element) =>
+                    element.id === activeElement.id
+                      ? {
+                          ...element,
+                          image: activeElement.image
+                            ? {
+                                ...element.image!,
+                                width: newWidth,
+                                height: newHeight,
+                              }
+                            : element.image,
+                          figure: activeElement.figure
+                            ? {
+                                ...element.figure!,
+                                width: newWidth,
+                                height: newHeight,
+                              }
+                            : element.figure,
+                        }
+                      : element
+                  ),
+                }
+              : slide
+          ),
+        };
+      });
 
       if (key === 'width') {
         presentationForm.setValue('height', newHeight);
@@ -152,77 +220,89 @@ const PresentationPage = () => {
 
   const updateColorElement = (slideId: number, hex: string) => {
     if (activeElement) {
-      setPresentation((prevPresentation) => ({
-        ...prevPresentation,
-        slides: prevPresentation.slides.map((slide) =>
-          slide.id === slideId
-            ? {
-                ...slide,
-                elements: slide.elements.map((element) =>
-                  element.id === activeElement.id
-                    ? {
-                        ...element,
-                        typeography: activeElement.typeography
-                          ? {
-                              ...element.typeography!,
-                              color: hex,
-                            }
-                          : element.typeography,
-                        figure: activeElement.figure
-                          ? {
-                              ...element.figure!,
-                              backgroundColor: hex,
-                            }
-                          : element.figure,
-                      }
-                    : element
-                ),
-              }
-            : slide
-        ),
-      }));
+      setPresentation((prevPresentation) => {
+        if (!prevPresentation) return null;
+
+        return {
+          ...prevPresentation,
+          slides: prevPresentation.slides.map((slide) =>
+            slide.id === slideId
+              ? {
+                  ...slide,
+                  elements: slide.elements.map((element) =>
+                    element.id === activeElement.id
+                      ? {
+                          ...element,
+                          typeography: activeElement.typeography
+                            ? {
+                                ...element.typeography!,
+                                color: hex,
+                              }
+                            : element.typeography,
+                          figure: activeElement.figure
+                            ? {
+                                ...element.figure!,
+                                backgroundColor: hex,
+                              }
+                            : element.figure,
+                        }
+                      : element
+                  ),
+                }
+              : slide
+          ),
+        };
+      });
     }
   };
 
   const updateTypography = (
     slideId: number,
-    key: 'fontSize' | 'fontWeight' | 'fontFamily',
+    key: 'fontSize' | 'fontWeight' | 'fontFamily' | 'text',
     value: string | number
   ) => {
     if (activeElement && activeElement.typeography) {
-      setPresentation((prevPresentation) => ({
-        ...prevPresentation,
-        slides: prevPresentation.slides.map((slide) =>
-          slide.id === slideId
-            ? {
-                ...slide,
-                elements: slide.elements.map((element) =>
-                  element.id === activeElement.id
-                    ? {
-                        ...element,
-                        typeography: {
-                          ...element.typeography!,
-                          [key]: value,
-                        },
-                      }
-                    : element
-                ),
-              }
-            : slide
-        ),
-      }));
+      setPresentation((prevPresentation) => {
+        if (!prevPresentation) return null;
+
+        return {
+          ...prevPresentation,
+          slides: prevPresentation.slides.map((slide) =>
+            slide.id === slideId
+              ? {
+                  ...slide,
+                  elements: slide.elements.map((element) =>
+                    element.id === activeElement.id
+                      ? {
+                          ...element,
+                          typeography: {
+                            ...element.typeography!,
+                            [key]: value,
+                          },
+                        }
+                      : element
+                  ),
+                }
+              : slide
+          ),
+        };
+      });
     }
   };
 
-  const handleRegenerate = () => {
+  const handleRegenerate = async () => {
+    if (!currentSlideId) return;
+
     if (!activeElement) {
       const slideType = presentationForm.getValues('slideType');
-      console.log('slide', slideType);
+
+      await RegenServices.regenSlide(currentSlideId, slideType);
     } else if (activeElement?.elementType === SlideElementType.Image) {
       const imageStyle = presentationForm.getValues('style');
-      console.log('image', imageStyle);
+
+      await RegenServices.regenImage(currentSlideId, imageStyle);
     } else {
-      console.log('text');
+      await RegenServices.regenText(currentSlideId);
     }
   };
 
@@ -271,8 +351,17 @@ const PresentationPage = () => {
     return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
+  useEffect(() => {
+    if (id) {
+      getPresentation(id);
+    }
+  }, [id]);
+
+  if (!id) return <Navigate replace to={HOME_ROUTE} />;
+
   return (
     <section className={styles.root}>
+      <Header loading={loading} onExport={onExport} onSave={onSave} />
       <FormProvider {...presentationForm}>
         <PresentationPageContext.Provider
           value={{
@@ -296,7 +385,7 @@ const PresentationPage = () => {
           }}
         >
           <ul className={styles.slideList}>
-            {presentation.slides.map((s, index) => (
+            {presentation?.slides.map((s, index) => (
               <li
                 key={s.id}
                 className={classNames(styles.slide, {
