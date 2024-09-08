@@ -23,8 +23,6 @@ export class Slide {
     presentation: Presentation
 }   
 
-
-
 enum SlideType {
     Header = 'HEADER',
     BigNumbers = 'BIG_NUMBERS',

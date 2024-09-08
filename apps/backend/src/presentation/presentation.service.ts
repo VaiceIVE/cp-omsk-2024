@@ -353,7 +353,7 @@ export class PresentationService {
 
     const presentation = await this.presentationRepository.findOne({where: {id: presentationId}, select: {slides: {slideElements: true}}})
 
-    console.log(presentation)
+    console.log(presentation.slides)
 
   }
 
