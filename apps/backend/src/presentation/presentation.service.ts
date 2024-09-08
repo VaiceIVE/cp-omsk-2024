@@ -201,7 +201,7 @@ export class PresentationService {
     const MLUrl = 'https://pyapi.adera-team.ru'
 
     const res = await axios.post(MLUrl + '/generate_presentation', {
-      text: createPresentationDto.context, exogen_data: tablesNames, num_of_slides: +createPresentationDto.len
+      text: createPresentationDto.context, exogen_data: tablesNames, num_of_slides: +createPresentationDto.len, num_of_themes: +createPresentationDto.len
     })
 
     console.log(res)
