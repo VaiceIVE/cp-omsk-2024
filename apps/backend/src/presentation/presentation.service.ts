@@ -355,8 +355,6 @@ export class PresentationService {
       
     const presentation = await this.presentationRepository.findOne({where: {id: presentationId}, relations: {slides: {slideElements: true}}})
 
-    console.log(presentation.slides)
-
     let slideCounter = 1
 
     for (const slide of presentation.slides)
@@ -407,12 +405,12 @@ export class PresentationService {
           for(const element of figures)
           {
             newSlide.addShape(pres.ShapeType.roundRect, {
-              x: element.posX / 192,
-              y: element.posY / 192,
-              w: element.fig_width / 192,
-              h: element.fig_height / 192,
+              x: +element.posX / 192,
+              y: +element.posY / 192,
+              w: +element.fig_width / 192,
+              h: +element.fig_height / 192,
               fill: element.fig_bgcolor as any,
-              rectRadius: element.fig_height / 192 / element.fig_border_radius
+              rectRadius: +element.fig_height / 192 / element.fig_border_radius
             })
           }
         }
@@ -438,10 +436,10 @@ export class PresentationService {
               for(const element of icons)
               {
                 newSlide.addImage({
-                  x: element.posX / 192,
-                  y: element.posY / 192,
-                  w: element.image_width / 192,
-                  h: element.image_height / 192,
+                  x: +element.posX / 192,
+                  y: +element.posY / 192,
+                  w: +element.image_width / 192,
+                  h: +element.image_height / 192,
                   data: element.image_url
                   //select image
                 })
@@ -453,13 +451,13 @@ export class PresentationService {
               for(const element of numbers)
               {
                 newSlide.addText(slideCounter.toString(), {
-                  x: element.posX / 192,
-                  y: element.posY / 192,
+                  x: +element.posX / 192,
+                  y: +element.posY / 192,
                   color: element.typo_color,
                   fontFace: element.typo_fontFamily,
                   bold: element.typo_fontWeight == 700 ? true : false,
-                  fontSize: element.typo_fontSize / 4,
-                  w: element.typo_width / 192
+                  fontSize: +element.typo_fontSize / 4,
+                  w: +element.typo_width / 192
   
                 })
               }
@@ -470,13 +468,13 @@ export class PresentationService {
                 for(const element of titles)
                 {
                   newSlide.addText(element.typo_text, {
-                    x: element.posX / 192, // 1,
-                    y: element.posY / 192, // 1,
+                    x: +element.posX / 192, // 1,
+                    y: +element.posY / 192, // 1,
                     color: element.typo_color,
                     fontFace: element.typo_fontFamily,
                     bold: element.typo_fontWeight == 700 ? true : false,
-                    fontSize: element.typo_fontSize / 4,
-                    w: element.typo_width / 192, // 15
+                    fontSize: +element.typo_fontSize / 4,
+                    w: +element.typo_width / 192, // 15
                 });
                 }
               }
@@ -486,14 +484,14 @@ export class PresentationService {
                   for(const element of texts)
                   {
                     newSlide.addText(element.typo_text, {
-                      x: element.posX / 192, // 1,
-                      y: element.posY / 192, // 1,
+                      x: +element.posX / 192, // 1,
+                      y: +element.posY / 192, // 1,
                       color: element.typo_color,
                       fontFace: element.typo_fontFamily,
                       bold: element.typo_fontWeight == 700 ? true : false,
-                      fontSize: element.typo_fontSize / 4,
+                      fontSize: +element.typo_fontSize / 4,
                       //lineSpacing: element.typeography.lineHeight,
-                      w: element.typo_width / 192, // 15
+                      w: +element.typo_width / 192, // 15
                   });
                   }
                 }
