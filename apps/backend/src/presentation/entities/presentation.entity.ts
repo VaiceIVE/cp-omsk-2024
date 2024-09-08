@@ -16,5 +16,5 @@ export class Presentation {
     @Column({
         nullable: true
     })
-    templateId: number;
+    templateId: string;
 }

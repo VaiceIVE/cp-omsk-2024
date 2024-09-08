@@ -7,7 +7,7 @@ import { IPresentation } from './interfaces/IPresentationTemplate';
 import pptxgen from "pptxgenjs";
 import { StorageService } from '../storage/storage.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Any, Repository } from 'typeorm';
 import { Slide } from './entities/slide.entity';
 import { SlideElement } from './entities/slideElement.entity';
 import { Presentation } from './entities/presentation.entity';
@@ -343,9 +343,7 @@ export class PresentationService {
     newPresentation.slides = newSlides
     const insertResponse = await this.presentationRepository.insert(newPresentation)
 
-    await this.presentationRepository.save(newPresentation)
-    console.log(newPresentation.slides.length)
-    
+    await this.presentationRepository.save(newPresentation)    
 
     return insertResponse.identifiers[0]
   }
@@ -353,12 +351,157 @@ export class PresentationService {
   async exportById(presentationId: number)
   { 
 
+    let pres = new pptxgen();
+      
     const presentation = await this.presentationRepository.findOne({where: {id: presentationId}, relations: {slides: {slideElements: true}}})
 
     console.log(presentation.slides)
-    console.log(await this.slideRepository.find())
-    console.log(await this.slideRepository.find({relations: {slideElements: true}}))
 
+    let slideCounter = 1
+
+    for (const slide of presentation.slides)
+    {
+      let newSlide = pres.addSlide();
+
+      let images :SlideElement[] = []
+      let figures :SlideElement[]= []
+      let numbers :SlideElement[]= []
+      let texts :SlideElement[]= []
+      let titles :SlideElement[]= []
+      let icons :SlideElement[]= []
+
+
+      for(const element of slide.slideElements)
+      {
+        if(element.elementType == 'FIGURE')
+          {
+            figures.push(element)
+          }
+
+          if(element.elementType == 'ICON')
+          {
+            icons.push(element)
+          }
+
+          if(element.elementType == 'IMAGE')
+          {
+            images.push(element)
+          }
+
+          if(element.elementType == 'NUMERIC')
+          {
+            numbers.push(element)
+          }
+          if (element.elementType == 'HEADING')
+          {
+            titles.push(element)
+          }
+          if (element.elementType == 'TEXT')
+          {
+            texts.push(element)
+          }
+      }
+      if(figures)
+        {
+          for(const element of figures)
+          {
+            newSlide.addShape(pres.ShapeType.roundRect, {
+
+              x: element.posX / 192,
+              y: element.posY / 192,
+              w: element.fig_width / 192,
+              h: element.fig_height / 192,
+              fill: element.fig_bgcolor as any,
+              rectRadius: element.fig_height / 192 / element.fig_border_radius
+            })
+          }
+        }
+  
+        if(images)
+          {
+            // for(const element of images)
+            // {
+            //   console.log(slideInfo[slide])
+            //   console.log(slideInfo[slide]['images'])
+            //   newSlide.addImage({
+            //     x: element.position.x / 192, // 1,
+            //     y: element.position.y / 192, // 1,
+            //     w: element.image.width / 192, // 15
+            //     h: element.image.height / 192, // 15
+            //     data: (await this.storageService.getFromS3ByName(slideInfo[slide]['images'][0])).read()
+            //   })
+            // }
+          }
+  
+          if(icons)
+            {
+              for(const element of icons)
+              {
+                newSlide.addImage({
+                  x: element.posX / 192,
+                  y: element.posY / 192,
+                  w: element.image_width / 192,
+                  h: element.image_height / 192,
+                  data: element.image_url
+                  //select image
+                })
+              }
+            }
+  
+          if(numbers)
+            {
+              for(const element of numbers)
+              {
+                newSlide.addText(slideCounter.toString(), {
+                  x: element.posX / 192,
+                  y: element.posY / 192,
+                  color: element.typo_color,
+                  fontFace: element.typo_fontFamily,
+                  bold: element.typo_fontWeight == 700 ? true : false,
+                  fontSize: element.typo_fontSize / 4,
+                  w: element.typo_width / 192
+  
+                })
+              }
+            }
+  
+            if(titles)
+              {
+                for(const element of titles)
+                {
+                  newSlide.addText(element.typo_text, {
+                    x: element.posX / 192, // 1,
+                    y: element.posY / 192, // 1,
+                    color: element.typo_color,
+                    fontFace: element.typo_fontFamily,
+                    bold: element.typo_fontWeight == 700 ? true : false,
+                    fontSize: element.typo_fontSize / 4,
+                    w: element.typo_width / 192, // 15
+                });
+                }
+              }
+  
+              if(texts)
+                {
+                  for(const element of texts)
+                  {
+                    newSlide.addText(element.typo_text, {
+                      x: element.posX / 192, // 1,
+                      y: element.posY / 192, // 1,
+                      color: element.typo_color,
+                      fontFace: element.typo_fontFamily,
+                      bold: element.typo_fontWeight == 700 ? true : false,
+                      fontSize: element.typo_fontSize / 4,
+                      //lineSpacing: element.typeography.lineHeight,
+                      w: element.typo_width / 192, // 15
+                  });
+                  }
+                }
+
+
+
+
+    }
 
 
   }
