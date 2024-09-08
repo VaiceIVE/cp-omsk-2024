@@ -14,6 +14,8 @@ export class Slide {
 
     @OneToMany(() => SlideElement, (se) => se.slide, {
         eager: true,
+        cascade: ['insert', 'update']
+
     })
     slideElements: SlideElement[] 
 
