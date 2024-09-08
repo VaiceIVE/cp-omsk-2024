@@ -7,6 +7,7 @@ import { mockPres } from 'shared/constants/mock';
 import { DraggableEvent } from 'react-draggable';
 import { ISlideElement, SlideElementType } from 'shared/models/ISlideElement';
 import { PresentationWorkspace } from 'widgets/presentation-workspace';
+import FileDownload from 'js-file-download';
 
 import template1 from 'shared/assets/templates/template1.png';
 import template2 from 'shared/assets/templates/template2.png';
@@ -18,6 +19,7 @@ import { HOME_ROUTE } from 'shared/constants/const';
 import RegenServices from 'shared/services/RegenServices';
 import PresentationServices from 'shared/services/PresentationServices';
 import { IPresentation } from 'shared/models/IPresentstion';
+import { Header } from 'widgets/header';
 
 const templates: Record<number, string> = {
   0: template1,
@@ -62,6 +64,38 @@ const PresentationPage = () => {
       console.error(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const onExport = async () => {
+    if (presentation) {
+      try {
+        setLoading(true);
+        const response = await PresentationServices.exportPresentation(
+          presentation.id
+        );
+
+        if (response.data) {
+          FileDownload(response.data, 'Report.xlsx');
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const onSave = async () => {
+    if (presentation) {
+      try {
+        setLoading(true);
+        await PresentationServices.savePresentation(presentation);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -327,6 +361,7 @@ const PresentationPage = () => {
 
   return (
     <section className={styles.root}>
+      <Header loading={loading} onExport={onExport} onSave={onSave} />
       <FormProvider {...presentationForm}>
         <PresentationPageContext.Provider
           value={{

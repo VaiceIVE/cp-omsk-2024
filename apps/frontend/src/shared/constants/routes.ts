@@ -12,12 +12,10 @@ const home = lazy(() => import('pages/home'));
 const presentation = lazy(() => import('pages/presentation'));
 const creating = lazy(() => import('pages/creating'));
 
-const login = lazy(() => import('pages/login'));
-
 export const publicRoutes = [
   {
     path: LOGIN_ROUTE,
-    Component: login,
+    Component: home,
     title: 'login',
   },
 ];

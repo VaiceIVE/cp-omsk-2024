@@ -12,6 +12,7 @@ import { EyeIcon } from 'shared/assets/EyeIcon';
 import { CreatingPageContext } from './CreatingPageContext';
 import PresentationServices from 'shared/services/PresentationServices';
 import { LoadingOverlay } from 'shared/ui/LoadingOverlay';
+import { useNavigate } from 'react-router-dom';
 
 const steps: Record<number, ReactNode> = {
   0: <InitialForm />,
@@ -23,6 +24,7 @@ const CreatingPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const creatingForm = useForm();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -53,7 +55,19 @@ const CreatingPage = () => {
     try {
       setLoading(true);
 
-      await PresentationServices.createPresentation(1);
+      const response = await PresentationServices.createPresentation(
+        data.text,
+        data.changeText,
+        data.template,
+        data.length,
+        selectedChart,
+        docFile,
+        tableFile
+      );
+
+      if (response.data) {
+        navigate('/presentation/' + response.data.id);
+      }
     } catch (error) {
       console.error(error);
     } finally {

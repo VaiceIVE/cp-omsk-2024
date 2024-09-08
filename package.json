@@ -19,6 +19,7 @@
     "cookie-parser": "^1.4.6",
     "dayjs": "^1.11.13",
     "i": "^0.3.7",
+    "js-file-download": "^0.4.12",
     "mobx": "^6.13.1",
     "mobx-react-lite": "^4.0.7",
     "npm": "^10.8.3",

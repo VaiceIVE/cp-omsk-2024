@@ -7,7 +7,13 @@ import { NavigationList } from './components/NavigationList';
 import { Button } from 'shared/ui/Button';
 import { BreadCrumbs } from './components/BreadCrumbs';
 
-export const Header = () => {
+interface HeaderProps {
+  onExport?: () => void;
+  onSave?: () => void;
+  loading?: boolean;
+}
+
+export const Header = ({ onExport, onSave, loading }: HeaderProps) => {
   const location = useLocation();
 
   const isPresentationPage = location.pathname.includes('presentation');
@@ -24,8 +30,17 @@ export const Header = () => {
 
         {isPresentationPage && (
           <Flex gap={12}>
-            <Button label="Экспортировать" variant="outline" />
-            <Button label="Сохранить изменения" />
+            <Button
+              onClick={onExport}
+              label="Экспортировать"
+              variant="outline"
+              isLoading={loading}
+            />
+            <Button
+              isLoading={loading}
+              onClick={onSave}
+              label="Сохранить изменения"
+            />
           </Flex>
         )}
       </Flex>

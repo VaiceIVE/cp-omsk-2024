@@ -34,12 +34,12 @@ export const Button = ({
   return (
     <MantineButton
       onClick={onClick}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       className={classNames(
         styles.button,
         {
           [styles.full]: fullWidth,
-          [styles.disabled]: disabled,
+          [styles.disabled]: disabled || isLoading,
           [styles.active]: isActive,
         },
         className && className,
