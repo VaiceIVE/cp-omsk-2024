@@ -239,6 +239,7 @@ export class PresentationService {
       for(const element of slideTemplate.elements)
       {
         let newElement = this.slideElementRepository.create()
+        newElement.elementType = element.elementType
         if(element.elementType == 'FIGURE')
         {
           newElement.posX = element.position.x 
