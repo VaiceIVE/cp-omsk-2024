@@ -556,7 +556,7 @@ export class PresentationService {
 
 
 
-    return `This action returns a #${id} presentation`;
+    return response;
   }
 
   update(id: number, updatePresentationDto: UpdatePresentationDto) {
