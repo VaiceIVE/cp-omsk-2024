@@ -355,6 +355,8 @@ export class PresentationService {
 
     console.log(presentation.slides)
     console.log(await this.slideRepository.find())
+    console.log(await this.slideRepository.find({relations: {slideElements: true}}))
+
 
 
   }
