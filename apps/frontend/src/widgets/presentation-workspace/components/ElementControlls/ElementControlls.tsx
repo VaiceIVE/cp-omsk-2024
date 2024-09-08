@@ -119,6 +119,7 @@ export const ElementControlls = () => {
             reverse
             label="Генерировать новый"
             fullWidth
+            disabled
             variant="outline"
             icon={<IconWand stroke={2} />}
           />

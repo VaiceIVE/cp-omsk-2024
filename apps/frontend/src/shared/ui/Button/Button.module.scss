@@ -62,6 +62,10 @@
     &.disabled {
       background-color: $gray25;
       color: $gray300;
+
+      svg {
+        color: $gray300;
+      }
     }
   }
 
