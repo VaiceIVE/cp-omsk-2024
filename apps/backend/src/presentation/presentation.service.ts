@@ -11,7 +11,7 @@ import { Any, Repository } from 'typeorm';
 import { Slide } from './entities/slide.entity';
 import { SlideElement } from './entities/slideElement.entity';
 import { Presentation } from './entities/presentation.entity';
-import { ISlide } from './interfaces/ISlide';
+import { ISlide, SlideType } from './interfaces/ISlide';
 import { ISlideElement } from './interfaces/ISlideElement';
 import { rawListeners } from 'process';
 
@@ -517,15 +517,14 @@ export class PresentationService {
 
     const presentation = await this.presentationRepository.findOne({where: {id: id}})
 
-    let response: IPresentation | null = null
-    response.templateId = presentation.templateId
+    let response: IPresentation = {id: 0, slides: [], templateId: presentation.templateId}
 
     for(const slide of presentation.slides)
     {
-      let resSlide: ISlide | null = null
+      let resSlide: ISlide = {elements: [], id: 0, slideType: SlideType.Header}
       for(const element of slide.slideElements)
       {
-        let resElement: ISlideElement | null = null
+        let resElement: ISlideElement = {chart: null, elementType: null, figure: null, id: null, image: null, position: null, typeography: null}
         resElement.position.x = element.posX
         resElement.position.y = element.posY
         resElement.position.z = element.posZ
