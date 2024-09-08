@@ -497,12 +497,9 @@ export class PresentationService {
                   });
                   }
                 }
-
-
-
-
+                slideCounter += 1
     }
-
+    return await pres.stream() as Uint8Array
 
   }
 
