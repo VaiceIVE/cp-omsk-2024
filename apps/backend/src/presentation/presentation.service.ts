@@ -517,15 +517,15 @@ export class PresentationService {
 
     const presentation = await this.presentationRepository.findOne({where: {id: id}})
 
-    let response: IPresentation = null
+    let response: IPresentation | null = null
     response.templateId = presentation.templateId
 
     for(const slide of presentation.slides)
     {
-      let resSlide: ISlide = null
+      let resSlide: ISlide | null = null
       for(const element of slide.slideElements)
       {
-        let resElement: ISlideElement = null
+        let resElement: ISlideElement | null = null
         resElement.position.x = element.posX
         resElement.position.y = element.posY
         resElement.position.z = element.posZ
