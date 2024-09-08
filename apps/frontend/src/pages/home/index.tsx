@@ -22,7 +22,7 @@ const HomePage = () => {
 
   useEffect(() => {
     PresentationServices.getPresentations().then((response) => {
-      if (response.data) {
+      if (response.data && typeof response.data !== 'string') {
         setPresintations(response.data);
       }
     });

@@ -1,7 +1,7 @@
 import { Flex } from '@mantine/core';
 
 import styles from './Footer.module.scss';
-import { DEMO_LINK, SLIDES_LINK } from 'shared/constants/links';
+import { SLIDES_LINK } from 'shared/constants/links';
 
 export const Footer = () => {
   return (
