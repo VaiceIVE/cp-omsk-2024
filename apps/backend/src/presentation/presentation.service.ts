@@ -524,7 +524,9 @@ export class PresentationService {
       let resSlide: ISlide = {elements: [], id: 0, slideType: SlideType.Header}
       for(const element of slide.slideElements)
       {
-        let resElement: ISlideElement = {chart: null, elementType: null, figure: null, id: null, image: null, position: null, typeography: null}
+        let resElement: ISlideElement = {chart: {charType: null, height: null, url: null, width: null},
+         elementType: null, figure: {backgroundColor: null, borderRadius: null, height: null, width: null}, id: null, image: {height: null, url: null, width: null}, 
+         position: {x: null, y: null, z: null}, typeography: {color: null, fontFamily: null, fontSize: null, fontWeight: null, lineHeight: null, text: null, width: null}}
         resElement.position.x = element.posX
         resElement.position.y = element.posY
         resElement.position.z = element.posZ
