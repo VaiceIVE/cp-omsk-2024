@@ -34,6 +34,11 @@ export class PresentationController {
     return this.presentationService.findOne(+id);
   }
 
+  @Get(':id/export')
+  exportOne(@Param('id') id: string) {
+    return this.presentationService.exportById(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePresentationDto: UpdatePresentationDto) {
     return this.presentationService.update(+id, updatePresentationDto);

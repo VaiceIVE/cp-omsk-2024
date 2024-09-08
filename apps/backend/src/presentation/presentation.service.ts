@@ -345,7 +345,7 @@ export class PresentationService {
     return insertResponse.identifiers[0]
   }
 
-  async generatePresentationFile(presentationId)
+  async exportById(presentationId: number)
   { 
 
     const presentation = this.presentationRepository.findOne({where: {id: presentationId}, select: {slides: {slideElements: true}}})
