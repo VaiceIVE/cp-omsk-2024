@@ -208,19 +208,19 @@ export class PresentationService {
 
     const res = await axios.post(MLUrl + '/generate_presentation', payload)
 
-    console.log(res)
+    console.log(res.data)
     //get slides contents from ML API
 
     resMock // ML response in future
 
     //save data to database
 
-    const presentationId = await this.saveResponseToDatabase(createPresentationDto)
+    const presentationId = await this.saveResponseToDatabase(createPresentationDto, res.data)
     
     return presentationId
   }
 
-  async saveResponseToDatabase(createPresentationDto: CreatePresentationDto,)
+  async saveResponseToDatabase(createPresentationDto: CreatePresentationDto, responseData: Record<string, any>)
   {
 
     const backendUrl = 'https://api.adera-team.ru'
@@ -231,9 +231,9 @@ export class PresentationService {
 
     let newSlides = []
 
-    for(const slideId in resMock)
+    for(const slideId in responseData)
     {
-      const slideInfo = resMock[slideId]
+      const slideInfo = responseData[slideId]
 
       if(('text_svg_pairs' in Object.keys(slideInfo)))
         {
@@ -530,7 +530,7 @@ export class PresentationService {
 
     const presentation = await this.presentationRepository.findOne({where: {id: id}})
 
-    let response: IPresentation = {id: 0, slides: [], templateId: presentation.templateId}
+    let response: IPresentation = {id: presentation.id, slides: [], templateId: presentation.templateId}
 
     for(const slide of presentation.slides)
     {
@@ -538,7 +538,7 @@ export class PresentationService {
       for(const element of slide.slideElements)
       {
         let resElement: ISlideElement = {chart: {charType: null, height: null, url: null, width: null},
-         elementType: null, figure: {backgroundColor: null, borderRadius: null, height: null, width: null}, id: null, image: {height: null, url: null, width: null}, 
+         elementType: null, figure: {backgroundColor: null, borderRadius: null, height: null, width: null}, id: element.id, image: {height: null, url: null, width: null}, 
          position: {x: null, y: null, z: null}, typeography: {color: null, fontFamily: null, fontSize: null, fontWeight: null, lineHeight: null, text: null, width: null}}
         resElement.position.x = element.posX
         resElement.position.y = element.posY
@@ -581,4 +581,17 @@ export class PresentationService {
   remove(id: number) {
     return `This action removes a #${id} presentation`;
   }
+
+  clearString = (value: string | undefined) => {
+    if (value) {
+      return value
+        .replace(/\+/g, '')
+        .replace(/^["[]]+|["[]]+$/g, '')
+        .replace(/\"/g, '"')
+        .replace(/[\n\r]+/g, ' ')
+        .trim();
+    }
+
+    return '';
+  };
 }
