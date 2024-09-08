@@ -50,7 +50,10 @@ export class SlideElement {
     typo_fontSize: number;
 
     @Column({
-        nullable: true
+        nullable: true,
+        type: "decimal",
+        precision: 8,
+        scale: 3
     })
     typo_lineHeight: number;
 
