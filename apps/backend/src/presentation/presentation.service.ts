@@ -334,6 +334,7 @@ export class PresentationService {
       newSlide.slideElements = newSlideElements
       newSlide.slideType = slideInfo['slide_type']
       await this.slideRepository.insert(newSlide)
+      await this.slideRepository.save(newSlide)
       newSlides.push(newSlide)
       slideCounter += 1
     } 
@@ -342,6 +343,7 @@ export class PresentationService {
     newPresentation.slides = newSlides
     const insertResponse = await this.presentationRepository.insert(newPresentation)
 
+    await this.presentationRepository.save(newPresentation)
     console.log(newPresentation.slides.length)
     
 

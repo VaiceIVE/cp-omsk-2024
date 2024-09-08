@@ -10,7 +10,6 @@ export class Presentation {
     @OneToMany(() => Slide, (s) => s.presentation, {
         eager: true,
         cascade: ['insert', 'update']
-
     })
     slides: Slide[];
 
