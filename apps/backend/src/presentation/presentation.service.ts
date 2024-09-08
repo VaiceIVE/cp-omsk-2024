@@ -564,6 +564,8 @@ export class PresentationService {
         resElement.typeography.width = element.typo_width
         resSlide.elements.push(resElement)
       }
+      resSlide.id = slide.id
+      resSlide.context = slide.context
       response.slides.push(resSlide)
     }
 
