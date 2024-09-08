@@ -12,6 +12,11 @@ export class Slide {
     })
     slideType: SlideType;
 
+    @Column({
+        nullable: true
+    })
+    context: string;
+
     @OneToMany(() => SlideElement, (se) => se.slide, {
         eager: true,
         cascade: ['insert', 'update']

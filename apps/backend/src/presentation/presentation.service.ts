@@ -14,6 +14,7 @@ import { Presentation } from './entities/presentation.entity';
 import { ISlide, SlideType } from './interfaces/ISlide';
 import { ISlideElement } from './interfaces/ISlideElement';
 import { rawListeners } from 'process';
+import axios from 'axios';
 
 @Injectable()
 export class PresentationService {
@@ -197,6 +198,13 @@ export class PresentationService {
 
     const backendUrl = 'https://api.adera-team.ru'
     
+    const MLUrl = 'https://pyapi.adera-team.ru'
+
+    const res = await axios.post(MLUrl + '/generate_presentation', {
+      text: createPresentationDto.context, exogen_data: tablesNames, num_of_slides: +createPresentationDto.len
+    })
+
+    console.log(res)
     //get slides contents from ML API
 
     resMock // ML response in future
@@ -339,6 +347,7 @@ export class PresentationService {
       }
       let newSlide = this.slideRepository.create()
       newSlide.slideElements = newSlideElements
+      newSlide.context = slideInfo['context']
       newSlide.slideType = slideInfo['slide_type']
       await this.slideRepository.insert(newSlide)
       await this.slideRepository.save(newSlide)
@@ -521,7 +530,7 @@ export class PresentationService {
 
     for(const slide of presentation.slides)
     {
-      let resSlide: ISlide = {elements: [], id: 0, slideType: SlideType.Header}
+      let resSlide: ISlide = {elements: [], id: 0, slideType: SlideType.Header, context: null}
       for(const element of slide.slideElements)
       {
         let resElement: ISlideElement = {chart: {charType: null, height: null, url: null, width: null},
